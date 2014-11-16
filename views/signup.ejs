@@ -1,0 +1,320 @@
+<html>
+   <title>Sign Up | Yelp</title>
+   <link href="/stylesheets/signup.css" media="all" type="text/css" rel="stylesheet">
+   <link href="/stylesheets/style.css" media="all" type="text/css" rel="stylesheet">
+   <link href="/stylesheets/landing_pictures.css" media="all" type="text/css" rel="stylesheet">
+   <div class="app-header simple-header">
+      <div class="header-container clearfix">
+         <h1 class="logo">
+            <a href="/">Yelp</a>
+         </h1>
+      </div>
+   </div>
+   </div>
+   <div id="print-masthead">
+      <img alt="Yelp" class="print-bkg-img" src="https://s3-media2.fl.yelpcdn.com/assets/2/www/img/b7e9d647188d/gfx/header_print.gif">
+   </div>
+   <span class="offscreen" id="page-content">&nbsp;</span>
+   <div id="super-container">
+      <div id="alert-container">
+         <div class="alert" data-component-bound="true" style="display: none;">
+            <a href="#" class="alert-dismiss">×</a>
+            <p class="alert-message"></p>
+         </div>
+      </div>
+      <div class="clearfix">
+         <div class="signup-wrapper">
+            <div class="signup-flow on-flow-start" data-component-bound="true">
+               <div class="flow-start signup-visible" data-component-bound="true">
+                  <div class="embossed-box">
+                     <div class="signup-form-container">
+                        <div class="header">
+                           <h2>Sign up for Yelp</h2>
+                        <fieldset class="hr-line">
+                        </fieldset>
+                        <form method="POST" id="signup-form" class="yform signup-form  city-hidden" action="http://localhost:4300/signup/save">
+                           <input type="hidden" value="2f11d8f7003e79ca7f6ce7c2aeb6be229e0896a55bab45e8ffcc753814e6269c" class="csrftok" name="csrftok">
+                           <ul class="inline-layout clearfix">
+                              <li>
+                                 <label class="placeholder-sub">First Name</label>
+                                 <input type="text" value="" required="required" placeholder="First Name" name="firstName" id="first_name">
+                              </li>
+                              <li>
+                                 <label class="placeholder-sub">Last Name</label>
+                                 <input type="text" value="" required="required" placeholder="Last Name" name="lastName" id="last_name">
+                              </li>
+                           </ul>
+                           <label class="placeholder-sub">Email</label>
+                           <input type="email" value="" required="required" placeholder="Email" name="email" id="email">
+                           <label class="placeholder-sub">Password</label>
+                           <input type="password" value="" required="required" placeholder="Password" name="password" id="password">
+                           </div>
+                           <button class="ybtn ybtn-primary ytype disable-on-submit submit signup-button" value="Sign Up" type="submit" id="signup-button"><span>Sign Up</span></button>
+                        </form>
+                     </div>
+                     <div class="sub-text-box">
+                        <small class="subtle-text">Already on Yelp?  <a href="http://localhost:4300/login" class="log-in">Log in</a></small>
+                     </div>
+                  </div>
+               </div>
+               <div class="facebook" data-component-bound="true">
+                  <div class="embossed-box">
+                     <div class="signup-form-container">
+                        <h2 class="firstname"></h2>
+                        <p class="subheading">Complete this step to create your account.</p>
+                        <div class="info-container media-block clearfix">
+                           <div class="picture-placeholder media-avatar">
+                              <div style="background-image: url(https://s3-media4.fl.yelpcdn.com/assets/2/www/img/cc4afe21892e/default_avatars/user_medium_square.png);" class="picture"></div>
+                           </div>
+                           <div class="info media-story">
+                              <div class="name"></div>
+                              <div class="city"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="extra" data-component-bound="true">
+                  <div class="embossed-box">
+                     <div class="extra-container">
+                        <h2>Welcome to Yelp</h2>
+                        <p>Complete your profile so others can find you.</p>
+                        <div class="extra-info-container yform extra-info-row">
+                           <div class="left-col">
+                              <div class="extra-picture-placeholder" style="position: relative;">
+                                 <div style="background-image: url(https://s3-media2.fl.yelpcdn.com/assets/2/www/img/9d3868546803/default_avatars/user_large.png);" class="picture"></div>
+                                 <div class="throbber-overlay" style="display: none;">
+                                    <div class="throbber-container"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="extra-info">
+                              <div class="fb-button">
+                                 <span class="logo"></span>
+                                 <div class="text">Use Facebook Photo</div>
+                              </div>
+                              <fieldset class="hr-line">
+                                 <legend align="center">OR</legend>
+                              </fieldset>
+                              <input type="file" class="upload-input">
+                              <button class="ybtn ybtn-small ytype photo-upload ybtn-full" value="submit" type="submit"><span>Upload Photo</span></button>
+                           </div>
+                        </div>
+                        <form method="POST" id="extra-form" class="yform" action="/signup/extra">
+                           <input type="hidden" value="705e8e6fdcbf2266c1258d09d70e0571c9980619967364a3a0d56777bfa19c02" class="csrftok" name="csrftok">
+                           <div class="extra-info-row">
+                              <div class="left-col">
+                                 <label>Gender</label>
+                              </div>
+                              <div class="right-col">
+                                 <fieldset name="gender">
+                                    <ul class="inline-layout clearfix">
+                                       <li>
+                                          <label>
+                                          <input type="radio" value="f" name="gender">
+                                          <span>Female</span>
+                                          </label>
+                                       </li>
+                                       <li>
+                                          <label>
+                                          <input type="radio" value="m" name="gender">
+                                          <span>Male</span>
+                                          </label>
+                                       </li>
+                                    </ul>
+                                 </fieldset>
+                              </div>
+                           </div>
+                           <div class="extra-info-row">
+                              <div class="left-col skip">
+                                 <a class="skip" href="/signup/extra_skip">Skip</a>
+                              </div>
+                              <div class="right-col">
+                                 <button class="ybtn ybtn-primary ytype save ybtn-full" value="submit" type="submit" id="extra-form-save"><span>Save &amp; Continue</span></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="login" data-component-bound="true">
+                  <div class="embossed-box">
+                     <div class="signup-form-container">
+                        <h2>Log in to Yelp</h2>
+                        <form method="POST" id="ajax-login" class="yform" action="/login/newajax">
+                           <input type="hidden" value="84b822d71e47156fbceb75bf971403f73410847b2a674f59b3caae2303b6789a" class="csrftok" name="csrftok">
+                           <label class="placeholder-sub">Email</label>
+                           <input type="email" placeholder="Email" required="required" name="email">
+                           <label class="placeholder-sub">Password</label>
+                           <input type="password" placeholder="Password" required="required" name="password">
+                           <div class="forgot-password">
+                              <a class="forgot-link" href="javascript:;">Forgot password?</a>
+                           </div>
+                           <div class="captcha login-captcha"></div>
+                           <button class="ybtn ybtn-primary ytype submit" value="submit" type="submit"><span>Login</span></button>
+                        </form>
+                     </div>
+                     <div class="sub-text-box">
+                        <small class="subtle-text">New to Yelp? <a class="signup-link">Sign Up</a></small>
+                     </div>
+                  </div>
+               </div>
+               <div class="forgot" data-component-bound="true">
+                  <div class="embossed-box">
+                     <div class="forgot-password-container">
+                        <h2>Forgot Password</h2>
+                        <p>
+                           Please enter your email address and we will send you an email about how to reset your password.
+                        </p>
+                        <form name="forgot_form" method="POST" class="yform" action="/forgot/ajax">
+                           <input type="hidden" value="ffc692911d1181b7fb83553a93d3cb10d9b2ca512c366246d27c2190f87654f8" class="csrftok" name="csrftok">
+                           <label class="placeholder-sub">Email</label>
+                           <input type="email" required="required" placeholder="Email" name="email">
+                           <button class="ybtn ybtn-primary ytype submit ybtn-full" value="submit" type="submit"><span>Reset Password</span></button>
+                        </form>
+                     </div>
+                     <div class="sub-text-box">
+                        <a class="login-link" href="javascript:;"><small> Back to Login</small></a>
+                     </div>
+                  </div>
+               </div>
+               <div style="display: none;" id="recaptcha-widget">
+                  <div class="clearfix" id="recaptcha_wrap">
+                     <div id="recaptcha_image"></div>
+                     <label class="recaptcha_only_if_image recaptcha_instruct">        Enter the text above:
+                     </label>
+                     <label class="recaptcha_only_if_audio recaptcha_instruct">        Type the words you hear:
+                     </label>
+                     <input type="text" name="recaptcha_response_field" id="recaptcha_response_field">
+                     <a href="#" id="recaptcha_btn_help" class="recaptcha_opt recaptcha_opt_help">Help</a>
+                     <a href="#" id="recaptcha_btn_reload" class="recaptcha_opt recaptcha_opt_cycle">Get another CAPTCHA</a>
+                     <a href="#" id="recaptcha_btn_audio" class="recaptcha_opt recaptcha_opt_audio recaptcha_only_if_image">Get an audio CAPTCHA</a>
+                     <a href="#" id="recaptcha_btn_image" class="recaptcha_opt recaptcha_opt_image recaptcha_only_if_audio">Get an image CAPTCHA</a>
+                  </div>
+                  <p class="recaptcha_credit">powered by reCAPTCHA</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- google_ad_section_start(weight=ignore) -->
+   <!-- <a href="/biz/outlook-autumn-market-fundamental-catwalk-flimsy-roost-legibility-individualism-grocer-predestination-3">yelp</a> -->
+   <div class="footer">
+      <div class="footer-wrap">
+         <div class="city-landscape-img"></div>
+         <div class="footer-copyright">
+            <small>
+            Copyright &copy; 2004&ndash;2014 Yelp Inc. Yelp, <img class="footer-copyright-logo" alt="Yelp logo" src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/9d213bfb766e/logo/logo_tiny.png">, <img class="footer-burst-logo" alt="Yelp burst" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/86ec59fef415/logo/burst_tiny.png"> and related marks are registered trademarks of Yelp.
+            </small>
+         </div>
+         <!--Source: Freebase (http://www.freebase.com/), licensed under CC-BY (http://creativecommons.org/licenses/by/2.5/)-->
+      </div>
+   </div>
+   <!-- google_ad_section_end -->
+   <div id="page-popups" style="display: none;">
+   </div>
+   <div class="hidden" id="qype-ghost-user-hovercard">
+      <div class="whatsthis-hovercard">
+         <h3>What's This?</h3>
+         <p>
+            This user has arrived from Qype, a European company acquired by Yelp in 2012. We have integrated the two sites to bring you one great local experience.
+         </p>
+      </div>
+   </div>
+   </div> 
+   <script type="text/javascript">
+      yConfig = {"bingMapsUrl": "https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\u0026mkt=en-US\u0026s=1\u0026onscriptload=", "cookies": {"ADMIN_SEARCH_USERDATA_RADIUS": "udr", "RECENT_LOCATIONS": "recentlocations", "SEARCH_PREFS": "searchPrefs", "JS_TRACK": "js_track", "YUV": "yuv", "DEBUG": "debug", "SELECTED_ACTIVITY_FEED": "fd", "SIGNUP_TRACK": "strack", "EXPR_OVERRIDE": "expr", "COOKIE_INFO": "cim", "LOCATION": "location", "ADMIN_CM_SCOREBOARD_SETTINGS": "acms", "SEARCH_SUGGEST_INFO": "search_suggest", "ADMIN_BUSINESS_ATTRIBUTE_CHANGESET_UTILS_PREFS": "bap", "ADMIN_SEARCH_USERDATA_LOCATION": "udl", "ADMIN_SEARCH_USERDATA": "ud", "DISMISSIBLE_MESSAGE_COOKIE": "dm", "USED_LOCALE_SELECTOR": "used_locale_selector", "PRIVACY_POLICY_NOTICE": "ppn", "HIDE_BROWSER_BAR": "hidebrowserbar", "SUGGEST_COOKIE": "ssi", "MESSAGE_SENDER_PASSED_CAPTCHA": "mspc", "QUANTCAST": "qntcst"}, "googDebugLevel": "OFF", "cdn": {"hostnamePattern": {"s3": "s3-media%s.fl.yelpcdn.com", "yelp": "media%s.fl.yelpcdn.com"}, "shardCount": 4}, "enabledSitRepChannels": {}, "spinnerURLSmall": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/294d5d03032e/loaders/small-throbber.gif", "uniqueRequestId": "fb261bacf38c66d8", "googleMapsUrl": "//maps.googleapis.com/maps/api/js?client=gme-yelp\u0026language=en\u0026sensor=false", "yelpcodeTemplateVersion": "a00b859213", "isLoggedIn": false, "imageUrls": {"mapMarkers": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/61a4c5ed6fcc/map/map_markers_sprite.png", "stars": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png"}, "mapMarkerSerial": "20140220", "countryNameList": ["argentina", "australia", "austria", "belgium", "brazil", "canada", "chile", "czech republic", "denmark", "finland", "france", "germany", "hong kong", "ireland", "italy", "japan", "mexico", "new zealand", "norway", "poland", "portugal", "singapore", "spain", "sweden", "switzerland", "netherlands", "turkey", "uk", "usa"], "isSitRepEnabled": false, "comscore": {"c15": "", "c3": "", "c2": 7130511, "c1": 2, "c6": "", "c5": "", "c4": ""}, "enableHighVolumeGAEvents": false, "isClientErrorsEnabled": false, "spinnerURLLarge": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/049247849df0/loaders/throbber.gif", "vendorExternalURLs": {}, "cookieDomain": ".www.yelp.com", "recaptchaPublicKey": "6Lc2978SAAAAADHkLB3mdFpNLLfBP5CYnqlR0gz6", "isLive": true, "bingMapsKey": "AjhDhG82AEA_I4CdC-0o2DTDxg1Ojh0AZdcp_o-IbNuJGlb5fMMrig728eetoW8S"};
+      
+   </script>
+   <noscript>&lt;img src="http://b.scorecardresearch.com/p?cj=1&amp;amp;c15=&amp;amp;c3=&amp;amp;c2=7130511&amp;amp;c1=2&amp;amp;c6=&amp;amp;c5=&amp;amp;c4="&gt;</noscript>
+   <script>
+      (function() {
+          var main = null;
+      
+          var main=function includeQuantcast(){window._qevents=window._qevents||[];window._qevents.push({qacct:"p-M4yfUTCPeS3vn"});var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.src="https://secure.quantserve.com/quant.js";b.type="text/javascript";b.async=true;a.parentNode.insertBefore(b,a)};
+      
+          if (main === null) {
+              throw 'invalid inline script, missing main declaration.';
+          }
+          main();
+      })();
+   </script>
+   <noscript>
+      &lt;img style="display: none;" src="https://pixel.quantserve.com/pixel/p-M4yfUTCPeS3vn.gif" border="0" height="1" width="1" alt="Quantcast"/&gt;
+   </noscript>
+   <script src="https://s3-media4.fl.yelpcdn.com/assets/2/www/js/d56bd43138e5/assets/vendor_external/LAB.min.js"></script><script>$LAB.script("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+      .wait(function() {if(document.readyState === 'interactive') jQuery.ready();})
+      .script("//s3-media4.fl.yelpcdn.com/assets/2/www/js/d3ff679cab95/assets/module_core-en_US.min.js")
+      .wait(function() {
+                      yConfig.vendorExternalURLs["easyXDM"]=['//s3-media4.fl.yelpcdn.com/assets/2/www/js/62199ef9e869/assets/vendor_external/easyXDM.min.js']
+                      
+                      yConfig.vendorExternalURLs["plugin-detect"]=['//s3-media4.fl.yelpcdn.com/assets/2/www/js/bfd62b330c7a/assets/vendor_external/plugin-detect-0.6.3.min.js']
+                      yelp.init.initLocaleSelector("#language-selector-wrap");
+      yelp.init.initCountrySelector("#country-selector-wrap");
+      yelp.init.ghostUsers();
+      yelp.pages.init();
+      yelp.www.init.facebook(97534753161, "//connect.facebook.net/en_US/all.js");
+      yelp.www.init.quantcast();
+      })
+      .script("//s3-media1.fl.yelpcdn.com/assets/2/www/js/bc21a66d7db3/assets/module_signup-en_US.min.js")
+      .wait(function() {yelp.www.init.signup.inlineController("312fb35f99bd26668a90bd4d973be0a7c15eebffda21c4d7d0b7ac9b84ec26e3", "0825148310dd68edde9970340ed4fd84aca95ce4263964b4e8a6047fc557cc70", "7ff1f83dee368929a01d0f81809a15d4bb091c0a8755bb3cbce9ca93f77c83a4", false, {"BE": [true, false], "FR": [false, true], "DK": [false, true], "DE": [false, true], "JP": [false, true], "HK": [false, false], "BR": [true, false], "FI": [false, true], "NL": [false, true], "PT": [false, true], "NO": [true, false], "TR": [true, false], "NZ": [true, false], "PL": [false, true], "CH": [false, true], "CL": [true, false], "CA": [false, true], "IT": [true, false], "CZ": [false, true], "AR": [true, false], "AU": [false, true], "AT": [false, true], "IE": [true, false], "ES": [false, true], "US": [false, true], "SG": [false, true], "MX": [false, true], "SE": [true, false], "GB": [false, true]});
+      })
+      $LAB.script("//sb.scorecardresearch.com/beacon.js")
+      .wait(function() {
+                      if (window.COMSCORE &amp;&amp; window.COMSCORE['beacon']) {
+                          window.COMSCORE['beacon']({'c15': '', 'c3': '', 'c2': 7130511, 'c1': 2, 'c6': '', 'c5': '', 'c4': ''});
+                      }
+                      })
+   </script>
+   <script type="text/javascript">
+      (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = "https://ssl.google-analytics.com/ga.js";
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      
+   </script>
+   <script>
+      (function() {
+          var main = null;
+      
+          var main=function loadSpice(a){var b=new Image();if(!document.webkitHidden){b.src=["/sp","ice?","r=",a,"&amp;pagevis","=0"].join("")}else{var c=false;document.addEventListener("webkitvisibilitychange",function(){if(document.webkitHidden||c){return}c=true;b.src=["/s","pice","?r=",a,"&amp;","pagevis=1"].join("")})}};
+      
+          if (main === null) {
+              throw 'invalid inline script, missing main declaration.';
+          }
+          main("fb261bacf38c66d8");
+      })();
+   </script>
+   <script>
+      (function() {
+          var main = null;
+      
+          var main=function(){var a=new Image(1,1);a.onerror=a.onload=function(){a.onerror=a.onload=null};a.src=["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-804377h&amp;cg=0&amp;cc=1&amp;si=",escape(window.location.href),"&amp;rp=",escape(document.referrer),"&amp;ts=compact&amp;rnd=",(new Date()).getTime()].join("")};
+      
+          if (main === null) {
+              throw 'invalid inline script, missing main declaration.';
+          }
+          main();
+      })();
+   </script>
+   <noscript>
+      &lt;img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-804377h&amp;amp;cg=0&amp;amp;cc=1&amp;amp;ts=noscript" width="1" height="1" alt=""&gt;
+   </noscript>
+   <script type="text/javascript">
+      yConfig.csrf = {"SitRep": "2a6124ff9343a0b143abfd3228816389cdebb4fabf2c3233d7a4c101cd100669"};
+      
+   </script>
+   <div class="hovercard">
+      <div class="hovercard-inner clearfix">
+         <div class="whatsthis-hovercard">
+            <h3>What's This?</h3>
+            <p>
+               This user has arrived from Qype, a European company acquired by Yelp in 2012. We have integrated the two sites to bring you one great local experience.
+            </p>
+         </div>
+      </div>
+      <span class="arrow-icon"></span>
+   </div>
+   </body>
+</html>

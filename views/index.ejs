@@ -1,0 +1,388 @@
+<html>
+	<!--<![endif]-->
+	<head>
+		<link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/homepage.css" rel="stylesheet" type="text/css">
+	<body class="country-us logged-out ytype jquery" id="yelp_main_body">
+		<div style="position: absolute; left: -9999px; top: -9999px;">
+			<object width="1" height="1" id="moatMessageSender" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" type="application/x-shockwave-flash">
+				<param value="always" name="allowScriptAccess">
+				<param value="false" name="allowFullScreen">
+				<param value="http://s.moatads.com/swf/MessageSenderV2.swf" name="movie">
+				<param value="r=MoatSuperV4.yh.zb&amp;s=MoatSuperV4.yh.zc&amp;e=MoatSuperV4.yh.zd&amp;td=afs.moatads.com" name="FlashVars">
+				<param value="high" name="quality">
+				<param value="#ffffff" name="bgcolor">
+				<embed width="1" height="1" align="middle" pluginspage="http://www.adobe.com/go/getflashplayer" allowfullscreen="false" allowscriptaccess="always" id="moatMessageSenderEmbed" bgcolor="#ffffff" flashvars="r=MoatSuperV4.yh.zb&amp;s=MoatSuperV4.yh.zc&amp;e=MoatSuperV4.yh.zd&amp;td=afs.moatads.com" quality="high" src="http://s.moatads.com/swf/MessageSenderV2.swf" type="application/x-shockwave-flash">
+			</object>
+		</div>
+		<div id="fb-root" class=" fb_reset">
+			<div style="position: absolute; top: -10000px; height: 0px; width: 0px;">
+				<div><iframe frameborder="0" name="fb_xdm_frame_http" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="http://static.ak.facebook.com/connect/xd_arbiter/KFZn1BJ0LYk.js?version=41#channel=f3620062e29315e&amp;origin=http%3A%2F%2Fwww.yelp.com"></iframe><iframe frameborder="0" name="fb_xdm_frame_https" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="https://s-static.ak.facebook.com/connect/xd_arbiter/KFZn1BJ0LYk.js?version=41#channel=f3620062e29315e&amp;origin=http%3A%2F%2Fwww.yelp.com"></iframe></div>
+			</div>
+			<div style="position: absolute; top: -10000px; height: 0px; width: 0px;">
+				<div></div>
+			</div>
+		</div>
+		<div class="lang-en" id="wrap">
+		<div>
+			<ul class="offscreen">
+				<li>
+					<a rel="nofollow" href="#header_find_form">
+					Skip to Search Form
+					</a>
+				</li>
+				<li>
+					<a rel="nofollow" href="\#header-nav">
+					Skip to Navigation
+					</a>
+				</li>
+				<li>
+					<a rel="nofollow" href="#page-content">
+					Skip to Page Content
+					</a>
+				</li>
+			</ul>
+			<div class="app-header">
+				<div class="header-container clearfix">
+					<div class="logo">
+						<a href="/">Yelp</a>
+					</div>
+					<%if(name!=""){%>
+					<div class="header-account webview-hidden">
+						<ul class="logged-out-nav">
+							<li>
+								<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" href="http://localhost:4300/logout">Log out</a>
+							</li>
+							<li style="color:white">
+								Welcome <%=name%>, Last Login : <%=lastlogin%>
+							</li>
+						</ul>
+					</div>
+					<%}else{%>
+					<div class="header-account webview-hidden">
+						<ul class="logged-out-nav">
+							<li>
+								<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" href="http://localhost:4300/signup">Sign Up</a>
+							</li>
+							<li class="text-centered">
+								<a href="http://localhost:4300/login" class="log-in">
+								Log In
+								</a>
+							</li>
+						</ul>
+					</div>
+					<%}%>
+				</div>
+			</div>
+		</div>
+		<div id="print-masthead">
+			<img alt="Yelp" class="print-bkg-img" src="http://s3-media2.fl.yelpcdn.com/assets/2/www/img/b7e9d647188d/gfx/header_print.gif">
+		</div>
+		<span class="offscreen" id="page-content">&nbsp;</span>
+		<div id="super-container">
+		<div id="yelp_us_welcome_915x35-wrapper" class="googlead-sponsor-wrapper" style="display: none;">
+			<div class="google-ads googlead-sponsor-container">
+				<div id="yelp_us_welcome_915x35" data-slot-id="/1014943/yelp_us/welcome/915x35" class="google-ads-block googlead-sponsor" style="display: none;">
+					<script>
+						(function() {
+						    var main = null;
+						
+						    var main=function(e,c,d,b,a){if(e){document.getElementById(d+"-wrapper").style.display="none"}window.googletag.cmd.push(function(){var i=window.googletag.defineSlot(c,b,d);i.addService(window.googletag.pubads());if(e){var h=i.renderEnded;i.renderEnded=function(){if(document.getElementById(d).style.display!=="none"){document.getElementById(d+"-wrapper").style.display="block"}return h.apply(this,arguments)}}if(a){var g=i.fetchStarted;i.fetchStarted=function(){window.yDFP.adsCountSemaphore+=1;return g.apply(this,arguments)
+						};var f=i.fetchEnded;i.fetchEnded=function(){window.yDFP.adsCountSemaphore-=1;return f.apply(this,arguments)}}window.googletag.display(d);window.yDFP.adSlots.push(i)})};
+						
+						    if (main === null) {
+						        throw 'invalid inline script, missing main declaration.';
+						    }
+						    main(true, "/1014943/yelp_us/welcome/915x35", "yelp_us_welcome_915x35", [[970, 66], [970, 90]], false);
+						})();
+					</script>
+					<div id="google_ads_iframe_/1014943/yelp_us/welcome/915x35_0__container__" style="border: 0pt none;"><iframe frameborder="0" width="970" height="66" id="google_ads_iframe_/1014943/yelp_us/welcome/915x35_0" name="google_ads_iframe_/1014943/yelp_us/welcome/915x35_0" scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe></div>
+					<iframe frameborder="0" width="0" height="0" id="google_ads_iframe_/1014943/yelp_us/welcome/915x35_0__hidden__" name="google_ads_iframe_/1014943/yelp_us/welcome/915x35_0__hidden__" scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe>
+				</div>
+			</div>
+		</div>
+		<div id="alert-container">
+		</div>
+		<div class="container homepage">
+		<div class="clearfix layout-block layout-a layout-border">
+		<div class="column column-alpha main">
+			<div id="signup-pitch" class="ysection">
+				
+			</div>
+			<div id="yelp_us_welcome_625x100-wrapper" class="googlead-box-wrapper" style="display: none;">
+				<div class="google-ads googlead-box-container">
+					<div id="yelp_us_welcome_625x100" data-slot-id="/1014943/yelp_us/welcome/625x100" class="google-ads-block googlead-box" style="display: none;">
+						<script>
+							(function() {
+							    var main = null;
+							
+							    var main=function(e,c,d,b,a){if(e){document.getElementById(d+"-wrapper").style.display="none"}window.googletag.cmd.push(function(){var i=window.googletag.defineSlot(c,b,d);i.addService(window.googletag.pubads());if(e){var h=i.renderEnded;i.renderEnded=function(){if(document.getElementById(d).style.display!=="none"){document.getElementById(d+"-wrapper").style.display="block"}return h.apply(this,arguments)}}if(a){var g=i.fetchStarted;i.fetchStarted=function(){window.yDFP.adsCountSemaphore+=1;return g.apply(this,arguments)
+							};var f=i.fetchEnded;i.fetchEnded=function(){window.yDFP.adsCountSemaphore-=1;return f.apply(this,arguments)}}window.googletag.display(d);window.yDFP.adSlots.push(i)})};
+							
+							    if (main === null) {
+							        throw 'invalid inline script, missing main declaration.';
+							    }
+							    main(true, "/1014943/yelp_us/welcome/625x100", "yelp_us_welcome_625x100", [[625, 100]], false);
+							})();
+						</script>
+						<div id="google_ads_iframe_/1014943/yelp_us/welcome/625x100_0__container__" style="border: 0pt none;"><iframe frameborder="0" width="625" height="100" id="google_ads_iframe_/1014943/yelp_us/welcome/625x100_0" name="google_ads_iframe_/1014943/yelp_us/welcome/625x100_0" scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe></div>
+						<iframe frameborder="0" width="0" height="0" id="google_ads_iframe_/1014943/yelp_us/welcome/625x100_0__hidden__" name="google_ads_iframe_/1014943/yelp_us/welcome/625x100_0__hidden__" scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe>
+					</div>
+				</div>
+			</div>
+			<div id="best-of-yelp-module" class="ysection clearfix">
+				<h2>Best of Yelp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" href="javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">Add Categories</a>
+					<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" href="javascript:void(0)" onclick = "document.getElementById('light2').style.display='block';document.getElementById('fade2').style.display='block'">Add Elements</a>
+				</h2>
+				<div id="light" class="white_content">
+					<div class="column column-alpha ">
+						<form action="http://localhost:4300/addCategory" id="login-form" method="GET" name="login_form">
+							<input type="hidden" name="csrftok" class="csrftok" value="f27d1e6594d34d8b1bacf481f3b80475c34b536a733f59e8371131ef5dac49d2">
+							<h2 align="center">Add Category</h2>
+							<p style ="font-size:16px;font-style:bold" align="center">
+								<label>Category name</label>&nbsp;&nbsp;&nbsp;
+								<input type="text" required="required" tabindex="1" maxlength="64" size="20" class="form200" name="name" value="">
+							</p>
+							<p style="margin: 10px 0 20px; text-align: center;">
+								<button class="ybtn ybtn-primary ytype submit" value="submit" type="submit"><span>Save</span></button>
+								<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Cancel</a>
+							</h2>
+							</p>
+						</form>
+					</div>
+				</div>
+				<div id="light2" class="white_content_item">
+					<div class="column column-alpha ">
+						<form action="http://localhost:4300/addElement" id="login-form" method="GET" name="login_form">
+							<h2 align="center">Add Elements</h2>
+								<table style="width:50%">
+								  <tr>
+								    <td class="tdClass"><label>Name</label></td>
+								    <td class="tdClass"><input type="text" required="required" tabindex="1" maxlength="64" size="20" class="form200" name="name" value=""></td>		
+								  </tr>
+								  <tr>
+								    <td class="tdClass"><label>Description</label></td>
+								    <td class="tdClass"><input type="textarea" required="required" tabindex="1" maxlength="64" size="20" class="form200" name="description" value=""></td>		
+								  </tr>
+								  <tr>
+								    <td class="tdClass"><label>Category</label></td>
+								    <td class="tdClass"><input type="text" required="required" tabindex="1" maxlength="64" size="20" class="form200" name="category_name" value=""></td>		
+								  </tr>
+								  <tr colspan="2">
+								  	<td class="tdClass"></td>
+								  	<td class="tdClass"><button class="ybtn ybtn-primary ytype submit" value="submit" type="submit"><span>Save</span></button> &nbsp;&nbsp;&nbsp;<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade2').style.display='none'">Cancel</a></td>
+								  </tr>
+								</table>		
+							</h2>
+							</p>
+						</form>
+					</div>
+				</div>
+				<div id="fade" class="black_overlay"></div>
+				<div id="fade2" class="black_overlay"></div>
+				<div class="content">
+					<div id="best-of-yelp-main" class="ysection clearfix" data-component-bound="true">
+						<div class="navigation">
+							<ol data-component-bound="true">
+								<% for(var i = 0;i < data.length;i++) { %>
+								<li data-tab-id="restaurants" class="tab">
+									<a href="http://localhost:4300/getDetails/<%=data[i].name%>">
+									<i class="i ig-best_of_yelp i-restaurants-best_of_yelp BOY-icon"></i>
+									<span class="category-title"><%=data[i].name%></span>
+									<span class="review-count">
+									<%=data[i].reviews_count%> reviewed
+									</span>
+									</a>
+								</li>
+								<%}%>
+							</ol>
+						</div>
+						<div class="stage">
+							<div class="main-content" data-component-bound="true">
+								<div class="content">
+									<h2 class="embossed-text-white">Yelp is the best way to find great local businesses</h2>
+									<p class="embossed-text-white">
+										People use Yelp to search for everything from the city's tastiest burger to the most renowned cardiologist. What will you uncover in your neighborhood?
+									</p>
+								</div>
+								<div class="throbber-overlay" style="width: 428px; height: 492px; display: none;">
+									<div class="throbber-container" style="left: 213px; top: 200px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="footer-wrap">
+					<div class="city-landscape-img"></div>
+					<div class="footer-copyright">
+						<small>
+						Copyright &copy; 2004&ndash;2014 Yelp Inc. Yelp, <img class="footer-copyright-logo" alt="Yelp logo" src="http://s3-media4.fl.yelpcdn.com/assets/2/www/img/9d213bfb766e/logo/logo_tiny.png">, <img class="footer-burst-logo" alt="Yelp burst" src="http://s3-media3.fl.yelpcdn.com/assets/2/www/img/86ec59fef415/logo/burst_tiny.png"> and related marks are registered trademarks of Yelp.
+						</small>
+					</div>
+					<!--Source: Freebase (http://www.freebase.com/), licensed under CC-BY (http://creativecommons.org/licenses/by/2.5/)-->
+				</div>
+			</div>
+			<!-- google_ad_section_end -->
+			<div id="page-popups" style="display: none;">
+			</div>
+			<div class="hidden" id="qype-ghost-user-hovercard">
+				<div class="whatsthis-hovercard">
+					<h3>What's This?</h3>
+					<p>
+						This user has arrived from Qype, a European company acquired by Yelp in 2012. We have integrated the two sites to bring you one great local experience.
+					</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			yConfig = {"bingMapsUrl": "https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\u0026mkt=en-US\u0026s=1\u0026onscriptload=", "cookies": {"ADMIN_SEARCH_USERDATA_RADIUS": "udr", "RECENT_LOCATIONS": "recentlocations", "SEARCH_PREFS": "searchPrefs", "JS_TRACK": "js_track", "YUV": "yuv", "DEBUG": "debug", "SELECTED_ACTIVITY_FEED": "fd", "SIGNUP_TRACK": "strack", "EXPR_OVERRIDE": "expr", "COOKIE_INFO": "cim", "LOCATION": "location", "ADMIN_CM_SCOREBOARD_SETTINGS": "acms", "SEARCH_SUGGEST_INFO": "search_suggest", "ADMIN_BUSINESS_ATTRIBUTE_CHANGESET_UTILS_PREFS": "bap", "ADMIN_SEARCH_USERDATA_LOCATION": "udl", "ADMIN_SEARCH_USERDATA": "ud", "DISMISSIBLE_MESSAGE_COOKIE": "dm", "USED_LOCALE_SELECTOR": "used_locale_selector", "PRIVACY_POLICY_NOTICE": "ppn", "HIDE_BROWSER_BAR": "hidebrowserbar", "SUGGEST_COOKIE": "ssi", "MESSAGE_SENDER_PASSED_CAPTCHA": "mspc", "QUANTCAST": "qntcst"}, "googDebugLevel": "OFF", "cdn": {"hostnamePattern": {"s3": "s3-media%s.fl.yelpcdn.com", "yelp": "media%s.fl.yelpcdn.com"}, "shardCount": 4}, "enabledSitRepChannels": {}, "spinnerURLSmall": "http://s3-media4.fl.yelpcdn.com/assets/2/www/img/294d5d03032e/loaders/small-throbber.gif", "uniqueRequestId": "fdd65082c7f2dae6", "googleMapsUrl": "//maps.googleapis.com/maps/api/js?client=gme-yelp\u0026language=en\u0026sensor=false", "yelpcodeTemplateVersion": "c4fb5ba1c2", "isLoggedIn": false, "imageUrls": {"mapMarkers": "http://s3-media1.fl.yelpcdn.com/assets/2/www/img/61a4c5ed6fcc/map/map_markers_sprite.png", "stars": "http://s3-media3.fl.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png"}, "mapMarkerSerial": "20140220", "countryNameList": ["argentina", "australia", "austria", "belgium", "brazil", "canada", "chile", "czech republic", "denmark", "finland", "france", "germany", "hong kong", "ireland", "italy", "japan", "mexico", "new zealand", "norway", "poland", "portugal", "singapore", "spain", "sweden", "switzerland", "netherlands", "turkey", "uk", "usa"], "isSitRepEnabled": false, "comscore": {"c15": "", "c3": "", "c2": 7130511, "c1": 2, "c6": "", "c5": "", "c4": ""}, "enableHighVolumeGAEvents": false, "isClientErrorsEnabled": false, "spinnerURLLarge": "http://s3-media2.fl.yelpcdn.com/assets/2/www/img/049247849df0/loaders/throbber.gif", "vendorExternalURLs": {}, "cookieDomain": ".www.yelp.com", "recaptchaPublicKey": "6Lc2978SAAAAADHkLB3mdFpNLLfBP5CYnqlR0gz6", "isLive": true, "bingMapsKey": "AjhDhG82AEA_I4CdC-0o2DTDxg1Ojh0AZdcp_o-IbNuJGlb5fMMrig728eetoW8S"};
+			
+		</script>
+		<noscript>&lt;img src="http://b.scorecardresearch.com/p?cj=1&amp;amp;c15=&amp;amp;c3=&amp;amp;c2=7130511&amp;amp;c1=2&amp;amp;c6=&amp;amp;c5=&amp;amp;c4="&gt;</noscript>
+		<script>
+			(function() {
+			    var main = null;
+			
+			    var main=function includeQuantcast(){window._qevents=window._qevents||[];window._qevents.push({qacct:"p-M4yfUTCPeS3vn"});var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.src="https://secure.quantserve.com/quant.js";b.type="text/javascript";b.async=true;a.parentNode.insertBefore(b,a)};
+			
+			    if (main === null) {
+			        throw 'invalid inline script, missing main declaration.';
+			    }
+			    main();
+			})();
+		</script>
+		<noscript>
+			&lt;img style="display: none;" src="https://pixel.quantserve.com/pixel/p-M4yfUTCPeS3vn.gif" border="0" height="1" width="1" alt="Quantcast"/&gt;
+		</noscript>
+		<script src="http://s3-media4.fl.yelpcdn.com/assets/2/www/js/d56bd43138e5/assets/vendor_external/LAB.min.js"></script><script>$LAB.script("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+			.wait(function() {if(document.readyState === 'interactive') jQuery.ready();})
+			.script("//s3-media4.fl.yelpcdn.com/assets/2/www/js/7c48ae039308/assets/module_core-en_US.min.js")
+			.wait(function() {
+			                yConfig.vendorExternalURLs["easyXDM"]=['//s3-media4.fl.yelpcdn.com/assets/2/www/js/62199ef9e869/assets/vendor_external/easyXDM.min.js']
+			                
+			                yConfig.vendorExternalURLs["plugin-detect"]=['//s3-media4.fl.yelpcdn.com/assets/2/www/js/bfd62b330c7a/assets/vendor_external/plugin-detect-0.6.3.min.js']
+			                yelp.www.init.initSearchSuggest("#find_desc", ".find-decorator", "#dropperText_Mast", false, false);
+			yelp.www.init.initLocationSuggest("#dropperText_Mast", ".near-decorator", true, false);
+			yelp.www.init.initNavItemTracking();
+			yelp.www.init.initGAUniversal({"domain": "yelp.com", "dimensions": {"1": "anon"}, "clientID": "4433D3903E8E5B6F", "trackers": {"www": "UA-30501-55"}}, []);
+			yelp.init.initLocaleSelector("#language-selector-wrap");
+			yelp.init.initCountrySelector("#country-selector-wrap");
+			yelp.init.ghostUsers();
+			yelp.pages.init();
+			yelp.www.init.facebook(97534753161, "//connect.facebook.net/en_US/all.js");
+			yelp.www.init.quantcast();
+			})
+			.script("//s3-media4.fl.yelpcdn.com/assets/2/www/js/0db7d46f92a5/assets/module_yelp_mobile-en_US.min.js")
+			.wait(function() {yelp.www.init.yelpMobile.initSmsAppLink({"phone_number": {"translation_kwargs": {}, "messages": {}, "label": "Phone Number", "validators": ["Required", "PhoneFromAnyCountry"]}, "__defaults__": {"messages": {"DisallowedCharacterError": "You may not use the character '$disallowed_char'.", "NoValueError": "A field is missing.", "ValidationError": "Some of the data you entered is invalid."}}});
+			})
+			.script("//s3-media4.fl.yelpcdn.com/assets/2/www/js/cb473aa974cd/assets/module_logged_out-en_US.min.js")
+			.wait(function() {yelp.www.init.home.activityFeed.loggedOut(null, 1412641195, 6411660, 10);
+			})
+			.script("//s3-media4.fl.yelpcdn.com/assets/2/www/js/fd48aa7bd6ee/assets/module_home-en_US.min.js")
+			.wait(function() {yelp.www.init.home.bestOfYelp();
+			yelp.www.init.home.initBusinessShowcase();
+			yelp.www.init.home.neighborhoods();
+			yelp.www.init.home.initROTDHovercards();
+			})
+			$LAB.script("//sb.scorecardresearch.com/beacon.js")
+			.wait(function() {
+			                if (window.COMSCORE &amp;&amp; window.COMSCORE['beacon']) {
+			                    window.COMSCORE['beacon']({'c15': '', 'c3': '', 'c2': 7130511, 'c1': 2, 'c6': '', 'c5': '', 'c4': ''});
+			                }
+			                })
+		</script>
+		<script type="text/javascript">
+			(function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = "http://www.google-analytics.com/ga.js";
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+			
+		</script>
+		<script>
+			(function() {
+			    var main = null;
+			
+			    var main=function loadSpice(a){var b=new Image();if(!document.webkitHidden){b.src=["/sp","ice?","r=",a,"&amp;pagevis","=0"].join("")}else{var c=false;document.addEventListener("webkitvisibilitychange",function(){if(document.webkitHidden||c){return}c=true;b.src=["/s","pice","?r=",a,"&amp;","pagevis=1"].join("")})}};
+			
+			    if (main === null) {
+			        throw 'invalid inline script, missing main declaration.';
+			    }
+			    main("fdd65082c7f2dae6");
+			})();
+		</script>
+		<script>
+			(function() {
+			    var main = null;
+			
+			    var main=function(){var a=new Image(1,1);a.onerror=a.onload=function(){a.onerror=a.onload=null};a.src=["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-804377h&amp;cg=0&amp;cc=1&amp;si=",escape(window.location.href),"&amp;rp=",escape(document.referrer),"&amp;ts=compact&amp;rnd=",(new Date()).getTime()].join("")};
+			
+			    if (main === null) {
+			        throw 'invalid inline script, missing main declaration.';
+			    }
+			    main();
+			})();
+		</script>
+		<noscript>
+			&lt;img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-804377h&amp;amp;cg=0&amp;amp;cc=1&amp;amp;ts=noscript" width="1" height="1" alt=""&gt;
+		</noscript>
+		<script type="text/javascript">
+			yConfig.csrf = {"BizPhotos": "f56bbdede9f69d059840638d03c1adb8b60807dde3334b467b58cd2ddd543ee4", "Tips": "d5357986f9ebc003ccd440a59fc96de909dd3847d1cbe64ea93fb22383aa2958", "UFC": "0305694b086ee3a7b848b6ac4d15fc4d9f8bb511d3a92b2a51ac5225595f151f", "CheckIns": "3d240d89fc61bbbf0cc8b39deb58de24e25b3c552c484bfd5c42d673a9bb5c13", "SitRep": "530b1a480e6249b85182ae130831d97e44025e63ca89418ebbdb9a6e3e61a8ea"};
+			
+		</script><iframe src="http://tpc.googlesyndication.com/safeframe/1-0-0/html/container.html" style="visibility: hidden; display: none;"></iframe>
+		<div class="hovercard">
+			<div class="hovercard-inner clearfix">
+				<div class="whatsthis-hovercard">
+					<h3>What's This?</h3>
+					<p>
+						This user has arrived from Qype, a European company acquired by Yelp in 2012. We have integrated the two sites to bring you one great local experience.
+					</p>
+				</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard biz-hovercard biz">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard hovercard-mod user-hovercard">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard biz-hovercard biz">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard hovercard-mod user-hovercard">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard biz-hovercard biz">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<div class="hovercard hovercard-mod user-hovercard">
+			<div class="hovercard-inner clearfix">
+				<div data-component-bound="true" class="loading-msg" style="display: block;"><span class="throbber"></span>Loading...</div>
+			</div>
+			<span class="arrow-icon"></span>
+		</div>
+		<iframe id="google_osd_static_frame_8534810897797" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
+	</body>
+</html>

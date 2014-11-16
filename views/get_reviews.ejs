@@ -1,0 +1,97 @@
+<html lang="en" class="js" xmlns:fb="http://www.facebook.com/2008/fbml">
+	<!--<![endif]-->
+	<head>
+		<title>Reviews | Yelp</title>
+		<link href="../stylesheets/style.css" media="all" type="text/css" rel="stylesheet">
+		<link href="../stylesheets/review.css" media="all" type="text/css" rel="stylesheet">
+		<link href="../stylesheets/writeareview_search.css" media="all" type="text/css" rel="stylesheet">
+		<style type="text/css">
+			#businessresults .leftcol {float:left; width:270px;}
+			#businessresults .rightcol {float:left; width: 200px;}
+			#businessresults .ybtn{float: right;}
+			#businessresults .itemcategories {width:260px;}
+			#businessresults .itemneighborhoods {width:260px;}
+			.fs_pagination_controls{clear:left;}
+			#loading_bg, #loading_animation{top:2px}
+		</style>
+	
+	</head>
+	<body class="country-us logged-in jquery" id="yelp_main_body">
+		<div class="lang-en" id="wrap">
+			<div>
+				<div class="app-header">
+					<div class="header-container clearfix">
+						<h1 class="logo">
+							<a href="Categories">Yelp</a>
+						</h1>
+						<div class="header-account webview-hidden">
+							<ul class="logged-out-nav">
+								<li>
+									<a class="ybtn ybtn-primary header-button sign-up" id="header-sign-up" href="http://localhost:4300/logout">Log out</a>
+								</li>
+								<li style="color:white">
+									Welcome <%=name%>, Last Login : <%=lastlogin%>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="super-container">
+				<div id="alert-container">
+					<span class="offscreen">Error message:</span>
+					<div class="alert alert-error">
+						<a href="/listCategory">
+							Home&nbsp;
+						</a>
+						|
+					</div>
+				</div>
+				<div class="container review_rate usd">
+					<div class="clearfix layout-block layout-a layout-border">
+						<div id="biz_reviews" class="column column-beta ">
+							<h3>Reviews for <%=element_name%></h3>
+							<div id="biz_reviews_list" class="">
+								<ul>
+									<%for(var i = 0; i< data.length; i++) {%>
+									<li>
+										<div class="photo-box pb-xss">
+											<a href="#">
+											<img src="/images/user.PNG" class="photo-box-img" alt="">
+											</a>
+										</div>
+										<a href="#"><%=data[i].submitted_by%></a>
+										<div class="formNote">
+											<div class="rating">
+												<%for(var j = 0; j<data[i].rating ; j++){%>
+												<img src="/images/star.png">
+												<%}%>
+											</div>
+											<%=data[i].submitted_on%>
+										</div>
+										<p class="nobtm comment">
+											<%=data[i].review%>
+										</p>
+									</li>
+									<%}%>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="footer-wrap">
+					<div class="footer-menu-wrap clearfix">
+						<div class="city-landscape-img"></div>
+						<div class="footer-copyright">
+							<small>
+							Copyright &copy; 2004&ndash;2014 Yelp Inc. Yelp, <img class="footer-copyright-logo" alt="Yelp logo" src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/9d213bfb766e/logo/logo_tiny.png">, <img class="footer-burst-logo" alt="Yelp burst" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/86ec59fef415/logo/burst_tiny.png"> and related marks are registered trademarks of Yelp.
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
