@@ -65,6 +65,7 @@ app.get('/listCategory', customers.listCategory);
 app.post('/signup/save', customers.save);
 app.get('/customers', customers.list);//route add customer, get n post
 app.get('/customers/add', customers.add);
+app.get('/getAllCategories', customers.getAllCategories);
 app.get('/review_submit/:name', customers.reviews);
 app.get('/get_reviews/:name', customers.get_reviews);
 app.post('/write_reviews', customers.write_reviews);

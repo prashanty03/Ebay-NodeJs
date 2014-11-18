@@ -16,6 +16,10 @@ exports.list = function(req, res){
   
 };
 
+exports.getAllCategories = function(req, res){
+	res.render('allCategories',{page_title:"Categories"});
+};
+
 exports.listCategory = function(req, res){
 	//console.log(req.session.fname);
 //	if(req.session.fname == undefined){
