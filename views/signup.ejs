@@ -7,9 +7,75 @@
       <link rel="stylesheet" type="text/css" href="https://secureir.ebaystatic.com/rs/v/jmpqbbql1m0sxlirqtx1kcedxef.css">
       <link href="https://secureir.ebaystatic.com/rs/v/nqbcbh0ana4jfbpsz0xsdlwpamb.css" type="text/css" rel="stylesheet">
 	  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
-      
+      <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initialize() {
+  // Create the autocomplete object, restricting the search
+  // to geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+      { types: ['geocode'] });
+  // When the user selects an address from the dropdown,
+  // populate the address fields in the form.
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    fillInAddress();
+  });
+}
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = new google.maps.LatLng(
+          position.coords.latitude, position.coords.longitude);
+      autocomplete.setBounds(new google.maps.LatLngBounds(geolocation,
+          geolocation));
+    });
+  }
+}
+// [END region_geolocation]
+
+    </script>
    </head>
-   <body>
+   <body onload="initialize()">
       <div class="sz980">
       <div class="pgWidth">
          <!--[if lt IE 9]>
@@ -41,7 +107,7 @@
                   <tr>
                      <td width="80%" valign="top">
                         <div class="pdb20">
-                           <h2 class="fntNml"><span class="col"> Create your personal account or <a href="https://scgi.ebay.com/ws/eBayISAPI.dll?RegisterEnterInfo&amp;bizflow=2" id="bsRg">start a business account</a>.</span></h2>
+                           <h2 class="fntNml"><span class="col"> Create your personal account .</span></h2>
                         </div>
                      </td>
                      <td width="20%" valign="top"></td>
@@ -155,64 +221,73 @@
                                     
                                     <!--<b>Other Details:</b>-->
                                     <div class="rcl"></div>
-                                    <div>
-                                 <div id="address1_d" class="dspB">
-                                    <div class="fv-w">
-                                       <label for="address1">Address</label>
-                                       <div class="fv-tw">
-                                          <input maxlength="64" type="text" name="address" value="" id="address" size="32" class="w242" v="1" t="0" a="1" aria-autocomplete="none" aria-required="true" required>
-                                          <div role="alert" aria-live="assertive">
-                                             <div id="address1_w" class="rdn">Please enter your address.</div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div id="city_d">
-                                 <!--<div class="w130 fl">-->
-                                    <div class="fv-w">
-                                       <label for="zip">Postal code</label>
-                                       <div class="fv-tw">
-                                          <input maxlength="5" type="text" name="zip" pattern="[0-9]{5}" value="" id="zip" size="12" class="w242" v="1" a="1" aria-autocomplete="none" autocomplete="off" aria-required="true" ue="1" required>
-                                          <div role="alert" aria-live="assertive">
-                                             <div id="zip_w" class="rdn">Please enter a valid postal code.</div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 <!--</div>-->
-                                 
-                                 <div id="zpdv" class="notranslate"></div>
-                              </div>
+                                     <label for="firstname">Enter your address</label>
+                                     <div id="locationField">
+										      <input class="w242" id="autocomplete" placeholder="Enter your address"
+										             onFocus="geolocate()" type="text"></input>
+										    </div>
+                             		 </div>
+                             		 <div class="rcl">
+                             
                               
-                              <div id="city_d">
-                                 <!--<div class="w130 fl">-->
-                                    <div class="fv-w">
-                                       <label for="st_ct">City</label>
-                                          <div class="fv-tw">
-                                             <input maxlength="128" type="text" name="city" value="" id="city" size="32" class="w242" v="1" a="1" aria-required="true" required>
-                                             <div role="alert" aria-live="assertive">
-                                                <div id="st_ct_w" class="rdn">Please enter your city.</div>
-                                             </div>
-                                          </div>
-                                    </div>
-                                 <!--</div>-->
-                                 <span>
-                                    <span id="st_ct_d">
-                                       <div class="fv-w" style="padding-left:15px;">
-                                          <label for="st_ct">State</label>
-                                          <div class="fv-tw">
-                                             <input maxlength="128" type="text" name="state" value="" id="state" size="32" class="w242" v="1" a="1" aria-required="true" required>
-                                             <div role="alert" aria-live="assertive">
-                                                <div id="st_ct_w" class="rdn">Please enter your state.</div>
-                                             </div>
+                              <div id="firstname_d" class="rfl">
+                                       <div class="fv-w">
+                                          <label for="firstname">Street #</label>
+                                          <div class="fv-tw ">
+                                             <input class="field" id="street_number"
+							              disabled="true" name="street"></input>
                                           </div>
                                        </div>
-                                    </span>
-                                    <span id="ctyDrpLyr" class="dn" style="display: none;"></span>
-                                 </span>
-                                 <div id="zpdv" class="notranslate"></div>
-                              </div>
-                              
+                                    </div>
+                                    <div id="lastname_d" class="rln">
+                                       <div class="fv-w">
+                                          <label for="lastname">Address</label>
+                                          <div class="fv-tw ">
+                                             <input class="field" id="route"
+							              disabled="true" name="address"></input></span>
+                                          </div>
+                                       </div>
+                                    </div>
+                              </div> 
+                              <div id="firstname_d" class="rfl">
+                                       <div class="fv-w">
+                                          <label for="firstname">City</label>
+                                          <div class="fv-tw ">
+                                             <input class="field" id="locality"
+							              disabled="true" name="city"></input>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div id="lastname_d" class="rln">
+                                       <div class="fv-w">
+                                          <label for="lastname">State</label>
+                                          <div class="fv-tw ">
+                                              <input class="field"
+							              id="administrative_area_level_1" disabled="true" name="state"></input></input></span>
+                                          </div>
+                                       </div>
+                                    </div>
+                              </div>  
+                              <div id="firstname_d" class="rfl">
+                                       <div class="fv-w">
+                                          <label for="firstname">ZIP</label>
+                                          <div class="fv-tw ">
+                                             <input class="field" id="postal_code"
+							              disabled="true" name="zip"></input>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div id="lastname_d" class="rln">
+                                       <div class="fv-w">
+                                          <label for="lastname">Country</label>
+                                          <div class="fv-tw ">
+                                             <input class="field"
+							              id="country" disabled="true" name="country"></input></input></input></span>
+                                          </div>
+                                       </div>
+                                    </div>
+                              </div>  
+                             
                               <div class="rcl">
                               <div>
                                  <div class="fv-w">
@@ -236,7 +311,7 @@
                                     <div class="agsp rcl">
                                        <b>By clicking "Submit" I agree that:</b>
                                        <ul>
-                                          <li>I have read and accepted the <a target="_blank" href="http://pages.ebay.com/help/policies/user-agreement.html" title="link opens in new window">User Agreement<b class="g-hdn">- opens in a new window or tab</b></a> and <a target="_blank" href="http://pages.ebay.com/help/policies/privacy-policy.html" title="link opens in new window">Privacy Policy<b class="g-hdn">- opens in a new window or tab</b></a>.</li>
+                                          <li>I have read and accepted the User Agreement and Privacy Policy.</li>
                                           <li>I may receive communications from eBay and can change my notification preferences in My eBay.</li>
                                           <li>I am at least 18 years old.</li>
                                        </ul>
