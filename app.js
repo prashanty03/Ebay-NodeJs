@@ -5,6 +5,7 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var crypto = require('crypto');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -32,6 +33,8 @@ app.use(express.bodyParser({ keepExtensions: true, uploadDir:'/Users/prashantyad
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+var flash = require('connect-flash');
+app.use(flash());
 /*------------------------------------------
     connection peer, register as middleware
     type koneksi : single,pool and request 
@@ -47,31 +50,40 @@ if ('development' == app.get('env')) {
 );*/
 
 //route index, hello world
-app.get('/home', routes.index);//route customer list
-app.get('/', customers.getHistoryPage);
+//app.get('/home', routes.index);//route customer list
+app.get('/history', customers.getHistoryPage);
 
 app.get('/getBiddingHistory', customers.getBiddingHistory);
 app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
 
-app.get('/signup', customers.signup);
+/////prashant luthra/////
+app.get('/', customers.login);
+app.get('/users', customers.list);
 app.get('/login', customers.login);
-app.post('/login/do', customers.logindo);
-app.get('/logout', customers.logout);
-app.post('/addCategory', customers.addCategory);
-app.post('/addElement', customers.addElement);
-app.get('/getDetails/:name', customers.getDetails);
-app.get('/listCategory', customers.listCategory);
-app.post('/signup/save', customers.save);
-app.get('/customers', customers.list);//route add customer, get n post
-app.get('/customers/add', customers.add);
-app.get('/getAllCategories', customers.getAllCategories);
-app.get('/review_submit/:name', customers.reviews);
-app.get('/get_reviews/:name', customers.get_reviews);
-app.post('/write_reviews', customers.write_reviews);
-app.get('/customers/delete/:id', customers.delete_customer);//edit customer route , get n post
-app.get('/customers/edit/:id', customers.edit); 
-app.post('/customers/edit/:id',customers.save_edit);
+app.get('/signup', customers.signup);
+app.post('/signup', customers.saveUser);
+app.post('/login', customers.logindo);
+//////end//////
+
+//app.get('/logout', customers.logout);
+//app.post('/addCategory', customers.addCategory);
+//app.post('/addElement', customers.addElement);
+//app.get('/getDetails/:name', customers.getDetails);
+//app.get('/listCategory', customers.listCategory);
+
+//app.get('/customers', customers.list);//route add customer, get n post
+//app.get('/customers/add', customers.add);
+//app.get('/getAllCategories', customers.getAllCategories);
+//app.get('/review_submit/:name', customers.reviews);
+//app.get('/get_reviews/:name', customers.get_reviews);
+//app.post('/write_reviews', customers.write_reviews);
+//app.get('/customers/delete/:id', customers.delete_customer);//edit customer route , get n post
+//app.get('/customers/edit/:id', customers.edit); 
+//app.post('/customers/edit/:id',customers.save_edit);
+app.get('/addProduct', customers.addProduct);
+app.post('/addProduct', customers.saveProduct)
+app.get('/home', customers.home);
 //var CronJob = require('cron').CronJob;
 //new CronJob('10 * * * * *', function(){
 //    console.log('You will see this message every second');

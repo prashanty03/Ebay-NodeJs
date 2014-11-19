@@ -15,5 +15,5 @@ exports.index = function(req, res){
 };
 
 exports.main = function(req, res){
-	res.render('home-page');
+	res.render('home');
 }
