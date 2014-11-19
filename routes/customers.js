@@ -53,6 +53,8 @@ exports.saveUser = function(req,res){
 			address : input.address,
 			city: input.city,
 			state: input.state,
+			country : input.country,
+			street : input.street,
 			zip: input.zip,
 			contact: input.contact,
 			isAdmin: 'N',
