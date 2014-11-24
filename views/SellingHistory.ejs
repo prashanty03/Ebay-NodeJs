@@ -39,6 +39,30 @@ var me_docStart =  (new Date()).getTime();
     style="display:none;"
     src="http://rover.ebay.com/roverclk/0/0/9?trknvp=sid%3Dp2053788.m1543.l3874&amp;_trkparms=noscript%3D1"
     /&gt; &lt;/div&gt; &lt;/div&gt;</noscript>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script> 
+		$(document).ready(function(){
+		  $("#flip").click(function(){
+		    $("#panel").slideToggle("slow");
+		  });
+		});
+	</script>
+	<style> 
+		#panel,#flip
+		{
+		padding:5px;
+		text-align:center;
+		background-color:grey;
+		border:solid 1px #c3c3c3;
+		}
+		#panel
+		{
+		padding:50px;
+		display:none;
+		}
+	</style>
+    
 </head>
 
 <body>
@@ -615,6 +639,54 @@ var me_docStart =  (new Date()).getTime();
                                             Seller : <a class="seller-id" href=
                                             "#"><%=dataVar[i].seller_name%></a>
                                         </div>
+                                        
+                                        <br/>
+                                         
+                                         <% if(dataVar[i].rating){%>
+                                        
+                                        <div class="media-title"><b>Ratings: </b>&nbsp;
+	                                    	<% for (var j=0; j<dataVar[i].rating;j++) { %>
+	                                       		<img src = "/images/star1.jpg"></img>
+	                                        <% }%>
+	                                    	</div>
+	                                        
+                                    	<% } else { %>
+                                        	<form name="review_rate_form" method="POST" id="review_rate_form" action="/rating">
+                                        	<input type="hidden" value="<%=dataVar[i].product_id%>" id="review-language-detect" name="product_id">
+                                        	<div id="flip"><b>Click here to rate this product<b></div>
+											<div id="panel">
+											<div align="left"><label class="formField">
+														<b>Rating</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														</label></div><br/>
+														<label>
+														<input type="radio" value="1" name="rating" id="av_box:rating:True">
+														<span><i>Methinks not&nbsp;</i></span>
+														</label>
+														<label>
+														<input type="radio" value="2" name="rating" id="av_box:rating:False">
+														<span><i>I've experienced better&nbsp;</i></span>
+														</label>
+														<label>
+														<input type="radio" value="3" name="rating" id="av_box:rating:False">
+														<span><i>OK&nbsp;</i></span>
+														</label>
+														<label>
+														<input type="radio" value="4" name="rating" id="av_box:rating:False">
+														<span><i>I'm a fan&nbsp;</i></span>
+														</label>
+														<label>
+														<input type="radio" value="5" name="rating" id="av_box:rating:False">
+														<span><i>As good as it gets&nbsp;</i></span>
+														</label>
+														
+														<div align= "left"><br/><button value="submit" type="submit"><span>Post</span></button></div>
+											</div>
+											
+											
+                                        	</form>
+                                        
+                                        <% }%>
+                                        
                                     </div>
                                 </td>
                             </tr>
