@@ -66,6 +66,7 @@ app.post('/signup', customers.saveUser);
 app.post('/login', customers.logindo);
 app.post('/rating', customers.rate)
 //////end//////
+
 /////Meher/////
 app.get('/getCategories', meher.getCategories);
 app.get('/getProducts/:name',meher.getProducts);
