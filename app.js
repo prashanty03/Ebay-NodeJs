@@ -12,6 +12,7 @@ var fs = require('fs');
 //load customers route
 var customers = require('./routes/customers'); 
 var meher = require('./routes/meher');
+var kiran = require('./routes/Kiran'); 
 var app = express();
 var connection  = require('express-myconnection'); 
 //var mysql = require('mysql');
@@ -86,17 +87,18 @@ app.get('/home', customers.home);
 
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);
+
 //Kiran
 
-app.get('/', home.start);
+app.get('/test', kiran.start);
 
-app.get('/getUserDetails',home.getUserDetails);
+app.get('/getUserDetails',kiran.getUserDetails);
 
-app.get('/updateUserDetails',home.update);
-app.post('/update',home.updateUserDetails);
-app.post('/searchProducts',home.searchProducts);
-app.get('/getAllCustomers',home.getCustomers);
-app.get('/getAllSellers',home.getSellers);
+app.get('/updateUserDetails',kiran.update);
+app.post('/update',kiran.updateUserDetails);
+app.post('/searchProducts',kiran.searchProducts);
+app.get('/getAllCustomers',kiran.getCustomers);
+app.get('/getAllSellers',kiran.getSellers);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){

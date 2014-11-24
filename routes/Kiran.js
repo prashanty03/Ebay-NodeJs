@@ -1,5 +1,5 @@
 var ejs = require("ejs");
-var mysql = require('./mysql');
+var mysql = require('../mysqldb');
 var url=require('url');
 function getUserDetails(req,res)
 {   var url_parts=url.parse(req.url,true);
