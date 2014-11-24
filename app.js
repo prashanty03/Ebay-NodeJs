@@ -66,7 +66,13 @@ app.post('/signup', customers.saveUser);
 app.post('/login', customers.logindo);
 app.post('/rating', customers.rate);
 //////end//////
+/////Meher/////
+app.get('/getCategories', meher.getCategories);
+app.get('/getProducts/:name',meher.getProducts);
+app.get('/updateProduct', meher.updateProduct);
 
+app.post('/updateProduct', meher.saveUpdatedProduct);
+//////end//////
 app.get('/addProduct', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
