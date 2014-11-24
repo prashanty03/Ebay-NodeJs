@@ -56,7 +56,7 @@ app.get('/history', customers.getHistoryPage);
 app.get('/getBiddingHistory', customers.getBiddingHistory);
 app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
-
+app.get('/search', customers.searchproducts);
 /////prashant luthra/////
 app.get('/', customers.login);
 app.get('/users', customers.list);

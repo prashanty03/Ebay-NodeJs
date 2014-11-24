@@ -627,3 +627,22 @@ validate = function(input, name){
 	return msg;
 
 }
+
+
+exports.searchproducts = function(req, res){
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	
+	var query =  connection.query('SELECT name from products where name like "%'+req.query.key+'%"', 
+			function(err, rows, fields) {
+			      if (err) throw err;
+			    var data=[];
+			    for(i=0;i<rows.length;i++)
+			      {
+			        data.push(rows[i].name);
+			      }
+			      res.end(JSON.stringify(data));
+			    });
+	
+	connection.end();
+}
