@@ -169,132 +169,8 @@ exports.rate = function(req, res){
 };
 
 
-/*
- * GET users listing.
- */
 
-exports.list = function(req, res){
-	var coneection = mysqldb.getConnection();
-	connection.query('SELECT * FROM customer',function(err,rows)     {
-		if(err)
-			console.log("Error Selecting : %s ",err );
-		res.render('customers',{page_title:"Customers - Node.js",data:rows});
-	});
-	connection.end();
-
-};
-
-exports.getAllCategories = function(req, res){
-	res.render('allCategories',{page_title:"Categories"});
-};
-
-exports.listCategory = function(req, res){
-	//console.log(req.session.fname);
-//	if(req.session.fname == undefined){
-//	res.redirect("/");
-//	}
-//	else{
-	var connection = mysqldb.getConnection();
-	connection.connect();
-	connection.query('SELECT * from category', function(err, rows){
-		if(err)
-			console.log("Error getting vlaues % s", err);
-		res.render('categories', {page_title:"Categories", data:rows, isAdmin : sess.isAdmin, name: sess.fname, email : sess.email, lastlogin: sess.lastlogin});
-	});
-	connection.end();
-	//}
-}
-
-
-exports.addCategory = function(req,res){
-	var input = JSON.parse(JSON.stringify(req.body));
-	var data = {
-			name : input.name,
-			description : input.description,
-	};
-	var connection = mysqldb.getConnection();
-	console.log(data);
-	connection.connect();
-	var query = connection.query("Insert into category set ? ", data, function(err, rows){
-		if(err)
-			console.log("Error inserting : %s", err);
-		res.redirect('/home');
-		//res.render('categories', {page_title:"Categories", data:rows, name:sess.fname, lastlogin: sess.lastlogin, email :sess.email});
-	});
-	connection.end();
-	//}
-}
-
-exports.addElement = function(req, res){
-//	if(req.session.fname == undefined){
-//	res.redirect("/");
-//	}
-//	else {
-
-	var input = JSON.parse(JSON.stringify(req.body));
-	var data = {
-			name : input.name,
-			description : input.description,
-			address : input.address,
-			total_reviews: 0,
-			category_name : input.category_name
-	};
-	var connection = mysqldb.getConnection();
-	console.log(data);
-	connection.connect();
-
-	var query = connection.query("Insert into element set ? ", data, function(err, rows){
-		if(err)
-			console.log("Error inserting : %s", err);
-		res.redirect('/getDetails/'+data.category_name);
-	});
-	connection.end();
-	//}
-
-}
-exports.edit = function(req,res){
-	var id = req.params.id;
-	req.getConnection(function(err, connection){
-		connection.query('select * from customer where id = ?', [id], function(err, rows){
-			if(err){
-				cosole.log("error : %s", err);
-			}
-			res.render('edit_customer', {page_title:"Edit Customers",data : rows});
-		});
-	});
-};
-
-exports.save = function(req, res){
-//	var input = JSON.parse(JSON.stringify(req.body));
-//	console.log(input);
-//	var connection = mysqldb.getConnection();
-//	connection.connect();
-//	var data = {
-//	firstName : input.firstName,
-//	lastName : input.lastName,
-//	email : input.email,
-//	password : input.password,
-//	isAdmin : 'N',
-//	lastlogin: new Date()
-//	};
-//	console.log(data);
-//	var query = connection.query("Insert into users set ? ", data, function(err, rows){
-//	if(err)
-//	console.log("Error inserting : %s", err);
-//	res.redirect('/');
-//	});
-//	connection.end();
-	var rest = require('restler');
-
-	rest.get('http://localhost:8080/NewGumBall/machines').on('complete', function(result) {
-		if (result instanceof Error) {
-			console.log('Error:', result.message);
-			this.retry(5000); // try again after 5 sec
-		} else {
-			console.log(result);
-		}
-	});
-
+<<<<<<< Updated upstream
 }
 <<<<<<< Updated upstream
 
@@ -377,30 +253,9 @@ exports.save_edit = function(req,res){
 				console.log("Error Updating : %s ",err );
 
 			res.redirect('/customers');
+=======
+>>>>>>> Stashed changes
 
-				});
-
-	});
-};
-
-exports.delete_customer = function(req,res){
-
-	var id = req.params.id;
-
-	req.getConnection(function (err, connection) {
-
-		connection.query("DELETE FROM customer  WHERE id = ? ",[id], function(err, rows)
-				{
-
-			if(err)
-				console.log("Error deleting : %s ",err );
-
-			res.redirect('/customers');
-
-				});
-
-	});
-};
 
 exports.getDetails = function(req,res){
 	var name = req.params.name;
@@ -656,7 +511,6 @@ validate = function(input, name){
 	return msg;
 
 }
-
 
 exports.searchproducts = function(req, res){
 	var connection = mysqldb.getConnection();
