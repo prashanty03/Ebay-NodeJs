@@ -1,4 +1,4 @@
-var mysqldb = require('../mysql.js');
+var mysqldb = require('../mysqldb.js');
 
 exports.getCategories = function(req, res) {
 	/*

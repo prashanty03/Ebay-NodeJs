@@ -653,6 +653,7 @@ var me_docStart =  (new Date()).getTime();
                                     	<% } else { %>
                                         	<form name="review_rate_form" method="POST" id="review_rate_form" action="/rating">
                                         	<input type="hidden" value="<%=dataVar[i].product_id%>" id="review-language-detect" name="product_id">
+                                        	<input type="hidden" value="selling" name="flag">
                                         	<div id="flip"><b>Click here to rate this product<b></div>
 											<div id="panel">
 											<div align="left"><label class="formField">

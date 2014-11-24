@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 //load customers route
 var customers = require('./routes/customers'); 
+var meher = require('./routes/meher');
 var app = express();
 var connection  = require('express-myconnection'); 
 //var mysql = require('mysql');
@@ -59,7 +60,7 @@ app.get('/getSellingHistory', customers.getSellingHistory);
 app.get('/search', customers.searchproducts);
 /////prashant luthra/////
 app.get('/', customers.login);
-app.get('/users', customers.list);
+//app.get('/users', customers.list);
 app.get('/login', customers.login);
 app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);

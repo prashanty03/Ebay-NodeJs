@@ -148,6 +148,7 @@ exports.logindo = function(req,res){
 
 exports.rate = function(req, res){
 	var input = JSON.parse(JSON.stringify(req.body));
+	var flag = input.flag;
 		var connection = mysqldb.getConnection();
 
 		var data = {
@@ -162,7 +163,10 @@ exports.rate = function(req, res){
 			  if (err)
 	              console.log("Error inserting : %s ",err );
 			  else{
-				res.render('History',{page_title:"Categories", data: rows});
+				  if(flag=="bidding")
+					  res.render('BiddingHistory',{page_title:"Categories", data: rows});
+				  else
+					  res.render('SellingHistory',{page_title:"Categories", data: rows});
 				connection.end();
 			  }
 		});
