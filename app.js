@@ -86,6 +86,17 @@ app.get('/home', customers.home);
 
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);
+//Kiran
+
+app.get('/', home.start);
+
+app.get('/getUserDetails',home.getUserDetails);
+
+app.get('/updateUserDetails',home.update);
+app.post('/update',home.updateUserDetails);
+app.post('/searchProducts',home.searchProducts);
+app.get('/getAllCustomers',home.getCustomers);
+app.get('/getAllSellers',home.getSellers);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){
