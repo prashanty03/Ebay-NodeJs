@@ -61,6 +61,7 @@ app.get('/search', customers.searchproducts);
 app.get('/', customers.login);
 app.get('/users', customers.list);
 app.get('/login', customers.login);
+<<<<<<< Updated upstream
 app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);
 app.post('/login', customers.logindo);
@@ -75,15 +76,30 @@ app.post('/login', customers.logindo);
 //app.get('/customers', customers.list);//route add customer, get n post
 //app.get('/customers/add', customers.add);
 //app.get('/getAllCategories', customers.getAllCategories);
+=======
+app.get('/getAllCategories', customers.getAllCategories);
+app.post('/login/do', customers.logindo);
+app.get('/logout', customers.logout);
+app.post('/addCategory', customers.addCategory);
+app.post('/addElement', customers.addElement);
+app.get('/getDetails/:name', customers.getDetails);
+app.get('/listCategory', customers.listCategory);
+app.post('/signup/save', customers.save);
+app.get('/customers', customers.list);//route add customer, get n post
+app.get('/customers/add', customers.add);
+>>>>>>> Stashed changes
 //app.get('/review_submit/:name', customers.reviews);
 //app.get('/get_reviews/:name', customers.get_reviews);
 //app.post('/write_reviews', customers.write_reviews);
 //app.get('/customers/delete/:id', customers.delete_customer);//edit customer route , get n post
 //app.get('/customers/edit/:id', customers.edit); 
 //app.post('/customers/edit/:id',customers.save_edit);
+<<<<<<< Updated upstream
 app.get('/addProduct', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
+=======
+>>>>>>> Stashed changes
 //var CronJob = require('cron').CronJob;
 //new CronJob('10 * * * * *', function(){
 //    console.log('You will see this message every second');

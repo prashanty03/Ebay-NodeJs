@@ -272,11 +272,16 @@ exports.save = function(req, res){
 	});
 
 }
+<<<<<<< Updated upstream
 
 
 exports.reviews = function(req, res){
 	var name = req.params.name;
 	res.render('review_submit',{page_title:"Categories",element_name:name, name:sess.fname, lastlogin: sess.lastlogin, email :sess.email});
+=======
+exports.getAllCategories = function(req, res){
+	res.render('allCategories',{page_title:"Categories"});
+>>>>>>> Stashed changes
 }
 exports.get_reviews = function(req, res){
 	var name = req.params.name;
