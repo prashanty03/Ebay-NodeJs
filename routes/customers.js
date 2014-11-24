@@ -144,6 +144,30 @@ exports.logindo = function(req,res){
 	//});
 };
 
+/* Rate a product */
+
+exports.rate = function(req, res){
+	var input = JSON.parse(JSON.stringify(req.body));
+		var connection = mysqldb.getConnection();
+
+		var data = {
+				product_id : input.product_id,
+				rating : input.rating,
+				
+				submitted_on : new Date(),
+		};
+		
+		
+		var query  = connection.query("Update purchase set rating = ? where product_id =? ", [input.rating,input.product_id], function(err, rows){
+			  if (err)
+	              console.log("Error inserting : %s ",err );
+			  else{
+				res.render('History',{page_title:"Categories", data: rows});
+				connection.end();
+			  }
+		});
+};
+
 
 /*
  * GET users listing.
