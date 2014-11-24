@@ -120,4 +120,22 @@ exports.getProducts = function(req, res) {
 							name : category_name
 						});
 					});
-}
+};
+
+exports.getSellerProducts = function(req,res){
+	//var seller_id = req.params.id;
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	
+	var query = connection.query(
+			"Select * from products where seller_id = 1",
+			 function(err, rows) {
+				if (err)
+					console.log("Error fetching results : %s", err);
+				connection.end();
+				res.render('getSellerProducts', {
+					page_title : "Listed Products",
+					data : rows
+				});
+			});
+};
