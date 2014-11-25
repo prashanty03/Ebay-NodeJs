@@ -99,6 +99,7 @@ app.post('/update',kiran.updateUserDetails);
 app.post('/searchProducts',kiran.searchProducts);
 app.get('/getAllCustomers',kiran.getCustomers);
 app.get('/getAllSellers',kiran.getSellers);
+app.post('/searchPerson',home.searchUsers);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){
