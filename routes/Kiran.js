@@ -27,7 +27,7 @@ function getUserDetails(req,res)
 }
 function start(req,res)
 {
-	ejs.renderFile('./views/beforeSearch.ejs',function(err,result)
+	ejs.renderFile('./views/home.ejs',function(err,result)
 			{
 		if(!err){
 			
@@ -42,7 +42,8 @@ function start(req,res)
 			});	
 }
 function update(req,res)
-{
+{   
+	var query="select * from person where ";
 	ejs.renderFile('./views/update.ejs',function(err,result)
 			{
 		if(!err){
@@ -93,6 +94,7 @@ function searchProducts(req,res)
     var cost=[]; 
     var condition=[];
     var availableQuantity=[];
+    var name=[];
 	var searchQuery=req.param("_nkw");
 	//var condition=req.param("Condition");
 	//console.log(condition);
@@ -106,12 +108,13 @@ function searchProducts(req,res)
 		//res.send(results);
 			for(var i=0; i<results.length;i++)
 				{
+				name[i]=results[i].name;
 				details[i]=results[i].details;
 				cost[i]=results[i].cost;
 				condition[i]=results[i].condition;
 				availableQuantity[i]=results[i].quantity;
 				}
-		  ejs.renderFile('./views/sample.ejs',{data:details, data1:cost, data2:condition,data3:availableQuantity,searchName:searchQuery},function(err,result)
+		  ejs.renderFile('./views/sample.ejs',{data0:name,data:details, data1:cost, data2:condition,data3:availableQuantity,searchName:searchQuery},function(err,result)
 				  {
 			        if(!err)
 			        	{
