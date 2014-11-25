@@ -162,11 +162,39 @@ exports.rate = function(req, res){
 		var query  = connection.query("Update purchase set rating = ? where product_id =? ", [input.rating,input.product_id], function(err, rows){
 			  if (err)
 	              console.log("Error inserting : %s ",err );
-			  else{
+			  else
+			  {
 				  if(flag=="bidding")
-					  res.render('BiddingHistory',{page_title:"Categories", data: rows});
+					 {
+						  	var id = 1 //session user-id
+							connection.query("	select p.id as purchase_id, pr.id as product_id, pr.name " +
+									" as product_name,pr.details as product_details, pr.image, s.id " +
+									" as seller_id,s.firstname as seller_name, p.bid_amount, " +
+									" p.submitted_on, p.rating " +
+									" from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s " +
+									" ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1",[id], function(err, rows){
+								if(err)
+									console.log("Error fetching results : %s", err);
+								console.log(rows + "************");
+						  	res.render('Purchase-History',{page_title:"Categories", dataVar: rows});
+							});
+					}
 				  else
-					  res.render('SellingHistory',{page_title:"Categories", data: rows});
+					  {
+					  var id = 2 //session user-id
+						connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.image as image, " +
+								" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
+								" c.firstname as customer_name, c.id as customer_id, p.quantity " +
+								" from Purchase p JOIN Products pr ON p.product_id = pr.id " +
+								" JOIN person s ON s.id = pr.seller_id JOIN  person c " +
+								" ON c.id = p.customer_id WHERE pr.seller_id = 2 AND p.sold=1",[id], function(err, rows){
+							if(err)
+								console.log("Error fetching results : %s", err);
+							console.log(rows + "************");
+					  res.render('SellingHistory',{page_title:"Categories", dataVar: rows});
+						});
+					  }
+					  
 				connection.end();
 			  }
 		});
@@ -251,7 +279,7 @@ exports.getPurchaseHistory  = function(req, res){
 		if(err)
 			console.log("Error fetching results : %s", err);
 		console.log(rows + "************");
-		res.render('BiddingHistory',{page_title:"",dataVar : rows});
+		res.render('Purchase-History',{page_title:"",dataVar : rows});
 	});
 
 	connection.end();
