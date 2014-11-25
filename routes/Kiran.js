@@ -95,6 +95,7 @@ function searchProducts(req,res)
     var condition=[];
     var availableQuantity=[];
     var name=[];
+    var image=[];
 	var searchQuery=req.param("_nkw");
 	//var condition=req.param("Condition");
 	//console.log(condition);
@@ -113,8 +114,9 @@ function searchProducts(req,res)
 				cost[i]=results[i].cost;
 				condition[i]=results[i].condition;
 				availableQuantity[i]=results[i].quantity;
+				image[i]=results[i].image;
 				}
-		  ejs.renderFile('./views/sample.ejs',{data0:name,data:details, data1:cost, data2:condition,data3:availableQuantity,searchName:searchQuery},function(err,result)
+		  ejs.renderFile('./views/sample.ejs',{data0:name,data:details, data1:cost, data2:condition,data3:availableQuantity,searchName:searchQuery, image:image},function(err,result)
 				  {
 			        if(!err)
 			        	{

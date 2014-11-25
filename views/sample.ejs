@@ -163,8 +163,8 @@ $df.set('ph_TopPanelDF','TopPanelDF')
                             <tbody>
                                 <tr>
                                     <td class="gh-td">
-                                        <!--[if lt IE 9]><a href="http://www.ebay.com/" class="iclg" _sp="m570.l2586" id="gh-la">eBay<img width="117" height="120" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="http://ir.ebaystatic.com/rs/v/apstidvcvu5pxlbxkphrrdo5iqv.png" id="gh-logo"></a><![endif]--><!--[if (gte IE 9)|!(IE)]><!--><a class="iclg"
-                                        href="http://www.ebay.com/" id=
+                                        <!--[if lt IE 9]><a href="/home" class="iclg" _sp="m570.l2586" id="gh-la">eBay<img width="117" height="120" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="http://ir.ebaystatic.com/rs/v/apstidvcvu5pxlbxkphrrdo5iqv.png" id="gh-logo"></a><![endif]--><!--[if (gte IE 9)|!(IE)]><!--><a class="iclg"
+                                        href="/home" id=
                                         "gh-la">eBay<img alt="" height="200"
                                         id="gh-logo" src=
                                         "http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png"
@@ -375,23 +375,15 @@ $df.set('ph_TopPanelDF','TopPanelDF')
                 </div>
 
                 <div id="RelatedSearchesDF">
-                    <script type="text/javascript">
-$df.set('ph_RelatedSearchesDF','RelatedSearchesDF')
-                    </script>
+                    
                 </div>
 
-                <div id="TopPanelDFItemCount">
-                    <script type="text/javascript">
-$df.set('ph_TopPanelDFItemCount','TopPanelDFItemCount')
-                    </script>
-                </div>
+          
             </div>
         </div>
 
         <div id="LeftCenterBottomPanelDF">
-            <script type="text/javascript">
-$df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
-            </script>
+            	
 
             <div id="RightPanelContainer">
                 <div id="Right"></div>
@@ -478,8 +470,9 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                         <div class="brcrCatAsp"></div>
 
                                         <h1 class="bcrs" title="laptop">
+                                       	Search results for : 
                                         <span class="cptname" style=
-                                        "font-weight: bold"><%=searchName%></span></h1>
+                                        "font-weight: bold">"<i><%=searchName%>"</i></span></h1>
 
                                         <div id="followMessage" style=
                                         "display:none">
@@ -558,19 +551,17 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                         "lvpicinner full-width picW s225">
                                                             <a class=
                                                             "img imgWr2"
-                                                                href="http://www.ebay.com/itm/NEW-HP-15-f039wm-Intel-Dual-2-41GHz-Turbo-DVD-RW-4GB-500GB-HD-15-6-Win-8-1-/291247122341?pt=Laptops_Nov05&amp;hash=item43cfae67a5">
-                                                                <img alt=
-                                                                "NEW HP 15-f039wm Intel Dual @ 2.41GHz Turbo DVD+RW 4GB 500GB HD 15.6ï¿½ Win 8.1"
+                                                                href="#">
+                                                                <img alt="<%=data0[i]%>"
                                                                 class="img"
-                                                                src="http://thumbs2.ebaystatic.com/d/l225/m/mZs0dPZiUcutwORDJnaxjmQ.jpg"></a>
+                                                                src="<%=image[i]%>"></a>
                                                             </div>
                                                         </div>
 
                                                         <h3 class="lvtitle">
-                                                        <a class="vip" href=
-                                                        "http://www.ebay.com/itm/NEW-HP-15-f039wm-Intel-Dual-2-41GHz-Turbo-DVD-RW-4GB-500GB-HD-15-6-Win-8-1-/291247122341?pt=Laptops_Nov05&amp;hash=item43cfae67a5"
+                                                        <a class="vip" href="#"
                                                         title=
-                                                        "Click this link to access NEW HP 15-f039wm Intel Dual @ 2.41GHz Turbo DVD+RW 4GB 500GB HD 15.6ï¿½ Win 8.1">
+                                                        "Click this link to access <%=data0[i]%>">
                                                        
                                                        
                                                         <strong><%=data0[i] %>
@@ -589,7 +580,7 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                         <li class=
                                                         "lvprice prc">
                                                                 <span class=
-                                                                "g-b"><%=data1[i]%></span>
+                                                                "g-b">$&nbsp;<%=data1[i]%></span>
 
                                                                 
                                                             </li>
