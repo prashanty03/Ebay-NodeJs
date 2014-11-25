@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.bodyParser({ keepExtensions: true, uploadDir:'/Users/prashantyadav/Documents/images/uploads' }));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir:'images/products' }));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
