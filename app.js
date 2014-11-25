@@ -66,9 +66,7 @@ app.get('/login', customers.login);
 app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);
 app.post('/login', customers.logindo);
-app.post('/rating', customers.rate)
-
-//prashant function////
+app.post('/rating', customers.rate);
 //////end//////
 
 /////Meher/////
