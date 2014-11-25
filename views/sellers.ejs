@@ -200,7 +200,7 @@ $df.set('ph_TopPanelDF','TopPanelDF')
                                                                     size="50"
                                                                     spellcheck=
                                                                     "false"
-                                                                    type="text"
+                                                                    type="text" required
                                                                     
                                                                     ><span class="ui-helper-hidden-accessible"></span>
                                                                 </div>
@@ -421,15 +421,7 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                             "pnl-h">Format</span></h3>
                                         </div>
 
-                                        <div class="pnl-b frmt">
-                                            <span class=
-                                            "small sel tgl_button first_b"
-                                            title="All Listings">All
-                                            Listings</span> <a class=
-                                            "small cbx btn btn-s btn-ter tab tgl_button"
-                                            href="" id="f_LH_CAds" style=
-                                            "display:none">Classified ads</a>
-                                        </div>
+                                       
                                     </div>
 
                                     <div class="right">
@@ -579,7 +571,7 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                         "Click this link to access NEW HP 15-f039wm Intel Dual @ 2.41GHz Turbo DVD+RW 4GB 500GB HD 15.6ï¿½ Win 8.1">
                                                        
                                                        
-                                                        <strong><%=data[i]%>
+                                                        <strong><%=data[i]%><%=data1[i]%>
                                                        
                                                        </strong></a></h3>
                                                        
@@ -601,8 +593,7 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                                     
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
-                                                                     First Name:<%=data[i]%>
-                                                                     Last Name:<%=data1[i]%>
+                                                                     
                                                                      Email:<%=data2[i]%>
                                                                      
                                                                     </span></span>
@@ -624,47 +615,22 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                         </ul>
                                                     </li>
 
-                                                    <li style=
-                                                    "list-style: none; display: inline">
-                                                    <div class="answers">
-                                                            <div id=
-                                                            "AnswersModule">
-                                                                <link href=
-                                                                "http://ir.ebaystatic.com/rs/v/vn3hudv3e21xri5gk3kl250boag.css"
-                                                                rel=
-                                                                "stylesheet"
-                                                                type=
-                                                                "text/css">
-
-                                                                <div></div>
-                                                            </div>
-
-                                                            <h2 class="hdnAcc">
-                                                            Items in search
-                                                            results
-                                                            (continued)</h2>
-                                                        </div>
-                                                    </li>
+                                                    
 
                                                     <li style=
                                                     "list-style: none; display: inline">
-                                                    <div id=
-                                                    "AnswersPlaceHolderContainer9999">
-                                                        </div>
+                                                    
                                                     </li>
                                                 </ul>
 
-                                                <div>
-                                                    <div id=
-                                                    "merch_html_100199"></div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
-                                        <div id="ResultSetItems"></div>
+                                       <%}%>
                                     </div>
                                 </div>
-                                <%}%>
+                                
 
                                 <div class="medianprcText g-hdn">
                                     This is the median price based on sales of
