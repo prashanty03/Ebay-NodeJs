@@ -109,7 +109,8 @@ else {
         <h1 class="offScr">Fill out the details below to complete your
         listing.</h1><a class="acc-skip-to-mc" href="#mainContent">Skip to main
         content</a>
-		<input type="hidden" name="categoryId" value="1">
+        <input type="hidden" name="categoryName" value="<%=categoryName%>">
+		<input type="hidden" name="categoryId" value="<%=categoryId%>">
         <div class="header-wrap">
             <div class="container hidden-phone">
                 <div class="row">
@@ -160,10 +161,8 @@ else {
                         <div class="row-fluid">
                             <div class="span19">
                                 <p class="cat-tree-wrap"><span class=
-                                "cat-tree-pre"><span class="cat-tree root">DVDs
-                                &amp; Movies</span><span class=
-                                "cat-tree cat-divider">&gt;</span></span><span class="cat-tree-post"><span class="cat-tree branch">DVDs
-                                &amp; Blu-ray Discs</span></span></p>
+                                "cat-tree-pre"><span class="cat-tree root">Categories</span><span class=
+                                "cat-tree cat-divider">&gt;</span></span><span class="cat-tree-post"><span class="cat-tree branch"><%=categoryName%></span></span></p>
                             </div>
 
                             <div class="span5">
@@ -232,7 +231,7 @@ else {
                                 "lyrtitle"><input class=
                                 "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all wn__title input-block-level"
                                 id="title" maxlength="80" name="title" type=
-                                "text" value="normal" required></span>
+                                "text" value="" required></span>
 
                                 <div class="jqEasyCounterMsg" style=
                                 "text-align: right; opacity: 0;">

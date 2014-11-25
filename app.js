@@ -69,14 +69,15 @@ app.post('/login', customers.logindo);
 app.post('/rating', customers.rate);
 //////end//////
 
-/////Meher/////
+/////Meher///// 
 app.get('/getCategories', meher.getCategories);
 app.get('/getProducts/:name',meher.getProducts);
 app.get('/updateProduct', meher.updateProduct);
 
 app.post('/updateProduct', meher.saveUpdatedProduct);
 //////end//////
-app.get('/addProduct/:categoryName', customers.addProduct);
+//order=desc&shoe[color]=blue
+app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 

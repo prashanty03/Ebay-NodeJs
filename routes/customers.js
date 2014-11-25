@@ -340,7 +340,10 @@ exports.uploadImage = function(req, res, next){
 };
 
 exports.addProduct = function(req, res){
-	res.render('addProduct',{ message: req.flash('error')});
+	
+	var categoryName = req.params.categoryName;
+	var categoryId = req.params.categoryId;
+	res.render('addProduct',{ categoryName : categoryName, categoryId: categoryId, message: req.flash('error')});
 };
 
 exports.saveProduct = function(req, res){
@@ -408,11 +411,9 @@ exports.saveProduct = function(req, res){
 			else
 			{
 				console.log(info.insertId);
-				res.render('addProduct', {message:'Product added successfuly'});
+				res.render('addProduct', {categoryName: input.categoryName, categoryId : input.categoryId, message:'Product added successfuly'});
 			}
 
-			//res.redirect('/addProduct');
-			//res.render('categories', {page_title:"Categories", data:rows, name:sess.fname, lastlogin: sess.lastlogin, email :sess.email});
 		});
 		connection.end();
 	}
@@ -498,4 +499,22 @@ exports.searchproducts = function(req, res){
 			    });
 	
 	connection.end();
+}
+
+exports.getCategories = function(req, res) {
+	/*
+	 * if(req.session.fname == undefined){ res.redirect("/"); } else{
+	 */
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	var query = connection.query('SELECT * from category', function(err,
+			rows) {
+		if (err)
+			console.log("Error getting vlaues % s", err);
+		connection.end();
+		res.render('selectCategories', {
+			page_title : "Categories",
+			data : rows
+		});
+	});
 }
