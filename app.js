@@ -76,7 +76,7 @@ app.get('/updateProduct', meher.updateProduct);
 
 app.post('/updateProduct', meher.saveUpdatedProduct);
 //////end//////
-app.get('/addProduct', customers.addProduct);
+app.get('/addProduct/:categoryName', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 
