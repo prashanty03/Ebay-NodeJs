@@ -2,7 +2,7 @@
     <!--<![endif]-->
     <head>
         <script async="" src="http://srx.main.ebayrtm.com/rtm?RtmCmd&amp;amp;a=json&amp;amp;i=2ARYicRRPL3wRRyx4Ew%3D%3D&amp;amp;g=6ff024a61490a5e697fcc4d9fffa090a&amp;amp;uf=1&amp;amp;c=1H4sIAAAAAAAAAC2OTWuEMBCG7%2FkVgVIPhdWZRPEDQtltlyJVsdXDHoSSrqEr1d2gsd38%2B2rbw8y8L88cnpv6NNPi8kWRU2QJhknA6FNebyBMACgD9InmUSh6W9Zd9nJHNEa%2BAKIZR3EyRjeJ5w3WVe%2FSusfL4H1PntpJm1bbMnXbvr%2FP7X5hO2Wk8zCPozqbUn6oRuR2%2FSvU1WTdZNJzq67ONK2skMPCq%2Fr1%2BZZv8%2F2ysiL7y1VaPB4OzpsZP6eubYRmEMQMwR0YcN%2FtOY%2BiVZGLBQSI8VpQYMx%2BlX2xQaJ9RLEMOXatQNbMAIDs%2F5If2uwsjxIBAAA%3D&amp;amp;ord=1415906272261&amp;p=644:649:830:194:1650:1651&amp;e=USC:1&amp;z=16&amp;bw=1263&amp;bh=611&amp;enc=UTF-8&amp;v=6&amp;rnc=1&amp;cg=1416606752524&amp;_vrdm=1416606752526&amp;cb=raptor.rtm.RtmManager.storeResponse"></script>
-        <title>My eBay&nbsp;Watch list</title>
+        <title><%=name%>|eBay</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="description" content="eBay Application">
@@ -245,11 +245,14 @@
 														</a>
 													</h4>
                                                 </div>
-                                                <div class="coln1">
-													<h5 class="lvprice prc">
-														<span class="g-b">$<%=data[i].cost%></span>
-													</h5>
-                                                </div>
+                                                <div class="item-spec"><%=data[i].details%></div>
+                                                <div class="item-spec">Condition:<%=data[i].condition%></div>
+                                                <div class="item-spec seller-info">
+                                                	<a class="seller-id">
+														<h5>$<%=data[i].cost%></h5>														
+													</a>
+													<a class="seller-score"><%=data[i].quantity%></a>
+												</div>
                                             </div>
                                         </div>
                                     </td>
