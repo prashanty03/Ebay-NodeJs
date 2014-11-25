@@ -231,6 +231,63 @@ function getSellers(req,res)
 
 
 }
+function searchUsers(req, res) {
+    var firstname = [];
+    var lastname = [];
+    var email = [];
+    var contact = [];
+    var searchQuery = req.param("_nkw");
+    var flag = req.param("flag");
+    var query = "select * from person where firstname REGEXP '" + searchQuery
+            + "' OR lastname REGEXP '" + searchQuery + "' OR email REGEXP '"
+            + searchQuery + "'";
+    var con = mysql.getConnection();
+    con.query(query, function(err, results) {
+        if (results.length > 0) {
+            for ( var i = 0; i < results.length; i++) {
+                firstname[i] = results[i].firstname;
+                lastname[i] = results[i].lastname;
+                email[i] = results[i].email;
+                contact[i] = results[i].contact;
+            }
+            if (flag === "AllSellers") {
+                ejs.renderFile('./views/sellers.ejs', {
+                    data : firstname,
+                    data1 : lastname,
+                    data2 : email,
+                    data3 : contact
+                }, function(err, result) {
+                    if (!err) {
+                        res.end(result);
+                    } else {
+                        res.end("An error occured");
+                        console.log(err);
+                    }
+                });
+            }
+            if (flag === "AllCustomers") {
+                ejs.renderFile('./views/users.ejs', {
+                    data : firstname,
+                    data1 : lastname,
+                    data2 : email,
+                    data3 : contact
+                }, function(err, result) {
+                    if (!err) {
+                        res.end(result);
+                    } else {
+                        res.end("An error occured");
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            console.log(results);
+            res.send("no results");
+            res.end();
+        }
+    });
+}
+
 /*function search(req,res)
 {
 	ejs.renderFile('./views/search.ejs',function(err,result)
@@ -257,3 +314,4 @@ exports.update=update;
 exports.searchProducts=searchProducts;
 exports.getCustomers=getCustomers;
 exports.getSellers=getSellers;
+exports.searchUsers = searchUsers;
