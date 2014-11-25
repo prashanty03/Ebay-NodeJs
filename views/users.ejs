@@ -200,7 +200,7 @@ $df.set('ph_TopPanelDF','TopPanelDF')
                                                                     size="50"
                                                                     spellcheck=
                                                                     "false"
-                                                                    type="text"
+                                                                    type="text" required
                                                                     
                                                                     ><span class="ui-helper-hidden-accessible"></span>
                                                                 </div>
@@ -244,24 +244,28 @@ $df.set('ph_TopPanelDF','TopPanelDF')
                         <form method="get">
                             <ul id="gh-topl">
                                 <li class="gh-t gh-spr" id="gh-eb-u">
-                                <span class="gh-ug-guest" id="gh-ug">Hi
-                                <b>Kiran</b> (<a href=
-                                "https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&amp;ru=http%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_odkw%3Dlaptop%26_from%3DR40%26_osacat%3D0%26_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3Dlaptop%26_sacat%3D0">Sign
-                                in</a>)</span></li>
-
-                                <li class="gh-t gh-spr" id="gh-p-1">
-                                    <a class="gh-p" href=
-                                    "http://deals.ebay.com/">Daily Deals</a>
-                                </li>
+<a class="gh-ua gh-control" href="#" id="gh-ug">Hi
+<b>Prashant</b>!<b class=
+"gh-eb-arw gh-sprRetina"></b></a>
+</li>
+                              <li class="gh-t gh-spr" id="gh-p-3">
+<a class="gh-p" href=
+"/history">Your History</a>
+</li>
+<li class="gh-t gh-spr" id="gh-p-2">
+<a class="gh-p" href=
+"/addProduct">Sell your product</a>
+</li>
+                                
 
                                 <li class="gh-t gh-spr" id="gh-p-4">
                                     <a class="gh-p" href=
-                                    /getAllCustomers">All Customers</a>
+                                    "/getAllCustomers">All Customers</a>
                                 </li>
 
                                 <li class="gh-t gh-spr" id="gh-p-2">
                                     <a class="gh-p" href=
-                                    "getAllSellers">All Sellers</a>
+                                    "/getAllSellers">All Sellers</a>
                                 </li>
 
                                 <li class="gh-t gh-spr" id="gh-p-3"></li>
@@ -418,13 +422,7 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                         </div>
 
                                         <div class="pnl-b frmt">
-                                            <span class=
-                                            "small sel tgl_button first_b"
-                                            title="All Listings">All
-                                            Listings</span> <a class=
-                                            "small cbx btn btn-s btn-ter tab tgl_button"
-                                            href="" id="f_LH_CAds" style=
-                                            "display:none">Classified ads</a>
+                                           
                                         </div>
                                     </div>
 
@@ -538,26 +536,20 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
-                                        <% for(var i=0;i<data.length;i++)
-                                                       {%>
-
+                                        <% for(var i=0;i<data.length;i++){%>
                                         <div class="rs rsw" id="e1-125">
                                             <a id="mainContent" tabindex=
                                             "-1"></a>
-
+                                            
                                             <div class="clearfix" id=
                                             "ResultSetItems">
                                                 <h2 class="hdnAcc">Items in
                                                 search results</h2>
-
+                                                
                                                 <ul id="ListViewInner">
-                                                    <li class=
-                                                    "sresult lvresult clearfix li shic"
-                                                    id="item43cfae67a5">
-                                                        <div class=
-                                                        "lvpic pic p225 img left">
-                                                        <div class=
-                                                        "">
+                                                    <li class="sresult lvresult clearfix li shic" id="item43cfae67a5">
+                                                        <div class="lvpic pic p225 img left">
+                                                        <div class="">
                                                             <a class=
                                                             "img imgWr2"
                                                                 href="http://www.ebay.com/itm/NEW-HP-15-f039wm-Intel-Dual-2-41GHz-Turbo-DVD-RW-4GB-500GB-HD-15-6-Win-8-1-/291247122341?pt=Laptops_Nov05&amp;hash=item43cfae67a5">
@@ -575,21 +567,11 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                         "Click this link to access NEW HP 15-f039wm Intel Dual @ 2.41GHz Turbo DVD+RW 4GB 500GB HD 15.6ï¿½ Win 8.1">
                                                        
                                                        
-                                                        <strong><%=data[i]%>
+                                                        <strong><%=data[i]%> <%=data1[i]%>
                                                        
                                                        </strong></a></h3>
-                                                       
-                                                        
-                                                        
-                                                        
-                                                   
-                                                            
-                                                        
-                                                        
-
-
-
-                                                        <ul class=
+														
+														<ul class=
                                                         "lvdetails left space-zero full-width">
                                                         <li>
                                                                 <div class=
@@ -597,126 +579,35 @@ $df.set('ph_LeftCenterBottomPanelDF','LeftCenterBottomPanelDF')
                                                                     
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
-                                                                     First Name:<%=data[i]%>
-                                                                     Last Name:<%=data1[i]%>
+                                                                     
                                                                      Email:<%=data2[i]%>
                                                                      
                                                                     </span></span>
 
                                                                     <div>
-                                                                        Contact Number:
-                                                                        
-                                                                        
-                                                                        <b><%=data3[i]%>
-                                                                        
-                                                                        </b>
-                                                                    </div>
+                                                                        Contact Number:<b><%=data3[i]%></b>
+                                                                   </div>
                                                                 </div>
                                                             </li>
-
-                                                            
-
-                                                            
-                                                        </ul>
+                                                             </ul>
                                                     </li>
 
                                                     <li style=
                                                     "list-style: none; display: inline">
-                                                    <div class="answers">
-                                                            <div id=
-                                                            "AnswersModule">
-                                                                <link href=
-                                                                "http://ir.ebaystatic.com/rs/v/vn3hudv3e21xri5gk3kl250boag.css"
-                                                                rel=
-                                                                "stylesheet"
-                                                                type=
-                                                                "text/css">
-
-                                                                <div></div>
-                                                            </div>
-
-                                                            <h2 class="hdnAcc">
-                                                            Items in search
-                                                            results
-                                                            (continued)</h2>
-                                                        </div>
+                                                   
                                                     </li>
-
-                                                    <li style=
-                                                    "list-style: none; display: inline">
-                                                    <div id=
-                                                    "AnswersPlaceHolderContainer9999">
-                                                        </div>
-                                                    </li>
-                                                </ul>
-
-                                                <div>
-                                                    <div id=
-                                                    "merch_html_100199"></div>
-                                                </div>
-                                            </div>
+                                            </ul>
+                                               </div>
                                         </div>
-
-                                        <div id="ResultSetItems"></div>
-                                    </div>
+                                        <%}%>
+                                     </div>
                                 </div>
-                                <%}%>
+                                
 
-                                <div class="medianprcText g-hdn">
-                                    This is the median price based on sales of
-                                    this product in the same condition from all
-                                    listings on <a href=
-                                    "http://www.ebay.com/">ebay.com</a> in the
-                                    past 14 days, or if there are any
-                                    insufficient number of listings for a
-                                    meaningful calculation, the past 90 days.
-                                </div>
-
-                                <div class="etrs2 g-hdn">
-                                    <b style="color:#333333">Top Rated
-                                    Plus</b><br>
-
-                                    <ul style="color:#666666;margin: 3px 0;">
-                                        <li>Sellers with highest buyer
-                                        ratings</li>
-
-                                        <li>Returns, money back</li>
-
-                                        <li>Ships in a business day with
-                                        tracking</li>
-                                    </ul><a href=
-                                    "http://pages.ebay.com/trp/index.html">Learn
-                                    More</a>
-                                </div>
-
-                                <div class="etrs3 g-hdn">
-                                    <b style="color:#333333">Top Rated
-                                    Plus</b><br>
-
-                                    <ul style="color:#666666;margin: 3px 0;">
-                                        <li>Sellers with highest buyer
-                                        ratings</li>
-
-                                        <li>Returns, money back</li>
-
-                                        <li>Ships in a business day with
-                                        tracking</li>
-                                    </ul><a href=
-                                    "http://pages.ebay.com/trp/index.html">Learn
-                                    More</a>
-                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div id="rtm_html_391"></div>
-
-                    <div id="rtm_html_984"></div>
-
-                    <div id="rtm_html_985"></div>
-
-                    <div id="rtm_html_278"></div>
-                </div>
+               </div>
             </div>
         </div>
     </div>
