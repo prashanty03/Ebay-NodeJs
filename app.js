@@ -54,7 +54,7 @@ app.use(flash());
 //route index, hello world
 //app.get('/home', routes.index);//route customer list
 app.get('/history', customers.getHistoryPage);
-
+app.get('/selectCategory', customers.getCategories);
 app.get('/getBiddingHistory', customers.getBiddingHistory);
 app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
