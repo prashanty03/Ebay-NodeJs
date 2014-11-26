@@ -71,6 +71,15 @@ app.get('/getUserDetails/:id', customers.getUserDetails);
 app.post('/updateUser/:id', customers.updateUser);
 //////end//////
 
+//////Juveria/////
+app.get('/getProductDetailsBid',customers.getProductDetails);
+app.post('/bid',customers.bid);
+app.post('/buy',customers.buy);
+
+
+
+
+
 /////Meher///// 
 app.get('/getCategories', meher.getCategories);
 app.get('/getProducts/:name',meher.getProducts);
