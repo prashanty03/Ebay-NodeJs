@@ -67,6 +67,8 @@ app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);
 app.post('/login', customers.logindo);
 app.post('/rating', customers.rate);
+app.get('/getUserDetails/:id', customers.getUserDetails);
+app.post('/updateUser/:id', customers.updateUser);
 //////end//////
 
 /////Meher///// 
