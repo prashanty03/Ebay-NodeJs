@@ -1,11 +1,11 @@
 var mysqldb = require('../mysqldb.js');
 
 exports.getCategories = function(req, res) {
-	if (req.sess.id == undefined) {
-		req.flash('error', 'Please Login..!!');
-		res.redirect("/login");
-	} 
-	else {
+//	if (req.sess.id == undefined) {
+//		req.flash('error', 'Please Login..!!');
+//		res.redirect("/login");
+//	} 
+//	else {
 		var connection = mysqldb.getConnection();
 		connection.connect();
 		var query = connection.query('SELECT name from category', function(err,
@@ -15,23 +15,23 @@ exports.getCategories = function(req, res) {
 			connection.end();
 			res.render('categories', {
 				page_title : "Categories",
-				data : rows,
-				id : sess.id,
-				firstname : sess.fname,
-				lastname : sess.lname,
-				email : sess.email,
-				lastlogin : sess.lastlogin
+				data : rows
+//				id : sess.id,
+//				firstname : sess.fname,
+//				lastname : sess.lname,
+//				email : sess.email,
+//				lastlogin : sess.lastlogin
 			});
 		});
-	}
+//	}
 }
 
 exports.updateProduct = function(req, res) {
-	if (req.sess.id == undefined) {
-		req.flash('error', 'Please Login..!!');
-		res.redirect("/login");
-	} 
-	else {
+//	if (req.sess.id == undefined) {
+//		req.flash('error', 'Please Login..!!');
+//		res.redirect("/login");
+//	} 
+//	else {
 		var connection = mysqldb.getConnection();
 		connection.connect();
 		var product_id = req.params.product_id;
@@ -44,23 +44,23 @@ exports.updateProduct = function(req, res) {
 					res.render('updateProduct', {
 						page_title : "Update Product",
 						data : rows,
-						id : sess.id,
-						firstname : sess.fname,
-						lastname : sess.lname,
-						email : sess.email,
-						lastlogin : sess.lastlogin,
+//						id : sess.id,
+//						firstname : sess.fname,
+//						lastname : sess.lname,
+//						email : sess.email,
+//						lastlogin : sess.lastlogin,
 						message : req.flash('error')
 					});
 				});
-	}
+//	}
 };
 
 exports.saveUpdatedProduct = function(req, res) {
-	if (req.sess.id == undefined) {
-		req.flash('error', 'Please Login..!!');
-		res.redirect("/login");
-	} 
-	else {
+//	if (req.sess.id == undefined) {
+//		req.flash('error', 'Please Login..!!');
+//		res.redirect("/login");
+//	} 
+//	else {
 		var input = JSON.parse(JSON.stringify(req.body));
 		var connection = mysqldb.getConnection();
 		connection.connect();
@@ -125,15 +125,15 @@ exports.saveUpdatedProduct = function(req, res) {
 		// req.files.thumbnail.size + ' bytes');
 		// });
 		// });
-	}
+//	}
 };
 
 exports.getProducts = function(req, res) {
-	if (req.sess.id == undefined) {
-		req.flash('error', 'Please Login..!!');
-		res.redirect("/login");
-	} 
-	else {
+//	if (req.sess.id == undefined) {
+//		req.flash('error', 'Please Login..!!');
+//		res.redirect("/login");
+//	} 
+//	else {
 		var category_name = req.params.name;
 		console.log(category_name);
 		var connection = mysqldb.getConnection();
@@ -150,23 +150,23 @@ exports.getProducts = function(req, res) {
 							res.render('getProducts', {
 								page_title : "Products",
 								data : rows,
-								name : category_name,
-								id : sess.id,
-								firstname : sess.fname,
-								lastname : sess.lname,
-								email : sess.email,
-								lastlogin : sess.lastlogin
+								name : category_name
+//								id : sess.id,
+//								firstname : sess.fname,
+//								lastname : sess.lname,
+//								email : sess.email,
+//								lastlogin : sess.lastlogin
 							});
 						});
-	}
+//	}
 };
 
 exports.getSellerProducts = function(req, res) {
-	if (req.sess.id == undefined) {
-		req.flash('error', 'Please Login..!!');
-		res.redirect("/login");
-	} 
-	else {
+//	if (req.sess.id == undefined) {
+//		req.flash('error', 'Please Login..!!');
+//		res.redirect("/login");
+//	} 
+//	else {
 		var seller_id = req.sess.id;
 		var connection = mysqldb.getConnection();
 		connection.connect();
@@ -179,13 +179,13 @@ exports.getSellerProducts = function(req, res) {
 					connection.end();
 					res.render('getSellerProducts', {
 						page_title : "Listed Products",
-						data : rows,
-						id : sess.id,
-						firstname : sess.fname,
-						lastname : sess.lname,
-						email : sess.email,
-						lastlogin : sess.lastlogin
+						data : rows
+//						id : sess.id,
+//						firstname : sess.fname,
+//						lastname : sess.lname,
+//						email : sess.email,
+//						lastlogin : sess.lastlogin
 					});
 				});
-	}
+//	}
 };
