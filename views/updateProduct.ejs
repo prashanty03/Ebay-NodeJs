@@ -10,7 +10,7 @@
             $( "#datepicker" ).datepicker();
             });
         </script>
-        <title>Sell on eBay</title>
+        <title>Update your product</title>
         <!-- meta -->
         <meta content="text/html; charset=utf-8" http-equiv="content-type">
         <meta content=
@@ -92,8 +92,8 @@
         <script> document.forms['old_browser_redirect'].submit() </script><![endif]--><!-- RcmdId cse,RlogId t6%60vcpfgh%7Fw%3F%3Ctof3e34e*2c%3E6-vrubqst-vjd-%60dfz%2Behn-149c088caf5-0x9e --><!--[if IE 8]>
         <div class="lt-ie9 ie8">
         <![endif]-->
-        <form action="/updateProduct" enctype="multipart/form-data" id="selling"
-            method="post" name="selling">
+        <form action="/updateProduct" enctype="multipart/form-data" id="updating"
+            method="POST" name="updating">
             <h1 class="offScr">Fill out the details below to complete your
                 listing.
             </h1>
@@ -131,7 +131,7 @@
             </div>
             <div class="container">
                 <a href="#" id="lnkSwitchForm" onclick=
-                    "return myfaces.oam.submitForm('selling','lnkSwitchForm');"
+                    "return myfaces.oam.submitForm('updating','lnkSwitchForm');"
                     tabindex="-1"></a>
                 <div id="errs"></div>
                 <div class="row category hidden-phone" id="lyrCategoryBreadcrumb">
@@ -142,12 +142,9 @@
                         <div class="well well-small">
                             <div class="row-fluid">
                                 <div class="span19">
-                                    <p class="cat-tree-wrap"><span class=
-                                        "cat-tree-pre"><span class="cat-tree root">DVDs
-                                        &amp; Movies</span><span class=
-                                            "cat-tree cat-divider">&gt;</span></span><span class="cat-tree-post"><span class="cat-tree branch">DVDs
-                                        &amp; Blu-ray Discs</span></span>
-                                    </p>
+                                <p class="cat-tree-wrap"><span class=
+                                "cat-tree-pre"><span class="cat-tree root">Categories</span><span class=
+                                "cat-tree cat-divider">&gt;</span></span><span class="cat-tree-post"><span class="cat-tree branch"><%=productId%></span></span></p>
                                 </div>
                                 <div class="span5">
                                     <p class="pull-right"><span class=
@@ -238,7 +235,7 @@
                                     <h3><label for="condition" id=
                                         "lblcondition">Photo</label></h3>
                                 </div>
-                                &nbsp;&nbsp;&nbsp;<img src="" alt="Image" width="140" height="140" id="blah"><input name="image" id="fileChooser" type="file" onchange="return ValidateFileUpload()">
+                                &nbsp;&nbsp;&nbsp;<img src="<%=data[0].image%>" alt="Image" width="140" height="140" id="blah"><input name="image" id="fileChooser" type="file" onchange="return ValidateFileUpload()">
                                 <div class="row-fluid field-group" id=
                                     "ccConditionFldGrp">
                                     <div class="span6 field-label req">
@@ -523,7 +520,7 @@
             },
             condition : {
             optVals : "1000!^2750!^4000!^5000!^6000",
-            helpVals : "An item that has never been opened or removed from the manufacturer’s sealing (if applicable). Item is in original shrink wrap (if applicable). See the seller's listing for full details.!^An item that looks as if it was just taken out of shrink wrap. No visible wear, and all facets of the item are flawless and intact. See the seller’s listing for full details and description of any imperfections.!^An item that is used but still in very good condition. No damage to the jewel case or item cover, no scuffs, scratches, cracks, or holes. The cover art and liner notes are included. The VHS or DVD box is included. The video game instructions and box are included. The teeth of disk holder are undamaged. Minimal wear on the exterior of item. No skipping on CD/DVD. No fuzzy/snowy frames on VHS tape. See the seller’s listing for full details and description of any imperfections.!^An item in used but good condition. May have minor damage to jewel case including scuffs or cracks, or to the item cover including scuffs, scratches, or cracks. The cover art and liner notes are included for a CD. VHS or DVD box is included. Video game instructions are included. No skipping on CD/DVD. No fuzzy/snowy frames on VHS tape. See the seller’s listing for full details and description of any imperfections.!^An item with obvious and significant wear but is still operational. May have tears or holes in VHS/DVD box. The video game instructions and box may not be included. See the seller’s listing for full details and description of any imperfections.",
+            helpVals : "An item that has never been opened or removed from the manufacturerâ€™s sealing (if applicable). Item is in original shrink wrap (if applicable). See the seller's listing for full details.!^An item that looks as if it was just taken out of shrink wrap. No visible wear, and all facets of the item are flawless and intact. See the sellerâ€™s listing for full details and description of any imperfections.!^An item that is used but still in very good condition. No damage to the jewel case or item cover, no scuffs, scratches, cracks, or holes. The cover art and liner notes are included. The VHS or DVD box is included. The video game instructions and box are included. The teeth of disk holder are undamaged. Minimal wear on the exterior of item. No skipping on CD/DVD. No fuzzy/snowy frames on VHS tape. See the sellerâ€™s listing for full details and description of any imperfections.!^An item in used but good condition. May have minor damage to jewel case including scuffs or cracks, or to the item cover including scuffs, scratches, or cracks. The cover art and liner notes are included for a CD. VHS or DVD box is included. Video game instructions are included. No skipping on CD/DVD. No fuzzy/snowy frames on VHS tape. See the sellerâ€™s listing for full details and description of any imperfections.!^An item with obvious and significant wear but is still operational. May have tears or holes in VHS/DVD box. The video game instructions and box may not be included. See the sellerâ€™s listing for full details and description of any imperfections.",
             rOnly : "false",
             readMore : "Read more"
             },
@@ -1054,7 +1051,7 @@
             }
             oBubHlpConfig.push (
             {id : "bubHlpCreditVoucher", content : "Select this option and you will pay no selling fees. You will receive a voucher for 100% of the buyer payment that you can use to buy any item on eBay.com"},
-            {id : "bubHlpPayPal", content : "With PayPal payments you profit from faster cleared payment, and you’re notified as soon as the buyer has paid."},
+            {id : "bubHlpPayPal", content : "With PayPal payments you profit from faster cleared payment, and youâ€™re notified as soon as the buyer has paid."},
             {id : "bubHlpPaypalEmailAddr", content : "We need the email address you used on your PayPal account so that we can pay you when your item sells. Don't have a PayPal account yet? Go to www.paypal.com to set up a free account."},
             {id : "bubHlpZipCode", content : "This is the ZIP code from where you'll ship items."},
             {id : "bubHlpHandlingDuration", content : "Handling time is the number of days it'll take you to ship after you receive payment. We encourage you to ship as soon as you get the buyer's payment."},
