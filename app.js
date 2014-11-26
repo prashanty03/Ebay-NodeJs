@@ -74,7 +74,8 @@ app.post('/updateUser/:id', customers.updateUser);
 /////Meher///// 
 app.get('/getCategories', meher.getCategories);
 app.get('/getProducts/:name',meher.getProducts);
-app.get('/updateProduct', meher.updateProduct);
+app.get('/updateProduct/:productId', meher.updateProduct);
+app.get('/getSellerProducts',meher.getSellerProducts);
 
 app.post('/updateProduct', meher.saveUpdatedProduct);
 //////end//////
