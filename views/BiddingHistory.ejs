@@ -3,7 +3,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>My eBay&nbsp;Watch list</title>
+    <title>My History | eBay</title>
     <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta content="eBay Application" name="description">
@@ -303,30 +303,12 @@ var me_docStart =  (new Date()).getTime();
                         <a class="gh-ua gh-control" href="#" id="gh-ug">Hi
                         <b>Prashant</b>!</a>
                     </li>
-
-                    <li class="gh-t gh-spr" id="gh-p-1">
-                        <a class="gh-p" href="http://deals.ebay.com/">Daily
-                        Deals</a>
-                    </li>
-
-                    <li class="gh-t gh-spr" id="gh-p-4">
-                        <a class="gh-p" href=
-                        "%20http://www.ebay.com/rpp/gift-cards">Gift Cards</a>
-                    </li>
-
-                    <li class="gh-t gh-spr" id="gh-p-2">
-                        <a class="gh-p" href="/addProduct">Sell your
-                        product</a>
-                    </li>
-
                     <li class="gh-t gh-spr" id="gh-p-3">
                         <a class="gh-p" href="/history">Your History</a>
                     </li>
-
-                    <li class="gh-t gh-spr" id="gh-ti">
-                        <a href="http://www.ebay.com/rpp/holiday-gifts" id=
-                        "gh-doodleS" rel="nofollow" style=
-                        "visibility: visible;"></a>
+                    <li class="gh-t gh-spr" id="gh-p-2">
+                        <a class="gh-p" href="/selectCategory">Sell your
+                        product</a>
                     </li>
                 </ul>
 
@@ -424,10 +406,7 @@ var me_docStart =  (new Date()).getTime();
 
         <div id="top-nav">
             <div class="topTitle">
-                <h1><span class="page-domain">My eBay:</span></h1><!--    
-    To store user email
     <span class="hidden" id="user-email" data-email=""></span>       
--->
             </div>
 
             <div class="tabbable">
@@ -468,7 +447,7 @@ var me_docStart =  (new Date()).getTime();
                     <ul>
                         <li class=" sub-menu-li">
                             <a href=
-                            "http://localhost:4300/getPurchaseHistory">Purchased
+                            "/getPurchaseHistory">Purchased
                             Items<b class="gh-ar-hdn">Page</b></a>
                         </li>
                     </ul>
@@ -485,8 +464,23 @@ var me_docStart =  (new Date()).getTime();
                     <ul>
                         <li class=" sub-menu-li">
                             <a href=
-                            "http://localhost:4300/getSellingHistory">Sold
+                            "/getSellingHistory">Sold
                             Items<b class="gh-ar-hdn">Page</b></a>
+                        </li>
+                    </ul>
+
+                    <div class="ss-migration" id="flyout-list">
+                        <p class="throbber"></p>
+                    </div>
+                </div>
+                 <p class="menu-head">My Products<b class=
+                "gh-ar-hdn">Page</b></p>
+
+                <div class="menu-body" style="display: block">
+                    <ul>
+                        <li class=" sub-menu-li">
+                            <a href=
+                            "/getSellerProducts">All Products<b class="gh-ar-hdn">Page</b></a>
                         </li>
                     </ul>
 
@@ -565,8 +559,7 @@ var me_docStart =  (new Date()).getTime();
                 </span>
 
                 <div class="container-header">
-                    <h2 class="container-title">Watch list</h2>
-
+                    <h2 class="container-title">Bidding History</h2>
                     <div class="edit-pref-r"></div>
                 </div>
             </div>
