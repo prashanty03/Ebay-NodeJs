@@ -21,6 +21,74 @@ exports.signup = function(req, res){
 	res.render('signup',{ message: req.flash('error') });
 };
 
+exports.updateUser = function(req,res){
+	var input = JSON.parse(JSON.stringify(req.body));
+	var personId = req.params.id;
+	var button = input.sbtBtn;
+	if(input.sbtBtn == "Update")
+	{
+		var password = input.pass;
+		var password_temp = input.pass;
+		var cipher = crypto.createCipher(algorithm, key);
+		var encrypted = cipher.update(password, 'utf8', 'hex') + cipher.final('hex');
+		var data = {
+				firstname : input.firstname,
+				lastname : input.lastname,
+				password : encrypted,
+				address : input.address,
+				city: input.city,
+				state: input.state,
+				country : input.country,
+				street : input.street,
+				zip: input.zip,
+				contact: input.contact
+		};
+		
+		var connection = mysqldb.getConnection();
+		connection.connect();
+		var	query = connection.query("UPDATE person set ? where id =?",[data, personId],function(err,rows){
+			if(err)
+				console.log("Error Inserting: %s",err);
+			else
+				{
+				req.flash('error', 'Record successfully updated!');
+				connection.query("select * from person where id = ?",[personId], function(err, rows){
+				if(err)
+					console.log("Error fetching results : %s", err);
+				res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+			
+				});
+				}
+			connection.end();
+		});
+	}
+	else if(input.sbtBtn == "Cancel")
+	{
+		var connection = mysqldb.getConnection();
+		connection.connect();
+		var query = connection.query("SELECT * from person WHERE id = ? ", [personId], function(err, rows){
+		if(err){
+			console.log("Error fecthing details : %s", err);
+			res.redirect('/');
+		}	
+		else{
+				sess = req.session;
+				sess.id = rows[0].id;
+				sess.fname = rows[0].firstname;
+				sess.lname = rows[0].lastname;
+				sess.email = rows[0].email;
+				sess.isAdmin = rows[0].isAdmin;
+				sess.isBuyer = rows[0].isBuyer;
+				sess.isSeller = rows[0].isSeller;
+				sess.memberno = rows[0].membership_no;
+				sess.lastlogin = rows[0].lastlogin.toString().substr(0,23);
+		
+				res.render('home', {page_title:"Home", data:rows, personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+			}
+		});
+	}
+}
+
 exports.saveUser = function(req,res){
 	var input = JSON.parse(JSON.stringify(req.body));
 	console.log(input);
@@ -133,7 +201,7 @@ exports.logindo = function(req,res){
 					sess.lastlogin = rows[0].lastlogin.toString().substr(0,23);
 					console.log("Session: " +JSON.stringify(sess));
 
-					res.render('home', {page_title:"After Login", data:rows, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+					res.render('home', {page_title:"After Login", data:rows, personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
 				}
 				else{
 					req.flash('error','Username or password is incorrect. Try Again!');
@@ -199,6 +267,18 @@ exports.rate = function(req, res){
 				connection.end();
 			  }
 		});
+};
+
+exports.getUserDetails = function(req,res){
+	var personId = req.params.id;
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	var query = connection.query("select * from person where id = ?",[personId], function(err, rows){
+		if(err)
+			console.log("Error fetching results : %s", err);
+		res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+	});
+	connection.end();
 };
 
 exports.getDetails = function(req,res){
