@@ -122,6 +122,7 @@ exports.logindo = function(req,res){
 					sess = req.session;
 					console.log(req.session);
 					console.log(rows[0].firstname);
+					sess.id = rows[0].id;
 					sess.fname = rows[0].firstname;
 					sess.lname = rows[0].lastname;
 					sess.email = rows[0].email;
