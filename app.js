@@ -79,7 +79,6 @@ app.get('/getSellerProducts',meher.getSellerProducts);
 
 app.post('/updateProduct', meher.saveUpdatedProduct);
 //////end//////
-//order=desc&shoe[color]=blue
 app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
@@ -98,12 +97,13 @@ app.get('/test', kiran.start);
 
 app.get('/getUserDetails',kiran.getUserDetails);
 
-app.get('/updateUserDetails',kiran.update);
-app.post('/update',kiran.updateUserDetails);
+//app.get('/updateUserDetails',kiran.update);
+//app.post('/update',kiran.updateUserDetails);
 app.post('/searchProducts',kiran.searchProducts);
 app.get('/getAllCustomers',kiran.getCustomers);
 app.get('/getAllSellers',kiran.getSellers);
 app.post('/searchPerson',kiran.searchUsers);
+
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){

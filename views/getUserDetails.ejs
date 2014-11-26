@@ -40,7 +40,7 @@ function fillInAddress() {
 var place = autocomplete.getPlace();
 for (var component in componentForm) {
 document.getElementById(component).value = '';
-document.getElementById(component).disabled = false;
+//document.getElementById(component).disabled = false;
 }
 // Get each component of the address from the place details
 // and fill the corresponding field on the form.
@@ -85,7 +85,7 @@ geolocation));
 <tbody>
 <tr>
 <td class="gh-td">
-<!--[if lt IE 9]><a href="http://www.ebay.com/" class="iclg" _sp="m570.l2586" id="gh-la">eBay<img width="117" height="120" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="https://secureir.ebaystatic.com/rs/v/apstidvcvu5pxlbxkphrrdo5iqv.png" id="gh-logo"></a><![endif]--><!--[if (gte IE 9)|!(IE)]><!--><a id="gh-la" _sp="m570.l2586" class="iclg" href="http://www.ebay.com/">eBay<img width="250" height="200" id="gh-logo" src="https://secureir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" alt="" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0"></a><!--<![endif]-->
+<!--[if lt IE 9]><a href="/home" class="iclg" _sp="m570.l2586" id="gh-la">eBay<img width="117" height="120" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="https://secureir.ebaystatic.com/rs/v/apstidvcvu5pxlbxkphrrdo5iqv.png" id="gh-logo"></a><![endif]--><!--[if (gte IE 9)|!(IE)]><!--><a id="gh-la" _sp="m570.l2586" class="iclg" href="/home">eBay<img width="250" height="200" id="gh-logo" src="https://secureir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" alt="" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0"></a><!--<![endif]-->
 </td>
 </tr>
 </tbody>
@@ -171,7 +171,7 @@ display:none;}
 <div class="fv-w">
 <label for="PASSWORD">Change your password</label>
 <div class="fv-tw ">
-<input type="password" aria-required="true" oncopy="return false" aria-autocomplete="none" a="1" t="1" v="1" class="w242" aria-describedby="PASSWORD_id" autocorrect="off" autocomplete="off" class="pwd" size="32" id="PASSWORD" value="" name="pass" maxlength="64" required>
+<input type="password" aria-required="true" oncopy="return false" aria-autocomplete="none" a="1" t="1" v="1" class="w242" aria-describedby="PASSWORD_id" autocorrect="off" autocomplete="off" class="pwd" size="32" id="PASSWORD" value="" name="pass" maxlength="64" >
 <script>
 var hash = CryptoJS.MD5("pass");
 </script>
@@ -216,7 +216,7 @@ onFocus="geolocate()" type="text" value=""></input>
 <label for="firstname">Street #</label>
 <div class="fv-tw ">
 <input class="field" id="street_number"
-disabled="true" name="street" value="<%=data.street%>"></input>
+ name="street" value="<%=data.street%>"></input>
 </div>
 </div>
 </div>
@@ -225,7 +225,7 @@ disabled="true" name="street" value="<%=data.street%>"></input>
 <label for="lastname">Address</label>
 <div class="fv-tw ">
 <input class="field" id="route"
-disabled="true" name="address" value="<%=data.address%>"></input></span>
+ name="address" value="<%=data.address%>"></input></span>
 </div>
 </div>
 </div>
@@ -235,7 +235,7 @@ disabled="true" name="address" value="<%=data.address%>"></input></span>
 <label for="firstname">City</label>
 <div class="fv-tw ">
 <input class="field" id="locality"
-disabled="true" name="city" value="<%=data.city%>"></input>
+ name="city" value="<%=data.city%>"></input>
 </div>
 </div>
 </div>
@@ -244,7 +244,7 @@ disabled="true" name="city" value="<%=data.city%>"></input>
 <label for="lastname">State</label>
 <div class="fv-tw ">
 <input class="field"
-id="administrative_area_level_1" disabled="true" name="state" value="<%=data.state%>"></input></input></span>
+id="administrative_area_level_1" name="state" value="<%=data.state%>"></input></input></span>
 </div>
 </div>
 </div>
@@ -254,7 +254,7 @@ id="administrative_area_level_1" disabled="true" name="state" value="<%=data.sta
 <label for="firstname">ZIP</label>
 <div class="fv-tw ">
 <input class="field" id="postal_code"
-disabled="true" name="zip" value = "<%=data.zip%>"></input>
+ name="zip" value = "<%=data.zip%>"></input>
 </div>
 </div>
 </div>
@@ -263,7 +263,7 @@ disabled="true" name="zip" value = "<%=data.zip%>"></input>
 <label for="lastname">Country</label>
 <div class="fv-tw ">
 <input class="field"
-id="country" disabled="true" name="country" value="<%=data.country%>"></input></input></input></span>
+id="country"  name="country" value="<%=data.country%>"></input></input></input></span>
 </div>
 </div>
 </div>

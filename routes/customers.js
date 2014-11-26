@@ -25,25 +25,39 @@ exports.updateUser = function(req,res){
 	var input = JSON.parse(JSON.stringify(req.body));
 	var personId = req.params.id;
 	var button = input.sbtBtn;
+	var data;
 	if(input.sbtBtn == "Update")
 	{
 		var password = input.pass;
-		var password_temp = input.pass;
-		var cipher = crypto.createCipher(algorithm, key);
-		var encrypted = cipher.update(password, 'utf8', 'hex') + cipher.final('hex');
-		var data = {
-				firstname : input.firstname,
-				lastname : input.lastname,
-				password : encrypted,
-				address : input.address,
-				city: input.city,
-				state: input.state,
-				country : input.country,
-				street : input.street,
-				zip: input.zip,
-				contact: input.contact
-		};
-		
+		if(password=="" || password.length==0){
+			data = {
+					firstname : input.firstname,
+					lastname : input.lastname,
+					address : input.address,
+					city: input.city,
+					state: input.state,
+					country : input.country,
+					street : input.street,
+					zip: input.zip,
+					contact: input.contact
+			};
+		}
+		else{
+			var cipher = crypto.createCipher(algorithm, key);
+			var encrypted = cipher.update(password, 'utf8', 'hex') + cipher.final('hex');
+			data = {
+					firstname : input.firstname,
+					lastname : input.lastname,
+					password : encrypted,
+					address : input.address,
+					city: input.city,
+					state: input.state,
+					country : input.country,
+					street : input.street,
+					zip: input.zip,
+					contact: input.contact
+			};
+		}
 		var connection = mysqldb.getConnection();
 		connection.connect();
 		var	query = connection.query("UPDATE person set ? where id =?",[data, personId],function(err,rows){
@@ -55,7 +69,7 @@ exports.updateUser = function(req,res){
 				connection.query("select * from person where id = ?",[personId], function(err, rows){
 				if(err)
 					console.log("Error fetching results : %s", err);
-				res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+				res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
 			
 				});
 				}
@@ -73,7 +87,7 @@ exports.updateUser = function(req,res){
 		}	
 		else{
 				sess = req.session;
-				sess.id = rows[0].id;
+				sess.uid = rows[0].id;
 				sess.fname = rows[0].firstname;
 				sess.lname = rows[0].lastname;
 				sess.email = rows[0].email;
@@ -83,7 +97,7 @@ exports.updateUser = function(req,res){
 				sess.memberno = rows[0].membership_no;
 				sess.lastlogin = rows[0].lastlogin.toString().substr(0,23);
 		
-				res.render('home', {page_title:"Home", data:rows, personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+				res.render('home', {page_title:"Home", data:rows, personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
 			}
 		});
 	}
@@ -190,7 +204,7 @@ exports.logindo = function(req,res){
 					sess = req.session;
 					console.log(req.session);
 					console.log(rows[0].firstname);
-					sess.id = rows[0].id;
+					sess.uid = rows[0].id;
 					sess.fname = rows[0].firstname;
 					sess.lname = rows[0].lastname;
 					sess.email = rows[0].email;
@@ -201,7 +215,7 @@ exports.logindo = function(req,res){
 					sess.lastlogin = rows[0].lastlogin.toString().substr(0,23);
 					console.log("Session: " +JSON.stringify(sess));
 
-					res.render('home', {page_title:"After Login", data:rows, personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+					res.render('home', {page_title:"After Login", data:rows, personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
 				}
 				else{
 					req.flash('error','Username or password is incorrect. Try Again!');
@@ -276,7 +290,7 @@ exports.getUserDetails = function(req,res){
 	var query = connection.query("select * from person where id = ?",[personId], function(err, rows){
 		if(err)
 			console.log("Error fetching results : %s", err);
-		res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: rows[0].id, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+		res.render('getUserDetails',{ message: req.flash('error') , data:rows[0],personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
 	});
 	connection.end();
 };
@@ -372,7 +386,8 @@ exports.getPurchaseHistory  = function(req, res){
 exports.getSellingHistory  = function(req, res){
 	var connection = mysqldb.getConnection();
 	var id = 2 //session user-id
-	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.image as image, " +
+	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, " +
+			"pr.image as image, " +
 			" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
 			" c.firstname as customer_name, c.id as customer_id, p.quantity " +
 			" from Purchase p JOIN Products pr ON p.product_id = pr.id " +
@@ -445,7 +460,7 @@ exports.saveProduct = function(req, res){
 			bid_duration : parseInt(input.duration),
 			category_id : input.categoryId,
 			cost : input.startPrice * 1,
-			seller_id : 3,       //session management
+			seller_id : sess.uid,       //session management
 			bid_start_time : new Date(),
 			image : temp_path
 	};
