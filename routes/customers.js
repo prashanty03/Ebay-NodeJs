@@ -364,7 +364,7 @@ exports.saveProduct = function(req, res){
 			bid_duration : parseInt(input.duration),
 			category_id : input.categoryId,
 			cost : input.startPrice * 1,
-			seller_id : 3,
+			seller_id : 3,       //session management
 			bid_start_time : new Date(),
 			image : temp_path
 	};

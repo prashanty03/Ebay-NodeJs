@@ -456,7 +456,7 @@
                     <ul>
                         <li class=" sub-menu-li">
                             <a href=
-                            "http://localhost:4300/getBiddingHistory">
+                            "/getBiddingHistory">
                             Bidded Items<b class="gh-ar-hdn">Page</b></a>
                         </li>
                     </ul>
@@ -468,7 +468,7 @@
                     <ul>
                         <li class=" sub-menu-li">
                             <a href=
-                            "http://localhost:4300/getPurchaseHistory">
+                            "/getPurchaseHistory">
                             Purchased Items<b class="gh-ar-hdn">Page</b></a>
                         </li>
                     </ul>
@@ -483,7 +483,7 @@
                     <ul>
                         <li class=" sub-menu-li">
                             <a href=
-                            "http://localhost:4300/getSellingHistory">
+                            "/getSellingHistory">
                             Sold Items<b class="gh-ar-hdn">Page</b></a>
                         </li>
                     </ul>
@@ -578,38 +578,32 @@
                     "javascript:;">
                         <tbody>
                             <tr>
-                                 <td class="coln1">
+                            	
+                            	<td class="coln1">
+                                        <div class="coln1-wrap">
+                                            <span class="hidden item-name">Product
+                                            Name</span>
                                             <div class="picCol">
-                                            <div class="l-shad lftd i200">
-                                                <span class="imgt"><a class=
-                                                "img-wrap" href="#" title="Juicy Couture Wish Charm Bracelet ">
-                                                <img alt="Juicy Couture Wish Charm Bracelet " border="0" class="lazy-img myb-img" 
-                                                src="/images/products/Chicken.jpg"></a>
-                                                </span>
+                                                <div class="l-shad lftd i200">
+                                                    <span class="imgt">
+                                                    <a class="img-wrap" href="#" title="">
+                                                    	<img border="0" src="/images/BB.png" class="img" alt="Nunc" style="width:150px;height:150px">
+                                                    </a>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="item-spec-r">
-                                            <div class=
-                                            "item-spec item-title-wrap">
-                                                Product Information: 
-                                                <a class="vip item-title" href="#">
-                                                </a>
-                                            </div>
-											<div class="item-spec seller-info">
-                                                Details : <%=dataVar[i].product_name%>
-                                            </div>
-											<div class="item-spec seller-info">
-                                                Details : <%=dataVar[i].product_details%>
-                                            </div>
-                                            <div class="item-spec seller-info">
-                                                Seller : <a class="seller-id" href="#">
-                                                <%=dataVar[i].seller_name%></a>
-                                            </div>
-                                            
-                                            <br/>
-                                         
-                                         <% if(dataVar[i].rating){%>
+                                            <ul><li>' </li></ul>
+                                            <div class="item-spec-r">
+                                                <div class="item-spec item-title-wrap">
+													<h4 class="lvtitle">
+														<a href="/getProductDetails/<%=dataVar[i].product_name%>" class="vip" title="Click this link to access <%=dataVar[i].product_name%>"><%=dataVar[i].product_name%>
+														</a>
+													</h4>
+                                                </div>
+                                                <div class="item-spec"><%=dataVar[i].product_details%></div>
+                                                <div class="item-spec">Condition:New</div>
+                                                <div class="item-spec">Seller: <%=dataVar[i].seller_name%></a></div> 
+                                                 <% if(dataVar[i].rating){%>
                                         
                                         <div class="media-title"><b>You rated this product: </b>&nbsp;
 	                                    	<% for (var j=0; j<dataVar[i].rating;j++) { %>
@@ -654,10 +648,10 @@
                                         	</form>
                                         
                                         <% }%>
-                                            
+                                            </div>
                                         </div>
-                                   
-                                </td>
+                                    </td>
+                                
                             </tr>
                         </tbody>
                     </table>
