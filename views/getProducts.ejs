@@ -92,7 +92,7 @@
 <ul id="gh-topl">
 <li class="gh-t gh-spr" id="gh-eb-u">
 <a class="gh-ua gh-control" href="/getUserDetails" id="gh-ug">Hi
-<b>Prashant</b>!<b class="gh-eb-arw gh-sprRetina"></b></a>
+<b><%=sess.fname%>&nbsp;<%=sess.lname%></b>!<b class="gh-eb-arw gh-sprRetina"></b></a>
 </li>
 <li class="gh-t gh-spr" id="gh-p-3">
 <a class="gh-p" href="/history">Your History</a>
@@ -105,63 +105,16 @@
 <a href="http://www.ebay.com/rpp/holiday-gifts" id="gh-doodleS" rel="nofollow" style="visibility: visible;"></a>
 </li>
 </ul>
-                    <ul id="gh-eb">
-                        <li id="gh-eb-My" data-imp="10" class="gh-eb-li gh-dd">
-                            <div class="gh-menu">
-                                <a href="#gh-eb-My" class="gh-acc-exp-a gh-acc-a2 gh-control">Expand My eBay</a>
-                                <div style="display: none;" id="gh-eb-My-o" class="gh-submenu gh-eb-o">
-                                    <ul>
-                                        <li></li>
-                                        <li>
-                                            <a href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayBidding&amp;ssPageName=STRK:ME:LNLK:MEBIDX" class="gh-eb-oa thrd">
-                                            Bids/Offers</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://www.ebay.com/myb/WatchList" class="gh-eb-oa thrd">Watch
-                                            list</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&amp;CurrentPage=MyeBayNextListIndex&amp;wl=1" class="gh-eb-oa thrd">
-                                            Wish list</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&amp;CurrentPage=MyeBayNextListIndex&amp;tagId=-100&amp;ssPageName=STRK:ME:LNLK:MESINDXX" class="gh-eb-oa thrd">
-                                            All lists</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://www.ebay.com/mbf/PurchaseHistory" class="gh-eb-oa thrd">
-                                            Purchase history</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayAllSelling&amp;ssPageName=STRK:ME:LNLK:MESX" class="gh-eb-oa thrd">
-                                            Selling</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://www.ebay.com/cln/_mycollections" class="gh-eb-oa thrd">
-                                            My Collections</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayAllFavorites" class="gh-eb-oa thrd">
-                                            Followed searches</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://mesgmy.ebay.com/ws/eBayISAPI.dll?ViewMyMessages&amp;gbh=1&amp;ssPageName=STRK:ME:LNLK&amp;CurrentPage=MyeBayMyMessages" class="gh-eb-oa thrd">
-                                            Messages</a>
-                                        </li>
-                                        <li id="gh-eb-sub-li-cpn"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li id="gh-eb-Alerts" class="gh-eb-li gh-layer rt gh-eb-Alerts-tab-0 gh-eb-active">
-                            <div class="gh-menu">
-                                <div class="gh-sublayer"></div>
-                            </div>
-                        </li>
-                        <li id="gh-cart" class="gh-eb-li rt">
-                            <a title="Your shopping cart is empty" href="http://cart.payments.ebay.com/sc/view" class="gh-eb-li-a"></a>
-                        </li>
-                    </ul>
+                                        <ul id="gh-eb">
+					<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login:<%=sess.lastlogin%></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out">Signout</a>
+</li>
+</ul>
                 </div>
             </div>
             <!--ts:2014.11.13.08:02--><!--rq:--><!--rvr:59rc5-->
@@ -245,7 +198,7 @@
                                             <div class="picCol">
                                                 <div class="l-shad lftd i200">
                                                     <span class="imgt">
-                                                    <a title="Juicy Couture Wish Charm Bracelet " href="#" class="img-wrap">
+                                                    <a  href="#" class="img-wrap">
                                                     	<img border="0" style="width:150px;height:150px" alt="<%=data[i].name%>" class="img" src="<%=data[i].image%>">
                                                     </a>
                                                     </span>

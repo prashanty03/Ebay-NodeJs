@@ -6,6 +6,10 @@ var mysqldb = require('../mysqldb.js');
 var util = require('util');
 
 exports.getProductDetails = function(req,res){
+	if (req.session.uid == undefined) {
+		req.flash('error', 'Please Login..!!');
+		res.redirect("/login");
+	} else {
 	//var input = JSON.parse(JSON.stringify(req.body));
 	var id = req.params.id;
 	var categoryName = req.params.catName;
@@ -22,8 +26,13 @@ exports.getProductDetails = function(req,res){
 	connection.end();
 
 };
+};
 
 exports.bid = function(req, res){
+	if (req.session.uid == undefined) {
+		req.flash('error', 'Please Login..!!');
+		res.redirect("/login");
+	} else {
 	//var id = req.params.id;
 	var input = JSON.parse(JSON.stringify(req.body));
 	var data = {
@@ -47,7 +56,7 @@ exports.bid = function(req, res){
 		} 
 		if(input.bid_amount<rows[0].min_bid)
 		{
-			req.flash('message','Error : Invalid Bid Amount!');
+			req.flash('message','Invalid Bid Amount!');
 			res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
 		}
 		else
@@ -70,9 +79,14 @@ exports.bid = function(req, res){
 			});
 	//connection.end();
 
-}
+}};
 
 exports.buy = function(req, res){
+	if (req.session.uid == undefined) {
+		req.flash('error', 'Please Login..!!');
+		res.redirect("/login");
+	} else {
+
 	var id = req.params.id;
 	var input = JSON.parse(JSON.stringify(req.body));
 	var connection = mysqldb.getConnection();
@@ -94,6 +108,11 @@ exports.buy = function(req, res){
 			};
 			var old_qty=rows[0].quantity;
 			console.log(data);
+			if(input.quantity==0)
+				{
+				req.flash('message','Please Enter Qty 1 Or More');
+				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
+				}
 			if(input.quantity<=old_qty)
 			{
 				var query = connection.query("Insert into purchase set ? ", data, function(err, rows){
@@ -121,7 +140,7 @@ exports.buy = function(req, res){
 			}
 			
 			else{
-				req.flash('message','Error:Invalid Quantity!');
+				req.flash('message','Invalid Quantity!');
 				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
 
 			}
@@ -131,3 +150,4 @@ exports.buy = function(req, res){
 						//connection.end();
 
 	}
+};

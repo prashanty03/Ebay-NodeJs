@@ -113,174 +113,6 @@ var me_docStart =  (new Date()).getTime();
                                                 </div>
                                             </td>
 
-                                            <td class="gh-td" id="gh-cat-td">
-                                                <div id="gh-cat-box">
-                                                    <select class=
-                                                    "gh-sb gh-sprRetina" id=
-                                                    "gh-cat" name="_sacat"
-                                                    size="1" title=
-                                                    "Select a category for search">
-                                                    <option selected="selected"
-                                                        value="0">
-                                                            All Categories
-                                                        </option>
-
-                                                        <option value="20081">
-                                                            Antiques
-                                                        </option>
-
-                                                        <option value="550">
-                                                            Art
-                                                        </option>
-
-                                                        <option value="2984">
-                                                            Baby
-                                                        </option>
-
-                                                        <option value="267">
-                                                            Books
-                                                        </option>
-
-                                                        <option value="12576">
-                                                            Business &amp;
-                                                            Industrial
-                                                        </option>
-
-                                                        <option value="625">
-                                                            Cameras &amp; Photo
-                                                        </option>
-
-                                                        <option value="15032">
-                                                            Cell Phones &amp;
-                                                            Accessories
-                                                        </option>
-
-                                                        <option value="11450">
-                                                            Clothing, Shoes
-                                                            &amp; Accessories
-                                                        </option>
-
-                                                        <option value="11116">
-                                                            Coins &amp; Paper
-                                                            Money
-                                                        </option>
-
-                                                        <option value="1">
-                                                            Collectibles
-                                                        </option>
-
-                                                        <option value="58058">
-                                                            Computers/Tablets
-                                                            &amp; Networking
-                                                        </option>
-
-                                                        <option value="293">
-                                                            Consumer
-                                                            Electronics
-                                                        </option>
-
-                                                        <option value="14339">
-                                                            Crafts
-                                                        </option>
-
-                                                        <option value="237">
-                                                            Dolls &amp; Bears
-                                                        </option>
-
-                                                        <option value="11232">
-                                                            DVDs &amp; Movies
-                                                        </option>
-
-                                                        <option value="6000">
-                                                            eBay Motors
-                                                        </option>
-
-                                                        <option value="45100">
-                                                            Entertainment
-                                                            Memorabilia
-                                                        </option>
-
-                                                        <option value="172008">
-                                                            Gift Cards &amp;
-                                                            Coupons
-                                                        </option>
-
-                                                        <option value="26395">
-                                                            Health &amp; Beauty
-                                                        </option>
-
-                                                        <option value="11700">
-                                                            Home &amp; Garden
-                                                        </option>
-
-                                                        <option value="281">
-                                                            Jewelry &amp;
-                                                            Watches
-                                                        </option>
-
-                                                        <option value="11233">
-                                                            Music
-                                                        </option>
-
-                                                        <option value="619">
-                                                            Musical Instruments
-                                                            &amp; Gear
-                                                        </option>
-
-                                                        <option value="1281">
-                                                            Pet Supplies
-                                                        </option>
-
-                                                        <option value="870">
-                                                            Pottery &amp; Glass
-                                                        </option>
-
-                                                        <option value="10542">
-                                                            Real Estate
-                                                        </option>
-
-                                                        <option value="316">
-                                                            Specialty Services
-                                                        </option>
-
-                                                        <option value="888">
-                                                            Sporting Goods
-                                                        </option>
-
-                                                        <option value="64482">
-                                                            Sports Mem, Cards
-                                                            &amp; Fan Shop
-                                                        </option>
-
-                                                        <option value="260">
-                                                            Stamps
-                                                        </option>
-
-                                                        <option value="1305">
-                                                            Tickets &amp;
-                                                            Experiences
-                                                        </option>
-
-                                                        <option value="220">
-                                                            Toys &amp; Hobbies
-                                                        </option>
-
-                                                        <option value="3252">
-                                                            Travel
-                                                        </option>
-
-                                                        <option value="1249">
-                                                            Video Games &amp;
-                                                            Consoles
-                                                        </option>
-
-                                                        <option value="99">
-                                                            Everything Else
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </td>
-
                                             <td class="gh-td"><input class=
                                             "btn btn-prim gh-spr" id="gh-btn"
                                             type="submit" value="Search"></td>
@@ -301,7 +133,7 @@ var me_docStart =  (new Date()).getTime();
                 <ul id="gh-topl">
                     <li class="gh-t gh-spr" id="gh-eb-u">
                         <a class="gh-ua gh-control" href="#" id="gh-ug">Hi
-                        <b>Prashant</b>!</a>
+                        <b><%=sess.fname%>&nbsp;<%=sess.lname%></b>!</a>
                     </li>
                     <li class="gh-t gh-spr" id="gh-p-3">
                         <a class="gh-p" href="/history">Your History</a>
@@ -312,91 +144,16 @@ var me_docStart =  (new Date()).getTime();
                     </li>
                 </ul>
 
-                <ul id="gh-eb">
-                    <li class="gh-eb-li gh-dd" data-imp="10" id="gh-eb-My">
-                        <div class="gh-menu">
-                            <a class="gh-acc-exp-a gh-acc-a2 gh-control" href=
-                            "#gh-eb-My">Expand My eBay</a>
-
-                            <div class="gh-submenu gh-eb-o" id="gh-eb-My-o"
-                            style="display: none;">
-                                <ul>
-                                    <li></li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayBidding&amp;ssPageName=STRK:ME:LNLK:MEBIDX">
-                                        Bids/Offers</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://www.ebay.com/myb/WatchList">Watch
-                                        list</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&amp;CurrentPage=MyeBayNextListIndex&amp;wl=1">
-                                        Wish list</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&amp;CurrentPage=MyeBayNextListIndex&amp;tagId=-100&amp;ssPageName=STRK:ME:LNLK:MESINDXX">
-                                        All lists</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://www.ebay.com/mbf/PurchaseHistory">
-                                        Purchase history</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayAllSelling&amp;ssPageName=STRK:ME:LNLK:MESX">
-                                        Selling</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://www.ebay.com/cln/_mycollections">
-                                        My Collections</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://my.ebay.com/ws/eBayISAPI.dll?MyEbay&amp;gbh=1&amp;CurrentPage=MyeBayAllFavorites">
-                                        Followed searches</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="gh-eb-oa thrd" href=
-                                        "http://mesgmy.ebay.com/ws/eBayISAPI.dll?ViewMyMessages&amp;gbh=1&amp;ssPageName=STRK:ME:LNLK&amp;CurrentPage=MyeBayMyMessages">
-                                        Messages</a>
-                                    </li>
-
-                                    <li id="gh-eb-sub-li-cpn"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class=
-                    "gh-eb-li gh-layer rt gh-eb-Alerts-tab-0 gh-eb-active" id=
-                    "gh-eb-Alerts">
-                        <div class="gh-menu">
-                            <div class="gh-sublayer"></div>
-                        </div>
-                    </li>
-
-                    <li class="gh-eb-li rt" id="gh-cart">
-                        <a class="gh-eb-li-a" href=
-                        "http://cart.payments.ebay.com/sc/view" title=
-                        "Your shopping cart is empty"></a>
-                    </li>
-                </ul>
+                                    <ul id="gh-eb">
+					<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login:<%=sess.lastlogin%></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out">Signout</a>
+</li>
+</ul>
             </div>
         </div><!--ts:2014.11.13.08:02--><!--rq:--><!--rvr:59rc5-->
     </div><!-- my-ebay Page content here -->
