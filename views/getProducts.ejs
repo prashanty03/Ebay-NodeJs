@@ -92,7 +92,7 @@
 <ul id="gh-topl">
 <li class="gh-t gh-spr" id="gh-eb-u">
 <a class="gh-ua gh-control" href="/getUserDetails" id="gh-ug">Hi
-<b>Prashant</b>!<b class="gh-eb-arw gh-sprRetina"></b></a>
+<b><%=sess.fname%>&nbsp;<%=sess.lname%></b>!<b class="gh-eb-arw gh-sprRetina"></b></a>
 </li>
 <li class="gh-t gh-spr" id="gh-p-3">
 <a class="gh-p" href="/history">Your History</a>
@@ -255,7 +255,7 @@
                                             <div class="item-spec-r">
                                                 <div class="item-spec item-title-wrap">
 													<h4 class="lvtitle">
-														<a title="Click this link to access <%=data[i].name%>" class="vip" href="/getProductDetailsBid/<%=name%>/<%=data[i].id%>"><%=data[i].name%>
+														<a title="Click this link to access <%=data[i].name%>" class="vip" href="/getProductDetails/<%=data[i].name%>"><%=data[i].name%>
 														</a>
 													</h4>
                                                 </div>
