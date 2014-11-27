@@ -353,7 +353,7 @@ exports.getHistoryPage = function(req, res){
 
 exports.getBiddingHistory  = function(req, res){
 	var connection = mysqldb.getConnection();
-	var id = 1 //session user-id
+	var id = sess.uid //session user-id
 	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, " +
 			" pr.image, s.id as seller_id," +
 			" s.firstname as seller_name, s.membership_no as membership_no, p.bid_amount, p.submitted_on, p.rating " +
@@ -373,7 +373,7 @@ exports.getBiddingHistory  = function(req, res){
 
 exports.getPurchaseHistory  = function(req, res){
 	var connection = mysqldb.getConnection();
-	var id = 1 //session user-id
+	var id = sess.uid //session user-id
 	connection.query("	select p.id as purchase_id, pr.id as product_id, pr.name " +
 			" as product_name,pr.details as product_details, pr.image, s.id " +
 			" as seller_id,s.firstname as seller_name, p.bid_amount, " +
@@ -394,7 +394,7 @@ exports.getPurchaseHistory  = function(req, res){
 
 exports.getSellingHistory  = function(req, res){
 	var connection = mysqldb.getConnection();
-	var id = 2 //session user-id
+	var id = sess.uid //session user-id
 	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, " +
 			"pr.image as image, " +
 			" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
@@ -495,6 +495,8 @@ exports.saveProduct = function(req, res){
 	            //res.send('File uploaded to: ' + target_path + ' - ' + req.files.image.size + ' bytes');
 	        });
 	    });
+	    var myDate = new Date();
+	    myDate.setDate(myDate.getDate() + parseInt(input.duration));
 	    var data = {
 				name : input.title,
 				details : input.details,
@@ -505,9 +507,10 @@ exports.saveProduct = function(req, res){
 				bid_duration : parseInt(input.duration),
 				category_id : input.categoryId,
 				cost : input.startPrice * 1,
-				seller_id : 3,
+				seller_id : sess.uid,
 				bid_start_time : new Date(),
-				image : target_path.substring(8)
+				image : target_path.substring(8),
+				bid_end_time : myDate
 		};
 		connection.connect();
 		var query = connection.query("Insert into products set ? ", data, function(err, info){
@@ -622,4 +625,9 @@ exports.getCategories = function(req, res) {
 			data : rows
 		});
 	});
+	
+	
+}
+exports.test = function(req, res){
+	res.render('test');
 }
