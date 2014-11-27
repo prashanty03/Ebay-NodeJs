@@ -258,7 +258,7 @@ exports.rate = function(req, res){
 			  {
 				  if(flag=="bidding")
 					 {
-						  	var id = 1 //session user-id
+						  	var id = sess.uid //session user-id
 							connection.query("	select p.id as purchase_id, pr.id as product_id, pr.name " +
 									" as product_name,pr.details as product_details, pr.image, s.id " +
 									" as seller_id,s.firstname as seller_name, p.bid_amount, " +
@@ -273,7 +273,7 @@ exports.rate = function(req, res){
 					}
 				  else
 					  {
-					  var id = 2 //session user-id
+					  var id = sess.uid //session user-id
 						connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.image as image, " +
 								" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
 								" c.firstname as customer_name, c.id as customer_id, p.quantity " +
@@ -355,7 +355,7 @@ exports.getBiddingHistory  = function(req, res){
 	var connection = mysqldb.getConnection();
 	var id = sess.uid //session user-id
 	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, " +
-			" pr.image, s.id as seller_id," +
+			" pr.image, s.id as seller_id,p.bid_amount, pr.min_bid, " +
 			" s.firstname as seller_name, s.membership_no as membership_no, p.bid_amount, p.submitted_on, p.rating " +
 			" from Purchase p JOIN Products pr" +
 			" ON p.product_id = pr.id " +
@@ -376,7 +376,7 @@ exports.getPurchaseHistory  = function(req, res){
 	var id = sess.uid //session user-id
 	connection.query("	select p.id as purchase_id, pr.id as product_id, pr.name " +
 			" as product_name,pr.details as product_details, pr.image, s.id " +
-			" as seller_id,s.firstname as seller_name, p.bid_amount, " +
+			" as seller_id, p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount, " +
 			" p.submitted_on, p.rating " +
 			" from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s " +
 			" ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1",[id], function(err, rows){
@@ -397,7 +397,7 @@ exports.getSellingHistory  = function(req, res){
 	var id = sess.uid //session user-id
 	connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, " +
 			"pr.image as image, " +
-			" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
+			" s.id as seller_id,p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
 			" c.firstname as customer_name, c.id as customer_id, p.quantity " +
 			" from Purchase p JOIN Products pr ON p.product_id = pr.id " +
 			" JOIN person s ON s.id = pr.seller_id JOIN  person c " +

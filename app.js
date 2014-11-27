@@ -101,7 +101,7 @@ app.post('/upload', customers.uploadImage);
 // Kiran
 
 app.get('/test', kiran.start);
-
+app.get('/t', customers.test);
 app.get('/getUserDetails', kiran.getUserDetails);
 
 // app.get('/updateUserDetails',kiran.update);
