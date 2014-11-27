@@ -823,6 +823,8 @@ function picOnLoad(isSetClkId){
                                             
 											<%if(data[0].auction==1){%>
 											<form  method="post" id="BidForm" name="BidForm">
+											<input type="hidden" name="categoryName" value="<%=categoryName%>">
+											<input type="hidden" name="productId" value="<%=data[0].id%>">
                                             <div class="u-flL u-b w29" id="">
                                                 <label class="u-dspn" for=
                                                 "MaxBidId" id=
@@ -868,6 +870,8 @@ function picOnLoad(isSetClkId){
 										<%}%>
 											<%if(data[0].auction==0){%>
 											<form action="/buy" method="post" id="BuyForm" name="BuyForm">
+											<input type="hidden" name="categoryName" value="<%=categoryName%>">
+											<input type="hidden" name="productId" value="<%=data[0].id%>">
                                             <div class="u-flL u-b w29" id="">
                                                 <label class="u-dspn" for=
                                                 "MaxBidId" id=
