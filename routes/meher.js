@@ -65,7 +65,7 @@ exports.saveUpdatedProduct = function(req, res) {
 	// else {
 	var input = JSON.parse(JSON.stringify(req.body));
 	var connection = mysqldb.getConnection();
-	var productId = req.params.productId;
+	var productId = input.productId;
 	console.log('********************'+productId+' in saveUpdated******************');
 	var condition = input.condition == "1000" ? "New" : "Refurbished";
 	var auction = input.format == "Auction" ? 1 : 0;
@@ -88,7 +88,7 @@ exports.saveUpdatedProduct = function(req, res) {
 	// console.log(data);
 
 	var msg = validate(input, req.files.image.name);
-
+	console.log(msg);
 	console.log("Message : " + msg.length);
 	if (msg.length == 0) {
 
@@ -126,14 +126,12 @@ exports.saveUpdatedProduct = function(req, res) {
 			image : target_path.substring(8)
 		};
 		connection.connect();
-		var query = connection.query("update products set ? where id = 1" , data,
+		var query = connection.query("update products set ? where id = ?" , [data,productId],
 				function(err, info) {
 					if (err)
 						console.log("Error inserting : %s", err);
 					else {
-						res.render('getSellerProducts', {
-							message : 'Product updated successfuly'
-						});
+						res.redirect('/getSellerProducts');						
 					}
 
 				});
