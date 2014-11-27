@@ -97,9 +97,12 @@ function searchProducts(req,res)
     var name=[];
     var image=[];
 	var searchQuery=req.param("_nkw");
+	var catId = [];
+	var catName =[];
+	var productId =[];
 	//var condition=req.param("Condition");
 	//console.log(condition);
-	var query="select * from products where name REGEXP '"+searchQuery+"' OR details REGEXP '"+searchQuery+"' OR `condition` REGEXP '"+searchQuery+"'";
+	var query="select p.*,c.id as catId,c.name as catName from products p join category c on c.id = p.category_id where p.name REGEXP '"+searchQuery+"' OR details REGEXP '"+searchQuery+"' OR `condition` REGEXP '"+searchQuery+"'";
 	//var query="select name,details,condition from products where condition REGEXP '"+searchQuery+"'";
 	var con=mysql.getConnection();
 	con.query(query,function(err,results)
@@ -107,16 +110,19 @@ function searchProducts(req,res)
 		if(!err)
 			{
 		//res.send(results);
-			for(var i=0; i<results.length;i++)
-				{
-				name[i]=results[i].name;
-				details[i]=results[i].details;
-				cost[i]=results[i].cost;
-				condition[i]=results[i].condition;
-				availableQuantity[i]=results[i].quantity;
-				image[i]=results[i].image;
-				}
-		  ejs.renderFile('./views/sample.ejs',{data0:name,data:details, data1:cost, data2:condition,data3:availableQuantity,searchName:searchQuery, image:image},function(err,result)
+//			for(var i=0; i<results.length;i++)
+//				{
+//				name[i]=results[i].name;
+//				details[i]=results[i].details;
+//				cost[i]=results[i].cost;
+//				condition[i]=results[i].condition;
+//				availableQuantity[i]=results[i].quantity;
+//				image[i]=results[i].image;
+//				catId[i]=results[i].catId;
+//				catName[i]=results[i].catName;
+//				productId[i]=results[i];
+//				}
+		  ejs.renderFile('./views/sample.ejs',{results:results, searchName : searchQuery},function(err,result)
 				  {
 			        if(!err)
 			        	{

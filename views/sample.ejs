@@ -518,7 +518,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
-                                        <% for(var i=0;i<data.length;i++)
+                                        <% for(var i=0;i<results.length;i++)
                                                        {%>
 
                                         <div class="rs rsw" id="e1-125">
@@ -541,26 +541,26 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                             <a class=
                                                             "img imgWr2"
                                                                 href="#">
-                                                                <img alt="<%=data0[i]%>"
+                                                                <img alt="<%=results[i].name%>"
                                                                 class="img"
-                                                                src="<%=image[i]%>"></a>
+                                                                src="<%=results[i].image%>"></a>
                                                             </div>
                                                         </div>
 
                                                         <h3 class="lvtitle">
-                                                        <a class="vip" href="#"
+                                                        <a class="vip" href="/getProductDetailsBid/<%=results[i].catName%>/<%=results[i].id%>"
                                                         title=
-                                                        "Click this link to access <%=data0[i]%>">
+                                                        "Click this link to access <%=results[i].name%>">
                                                        
                                                        
-                                                        <strong><%=data0[i] %>
+                                                        <strong><%=results[i].name %>
                                                        
                                                        </strong></a></h3>
                                                        
                                                         
                                                         <div class=
                                                         "lvsubtitle">
-                                                            <%=data[i]%>
+                                                            <%=results[i].details%>
                                                             
                                                             
                                                         </div>
@@ -569,7 +569,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                         <li class=
                                                         "lvprice prc">
                                                                 <span class=
-                                                                "g-b">$&nbsp;<%=data1[i]%></span>
+                                                                "g-b">$&nbsp;<%=results[i].cost%></span>
 
                                                                 
                                                             </li>
@@ -590,14 +590,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                                     
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
-                                                                     Condition:<%=data2[i]%>
+                                                                     Condition:<%=results[i].condition%>
                                                                     </span></span>
 
                                                                     <div>
                                                                         Available Quantity:
                                                                         
                                                                         
-                                                                        <b><%=data3[i]%>
+                                                                        <b><%=results[i].quantity%>
                                                                         
                                                                         </b>
                                                                     </div>

@@ -13,6 +13,7 @@ var fs = require('fs');
 var customers = require('./routes/customers'); 
 var meher = require('./routes/meher');
 var kiran = require('./routes/Kiran'); 
+var juveria = require('./routes/juveria');
 var app = express();
 var connection  = require('express-myconnection'); 
 //var mysql = require('mysql');
@@ -72,9 +73,9 @@ app.post('/updateUser/:id', customers.updateUser);
 //////end//////
 
 //////Juveria/////
-app.get('/getProductDetailsBid',customers.getProductDetails);
-app.post('/bid',customers.bid);
-app.post('/buy',customers.buy);
+app.get('/getProductDetailsBid/:catName/:id',juveria.getProductDetails);
+app.post('/bid',juveria.bid);
+app.post('/buy',juveria.buy);
 
 
 
