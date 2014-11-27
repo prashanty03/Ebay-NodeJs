@@ -107,11 +107,11 @@ exports.saveUser = function(req,res){
 	var input = JSON.parse(JSON.stringify(req.body));
 	console.log(input);
 	console.log("PAssword: "+input.hash+ " "+ input.password);
-	if(input.buyer == 1){
+	if(input.buyer == 1 && input.seller == ""){
 		var buyer = 1;
 		var seller = 0;
 	}
-	else if(input.seller == 2){
+	else if(input.buyer =="" && input.seller == 2){
 		var buyer = 0;
 		var seller = 1;
 	}
@@ -140,7 +140,6 @@ exports.saveUser = function(req,res){
 			zip: input.zip,
 			contact: input.contact,
 			isAdmin: 'N',
-			lastlogin: new Date(),
 			isActive:'1',
 			isBuyer: buyer,
 			isSeller: seller
@@ -212,10 +211,20 @@ exports.logindo = function(req,res){
 					sess.isBuyer = rows[0].isBuyer;
 					sess.isSeller = rows[0].isSeller;
 					sess.memberno = rows[0].membership_no;
-					sess.lastlogin = rows[0].lastlogin.toString().substr(0,23);
+					if(rows[0].lastlogin == null)
+					{
+						sess.lastlogin = "First Login";
+						var lastlogin = new Date();
+						connection.query('UPDATE person SET lastlogin = ? WHERE email = ?', [lastlogin, sess.email]);
+					}
+					else
+					{
+						sess.lastlogin = rows[0].lastlogin.toString().substr(0,15);
+					}
 					console.log("Session: " +JSON.stringify(sess));
-
+					
 					res.render('home', {page_title:"After Login", data:rows, personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
+					connection.end();
 				}
 				else{
 					req.flash('error','Username or password is incorrect. Try Again!');
@@ -223,7 +232,7 @@ exports.logindo = function(req,res){
 				}
 			}
 		});
-		connection.end();
+		
 	//});
 };
 
