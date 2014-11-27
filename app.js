@@ -9,60 +9,61 @@ var crypto = require('crypto');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-//load customers route
-var customers = require('./routes/customers'); 
+// load customers route
+var customers = require('./routes/customers');
 var meher = require('./routes/meher');
-var kiran = require('./routes/Kiran'); 
+var kiran = require('./routes/Kiran');
 var juveria = require('./routes/juveria');
 var app = express();
-var connection  = require('express-myconnection'); 
-//var mysql = require('mysql');
-var sess=null;
+var connection = require('express-myconnection');
+// var mysql = require('mysql');
+var sess = null;
 // all environments
 app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//app.use(express.favicon());
-app.use(session({secret: 'ssshhhhh'}));
+// app.use(express.favicon());
+app.use(session({
+    secret : 'ssshhhhh'
+}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended : true
+}));
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.bodyParser({ keepExtensions: true}));
+app.use(express.bodyParser({
+    keepExtensions : true
+}));
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 var flash = require('connect-flash');
 app.use(flash());
 /*------------------------------------------
-    connection peer, register as middleware
-    type koneksi : single,pool and request 
--------------------------------------------*/
-/*app.use(
-    connection(mysql,{        
-        host: 'localhost',
-        user: 'root',
-        password : 'admin',
-        port : 3306, //port mysql
-        database:'nodejs'
-    },'request')
-);*/
+ connection peer, register as middleware
+ type koneksi : single,pool and request 
+ -------------------------------------------*/
+/*
+ * app.use( connection(mysql,{ host: 'localhost', user: 'root', password :
+ * 'admin', port : 3306, //port mysql database:'nodejs' },'request') );
+ */
 
-//route index, hello world
-//app.get('/home', routes.index);//route customer list
+// route index, hello world
+// app.get('/home', routes.index);//route customer list
 app.get('/history', customers.getBiddingHistory);
 app.get('/selectCategory', customers.getCategories);
 app.get('/getBiddingHistory', customers.getBiddingHistory);
 app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
 app.get('/search', customers.searchproducts);
-/////prashant luthra/////
+// ///prashant luthra/////
 app.get('/', customers.login);
-//app.get('/users', customers.list);
+// app.get('/users', customers.list);
 app.get('/login', customers.login);
 app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);
@@ -70,52 +71,48 @@ app.post('/login', customers.logindo);
 app.post('/rating', customers.rate);
 app.get('/getUserDetails/:id', customers.getUserDetails);
 app.post('/updateUser/:id', customers.updateUser);
-//////end//////
+// ////end//////
 
-//////Juveria/////
-app.get('/getProductDetailsBid/:catName/:id',juveria.getProductDetails);
-app.post('/bid',juveria.bid);
-app.post('/buy',juveria.buy);
+// ////Juveria/////
+app.get('/getProductDetailsBid/:catName/:id', juveria.getProductDetails);
+app.post('/bid', juveria.bid);
+app.post('/buy', juveria.buy);
 
-
-
-
-
-/////Meher///// 
+// ///Meher/////
 app.get('/getCategories', meher.getCategories);
-app.get('/getProducts/:name',meher.getProducts);
+app.get('/getProducts/:name', meher.getProducts);
 app.get('/updateProduct/:productId', meher.updateProduct);
-app.get('/getSellerProducts',meher.getSellerProducts);
+app.get('/getSellerProducts', meher.getSellerProducts);
 
 app.post('/updateProduct/:productId', meher.saveUpdatedProduct);
-//////end//////
+// ////end//////
 app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 
-//var CronJob = require('cron').CronJob;
-//new CronJob('10 * * * * *', function(){
-//    console.log('You will see this message every second');
-//}, null, true, "America/Los_Angeles");
+// var CronJob = require('cron').CronJob;
+// new CronJob('10 * * * * *', function(){
+// console.log('You will see this message every second');
+// }, null, true, "America/Los_Angeles");
 
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);
 
-//Kiran
+// Kiran
 
 app.get('/test', kiran.start);
 
-app.get('/getUserDetails',kiran.getUserDetails);
+app.get('/getUserDetails', kiran.getUserDetails);
 
-//app.get('/updateUserDetails',kiran.update);
-//app.post('/update',kiran.updateUserDetails);
-app.post('/searchProducts',kiran.searchProducts);
-app.get('/getAllCustomers',kiran.getCustomers);
-app.get('/getAllSellers',kiran.getSellers);
-app.post('/searchPerson',kiran.searchUsers);
-
+// app.get('/updateUserDetails',kiran.update);
+// app.post('/update',kiran.updateUserDetails);
+app.post('/searchProducts', kiran.searchProducts);
+app.get('/getAllCustomers', kiran.getCustomers);
+app.get('/getAllSellers', kiran.getSellers);
+app.post('/searchPerson', kiran.searchUsers);
+app.get('/signout', kiran.signout);
 
 app.use(app.router);
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
 });
