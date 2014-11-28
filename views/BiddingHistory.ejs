@@ -370,8 +370,13 @@ var me_docStart =  (new Date()).getTime();
 													</h4>
                                                 </div>
                                                 <div class="item-spec"><%=dataVar[i].product_details%></div>
-                                                <div class="item-spec">Condition:New</div>
-                                                <div class="item-spec">Seller: <%=dataVar[i].seller_name%></a></div> 
+                                                <div class="item-spec"><b>Seller:</b> <%=dataVar[i].seller_name%></a></div> 
+                                                <div class="item-spec"><b>Condition:</b>New</div>
+                                                <div class="item-spec"><b>Bidded for: </b>$ <%=dataVar[i].bid_amount%> &nbsp;&nbsp;&nbsp;
+                                                <b>Minimum bid: </b>$ <%=dataVar[i].min_bid%> &nbsp;&nbsp;&nbsp;
+                                                <b>Submitted on: </b><%=dataVar[i].submitted_on%> &nbsp;&nbsp;&nbsp;
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </td>
