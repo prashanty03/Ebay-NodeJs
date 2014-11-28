@@ -28,6 +28,7 @@ exports.updateProduct = function(req, res) {
 		var connection = mysqldb.getConnection();
 		connection.connect();
 		var productId = req.params.productId;
+		var catName = req.params.catName;
 		console.log('********' + productId + 'in update***********');
 		var query = connection.query('SELECT * from products where id=?',
 				[ productId ], function(err, rows) {
@@ -39,6 +40,7 @@ exports.updateProduct = function(req, res) {
 						page_title : "Update Product",
 						data : rows,
 						productId : productId,
+						catName : catName,
 						message : req.flash('error')
 					});
 				});
@@ -190,7 +192,7 @@ exports.getSellerProducts = function(req, res) {
 		connection.connect();
 
 		var query = connection.query(
-				"Select * from products where seller_id = ?", seller_id,
+				"Select p.*, c.name as cname from products p join category c on c.id = p.category_id where p.seller_id = ?", seller_id,
 				function(err, rows) {
 					if (err)
 						console.log("Error fetching results : %s", err);

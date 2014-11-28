@@ -82,7 +82,7 @@ app.post('/buy', juveria.buy);
 // ///Meher/////
 app.get('/getCategories', meher.getCategories);
 app.get('/getProducts/:name', meher.getProducts);
-app.get('/updateProduct/:productId', meher.updateProduct);
+app.get('/updateProduct/:catName/:productId', meher.updateProduct);
 app.get('/getSellerProducts', meher.getSellerProducts);
 
 app.post('/updateProduct/:productId', meher.saveUpdatedProduct);

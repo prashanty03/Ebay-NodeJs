@@ -351,7 +351,7 @@ var me_docStart =  (new Date()).getTime();
 														<a href="/getProductDetails/<%=data[i].name%>" class="vip" title="Click this link to access <%=data[i].name%>"><%=data[i].name%>
 														</a>
 													</h4>
-													<a href="/updateProduct/<%=data[i].id%>" class="vip" title="Click this link to update your product <%=data[i].name%>">edit</a>
+													<a href="/updateProduct/<%=data[i].cname%>/<%=data[i].id%>" class="vip" title="Click this link to update your product <%=data[i].name%>">edit</a>
                                                 </div>
                                                 <div class="item-spec"><%=data[i].details%></div>
                                                 <div class="item-spec">Condition:<%=data[i].condition%></div>
