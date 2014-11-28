@@ -2,7 +2,7 @@
 <html lang="en_US">
 <head>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
-<title>Get started with eBay</title>
+<title>Update User</title>
 <script type="text/javascript">var layer = false;</script>
 <link rel="stylesheet" type="text/css" href="https://secureir.ebaystatic.com/rs/v/kp2d0yxoguy0xnebuz2qnu0zc2t.css">
 <link rel="stylesheet" type="text/css" href="https://secureir.ebaystatic.com/rs/v/jmpqbbql1m0sxlirqtx1kcedxef.css">
@@ -213,16 +213,30 @@ display:none;}
 </div>
 </div>
 <div class="rcl"></div>
-<div>
-<div class="rfl">
-<div class="fv-w wtx">
+<div id="firstname_d" class="rfl">
+<div class="fv-w">
 <label for="email">Email</label>
 <div class="fv-tw ">
 <input type="email" aria-required="true" a="1" t="1" v="1" class="w242" size="32" placeholder="e.g. cmpe273@example.com" id="email" value="<%=data.email%>" name="email" maxlength="64" readonly>
+</div>
+</div>
+</div>
+</div>
 
+<div id="lastname_d" class="rln">
+<div class="fv-w">
+<label for="lastname">Membership #</label>
+<div class="fv-tw ">
+<input type="text" aria-required="true" aria-autocomplete="none" a="1" t="1" v="1" class="w242" size="32" id="lastname" value="<%=data.membership_no%>" name="lastname" maxlength="64" readonly>
+<div aria-live="assertive" role="alert">
+<div class="rdn" id="lastname_w">Please enter your last name.</div>
 </div>
 </div>
 </div>
+</div>
+
+
+
 <div class="rcl"></div>
 <!--<input type="hidden" value="" id="userid" name="userid">-->
 <div class="pass_wrp">
@@ -375,9 +389,6 @@ id="country"  name="country" value="<%=data.country%>"></input></input></input><
 </tbody>
 </table>
 </div>
-<img width="1" height="1" src="https://scgi.ebay.com/ws/eBayISAPI.dll?LogBuyerRegistrationJSEvent&amp;eventid=21&amp;regppapage=1&amp;ru=http%3A%2F%2Fwww.ebay.com%2F&amp;src=rap" alt="" id="track"><img width="1" height="1" src="" alt="" id="trackFb">
-<script type="text/javascript" src="https://secureir.ebaystatic.com/rs/v/n0npp25t2qykfm5jzbva24212mb.js"></script><script type="text/javascript" src="https://secureir.ebaystatic.com/rs/v/a34syhrtsy0avnfsde2nb2h4xyi.js"></script>
-<div class="rsv"><a title="Send us your comments - opens in new window or tab" target="_blank" href="http://qu.ebay.com/survey?srvName=registration%20(ppa-US)">Comments?</a></div>
 <div class="gh-w gh-flex" id="glbfooter">
 <div>
 <div id="rtm_html_1650"></div>

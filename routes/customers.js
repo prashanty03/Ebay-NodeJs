@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var assert = require('assert');
+var Chance = require('chance');
 var algorithm = 'aes256';
 var key = 'password';
 var password_temp;
@@ -105,6 +106,7 @@ exports.updateUser = function(req,res){
 
 exports.saveUser = function(req,res){
 	var input = JSON.parse(JSON.stringify(req.body));
+	var chance = new Chance();
 	console.log(input);
 	console.log("PAssword: "+input.hash+ " "+ input.password);
 	if(input.buyer == 1 && input.seller == ""){
@@ -139,6 +141,7 @@ exports.saveUser = function(req,res){
 			street : input.street,
 			zip: input.zip,
 			contact: input.contact,
+			membership_no : chance.ssn(),
 			isAdmin: 'N',
 			isActive:'1',
 			isBuyer: buyer,

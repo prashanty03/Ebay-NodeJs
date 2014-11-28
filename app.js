@@ -6,6 +6,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var crypto = require('crypto');
+var Chance= require('chance')
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
