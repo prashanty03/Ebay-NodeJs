@@ -91,10 +91,6 @@ app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 
-// var CronJob = require('cron').CronJob;
-// new CronJob('10 * * * * *', function(){
-// console.log('You will see this message every second');
-// }, null, true, "America/Los_Angeles");
 
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);

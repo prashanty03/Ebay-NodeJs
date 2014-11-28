@@ -264,8 +264,8 @@ exports.rate = function(req, res){
 						  	var id = sess.uid //session user-id
 							connection.query("	select p.id as purchase_id, pr.id as product_id, pr.name " +
 									" as product_name,pr.details as product_details, pr.image, s.id " +
-									" as seller_id,s.firstname as seller_name, p.bid_amount, " +
-									" p.submitted_on, p.rating " +
+									" as seller_id,s.firstname as seller_name, s.membership_no, p.bid_amount, " +
+									" p.submitted_on, p.rating, p.submitted_on, p.bid_amount, pr.min_bid " +
 									" from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s " +
 									" ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1",[id], function(err, rows){
 								if(err)
@@ -279,7 +279,7 @@ exports.rate = function(req, res){
 					  var id = sess.uid //session user-id
 						connection.query("select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.image as image, " +
 								" s.id as seller_id, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, " +
-								" c.firstname as customer_name, c.id as customer_id, p.quantity " +
+								" c.firstname as customer_name, c.id as customer_id, p.quantity, s.membership_no, p.bid_amount, p.submitted_on, pr.min_bid " +
 								" from Purchase p JOIN Products pr ON p.product_id = pr.id " +
 								" JOIN person s ON s.id = pr.seller_id JOIN  person c " +
 								" ON c.id = p.customer_id WHERE pr.seller_id = 2 AND p.sold=1",[id], function(err, rows){
@@ -631,6 +631,38 @@ exports.getCategories = function(req, res) {
 	
 	
 }
+
+
+var CronJob = require('cron').CronJob;
+new CronJob('5 * * * * *', function(){
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	var query = connection.query("select p.product_id, p.customer_id, max(p.bid_amount) as max_bid from purchase p " +
+			" join products pr on pr.id = p.product_id " +
+			" WHERE pr.isForAuction = 1 and pr.bid_end_time < now() " +
+			" and sold=0 and p.submitted_on < pr.bid_end_time group by p.product_id",function(err, rows){
+		if(err)
+			console.log("Error getting values %s ", err);
+		else{
+			for(var i=0;i<rows.length;i++){
+				var pid = rows[i].product_id;
+				var cid = rows[i].customer_id;
+				var cost = rows[i].max_bid;
+				console.log(pid + " "+ cid + " "+ cost);
+				var query = connection.query("UPDATE purchase set sold = 1 WHERE product_id = ? and customer_id = ? and bid_amount = ? ",[pid, cid, cost], function(err, data){
+					if(err)
+						console.log("Error getting values %s ", err);
+					else
+						console.log(data);
+			});
+			}
+		}
+	});
+	console.log('You will see this message every second');
+}, null, true, "America/Los_Angeles");
+
+
+
 exports.test = function(req, res){
 	res.render('test');
 }
