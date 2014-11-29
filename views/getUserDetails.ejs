@@ -113,7 +113,22 @@ geolocation));
 <li id="gh-p-2" class="gh-t gh-spr">
 <a href="/selectCategory" class="gh-p">Sell your product</a>
 </li>
+<%if((sess.isAdmin).toString()=="Y"){%>
+<li class="gh-t gh-spr" id="gh-p-1">
+<a class="gh-p" href="/getAllCustomers">All Customers
+</a>
+</li>
+<li class="gh-t gh-spr" id="gh-p-4">
+<a class="gh-p" href=
+"/getAllSellers">All Sellers</a>
+</li>
 
+<li class="gh-t gh-spr" id="gh-ti">
+<a href="http://www.ebay.com/rpp/holiday-gifts" id=
+"gh-doodleS" rel="nofollow" style=
+"visibility: visible;"></a>
+</li>
+<%}%>
 
 
 </ul>

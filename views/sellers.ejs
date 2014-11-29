@@ -255,7 +255,22 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 <a class="gh-p" href=
 "/addProduct">Sell your product</a>
 </li>
-                     
+<%if((sess.isAdmin).toString()=="Y"){%>
+<li class="gh-t gh-spr" id="gh-p-1">
+<a class="gh-p" href="/getAllCustomers">All Customers
+</a>
+</li>
+<li class="gh-t gh-spr" id="gh-p-4">
+<a class="gh-p" href=
+"/getAllSellers">All Sellers</a>
+</li>
+
+<li class="gh-t gh-spr" id="gh-ti">
+<a href="http://www.ebay.com/rpp/holiday-gifts" id=
+"gh-doodleS" rel="nofollow" style=
+"visibility: visible;"></a>
+</li>
+<%}%>                     
                             </ul>
                             </form>
 
@@ -477,7 +492,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                        
                                                         <strong><%=data[i]%><%=data1[i]%>
                                                        
-                                                       </strong></a></h3>
+                                                       </strong></a>[<a href="/getUserDetails/<%=id[i]%>">edit</a>]</h3>
                                                                                                            <ul class=
                                                         "">
                                                         <li>
