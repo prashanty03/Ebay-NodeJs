@@ -127,6 +127,7 @@ type="submit" value="Search" formaction="/searchProducts"></td>
 <a class="gh-p" href=
 "/selectCategory">Sell your product</a>
 </li>
+<%if((sess.isAdmin).toString()=="Y"){%>
 <li class="gh-t gh-spr" id="gh-p-1">
 <a class="gh-p" href="/getAllCustomers">All Customers
 </a>
@@ -141,6 +142,7 @@ type="submit" value="Search" formaction="/searchProducts"></td>
 "gh-doodleS" rel="nofollow" style=
 "visibility: visible;"></a>
 </li>
+<%}%>
 </ul>
 <ul id="gh-eb">
 <li class="gh-eb-li gh-dd gh-eb-active" data-imp="10" id=
