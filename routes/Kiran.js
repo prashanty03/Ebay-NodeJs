@@ -148,6 +148,7 @@ function getCustomers(req, res) {
     var email = [];
     var contact = [];
     var id = [];
+    var active = [];
     var query = "select * from person where isBuyer=1";
     var con = mysql.getConnection();
     con.query(query, function(err, results) {
@@ -158,13 +159,15 @@ function getCustomers(req, res) {
                 email[i] = results[i].email;
                 contact[i] = results[i].contact;
                 id[i] = results[i].id;
+                isActive = results[i].isActive
             }
             ejs.renderFile('./views/users.ejs', {
                 data : firstname,
                 data1 : lastname,
                 data2 : email,
                 data3 : contact,
-                id : id
+                id : id,
+                isActive : isActive
             }, function(err, result) {
                 if (!err) {
                     res.end(result);
@@ -193,6 +196,7 @@ function getSellers(req, res) {
     var email = [];
     var contact = [];
     var id = [];
+    var active = [];
     var query = "select * from person where isSeller=1";
     var con = mysql.getConnection();
     con.query(query, function(err, results) {
@@ -202,7 +206,8 @@ function getSellers(req, res) {
                 lastname[i] = results[i].lastname;
                 email[i] = results[i].email;
                 contact[i] = results[i].contact;
-                id[i] = results[i].id
+                id[i] = results[i].id,
+                isActive = results[i].isActive
             }
             ejs.renderFile('./views/sellers.ejs', {
                 data : firstname,
