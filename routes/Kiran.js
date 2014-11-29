@@ -142,42 +142,44 @@ function searchProducts(req, res) {
 
 }
 function getCustomers(req, res) {
-	if (req.session.fname == undefined) {
-		res.redirect("/");
-	}
-	var firstname = [];
-	var lastname = [];
-	var email = [];
-	var contact = [];
-	var id = [];
-	var active = [];
-	var query = "select * from person where isBuyer=1";
-	var con = mysql.getConnection();
-	con.query(query, function(err, results) {
-		if (results.length > 0) {
-			for (var i = 0; i < results.length; i++) {
-				firstname[i] = results[i].firstname;
-				lastname[i] = results[i].lastname;
-				email[i] = results[i].email;
-				contact[i] = results[i].contact;
-				id[i] = results[i].id;
-				isActive = results[i].isActive
-			}
-			ejs.renderFile('./views/users.ejs', {
-				data : firstname,
-				data1 : lastname,
-				data2 : email,
-				data3 : contact,
-				id : id,
-				isActive : isActive
-			}, function(err, result) {
-				if (!err) {
-					res.end(result);
-				} else {
-					res.end("An error occured");
-					console.log(err);
-				}
-			});
+
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    }
+    var firstname = [];
+    var lastname = [];
+    var email = [];
+    var contact = [];
+    var id = [];
+    var isActive = [];
+    var query = "select * from person where isBuyer=1";
+    var con = mysql.getConnection();
+    con.query(query, function(err, results) {
+        if (results.length > 0) {
+            for ( var i = 0; i < results.length; i++) {
+                firstname[i] = results[i].firstname;
+                lastname[i] = results[i].lastname;
+                email[i] = results[i].email;
+                contact[i] = results[i].contact;
+                id[i] = results[i].id;
+                isActive = results[i].isActive
+            }
+            ejs.renderFile('./views/users.ejs', {
+                data : firstname,
+                data1 : lastname,
+                data2 : email,
+                data3 : contact,
+                id : id,
+                isActive : isActive
+            }, function(err, result) {
+                if (!err) {
+                    res.end(result);
+                } else {
+                    res.end("An error occured");
+                    console.log(err);
+                }
+            });
+
 
 		} else {
 			console.log(results);
@@ -190,40 +192,43 @@ function getCustomers(req, res) {
 
 }
 function getSellers(req, res) {
-	if (req.session.fname == undefined) {
-		res.redirect("/");
-	}
-	var firstname = [];
-	var lastname = [];
-	var email = [];
-	var contact = [];
-	var id = [];
-	var active = [];
-	var query = "select * from person where isSeller=1";
-	var con = mysql.getConnection();
-	con.query(query, function(err, results) {
-		if (results.length > 0) {
-			for (var i = 0; i < results.length; i++) {
-				firstname[i] = results[i].firstname;
-				lastname[i] = results[i].lastname;
-				email[i] = results[i].email;
-				contact[i] = results[i].contact;
-				id[i] = results[i].id, isActive = results[i].isActive
-			}
-			ejs.renderFile('./views/sellers.ejs', {
-				data : firstname,
-				data1 : lastname,
-				data2 : email,
-				data3 : contact,
-				id : id
-			}, function(err, result) {
-				if (!err) {
-					res.end(result);
-				} else {
-					res.end("An error occured");
-					console.log(err);
-				}
-			});
+
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    }
+    var firstname = [];
+    var lastname = [];
+    var email = [];
+    var contact = [];
+    var id = [];
+    var isActive = [];
+    var query = "select * from person where isSeller=1";
+    var con = mysql.getConnection();
+    con.query(query, function(err, results) {
+        if (results.length > 0) {
+            for ( var i = 0; i < results.length; i++) {
+                firstname[i] = results[i].firstname;
+                lastname[i] = results[i].lastname;
+                email[i] = results[i].email;
+                contact[i] = results[i].contact;
+                id[i] = results[i].id,
+                isActive = results[i].isActive
+            }
+            ejs.renderFile('./views/sellers.ejs', {
+                data : firstname,
+                data1 : lastname,
+                data2 : email,
+                data3 : contact,
+                id : id,
+                isActive : isActive
+            }, function(err, result) {
+                if (!err) {
+                    res.end(result);
+                } else {
+                    res.end("An error occured");
+                    console.log(err);
+                }
+            });
 
 		} else {
 			console.log(results);

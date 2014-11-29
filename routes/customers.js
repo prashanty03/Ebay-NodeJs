@@ -217,13 +217,13 @@ exports.logindo = function(req,res){
 					if(rows[0].lastlogin == null)
 					{
 						sess.lastlogin = "First Login";
-						var lastlogin = new Date();
-						connection.query('UPDATE person SET lastlogin = ? WHERE email = ?', [lastlogin, sess.email]);
 					}
 					else
 					{
-						sess.lastlogin = rows[0].lastlogin.toString().substr(0,15);
+						sess.lastlogin = rows[0].lastlogin.toString().substr(0,24);
 					}
+					var lastlogin = new Date();
+					connection.query('UPDATE person SET lastlogin = ? WHERE email = ?', [lastlogin, sess.email]);
 					console.log("Session: " +JSON.stringify(sess));
 					
 					res.render('home', {page_title:"After Login", data:rows, personId: sess.uid, firstname: sess.fname, lastname: sess.lname, email: sess.email, lastlogin: sess.lastlogin, isAdmin: sess.isAdmin, isBuyer: sess.isBuyer, isSeller: sess.isSeller, memberno: sess.memberno});
@@ -663,6 +663,23 @@ new CronJob('5 * * * * *', function(){
 
 
 
-exports.test = function(req, res){
-	res.render('test');
+exports.deleteUser = function(req, res){
+	var id = req.params.id;
+	var status = req.params.status;
+	var utype = req.params.utype;
+	var connection = mysqldb.getConnection();
+	connection.query("UPDATE users set isActive = ? WHERE id = ? ", [status,id], function(err, rows){
+		if(err){
+			cosole.log("error : %s", err);
+		}
+		if(utype=="customers"){
+			res.rendirect("/getAllCustomers")
+		}
+		else{
+			res.rendirect("/getAllSellers")
+		}
+		
+	});
+
+	connection.end();
 }

@@ -484,13 +484,19 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                                     <span class="FnFl">
                                                                      
                                                                      Email:<%=data2[i]%>
-                                                                     
+                                                                      <%isActive[i]%>
                                                                     </span></span>
 
                                                                     <div>
                                                                         Contact Number:<b><%=data3[i]%></b>
                                                                    </div>
                                                                 </div>
+                                                                 <%if(isActive[i]==1){%>
+                                                                    <a href="/delete/id[i]/0/customers">In Activate</a>
+                                                                    <%}%>
+                                                                    <%if(isActive[i]==0){%>
+                                                                    <a href="/delete/id[i]/1/customers">Activate</a>
+                                                                    <%}%>
                                                             </li>
                                                              </ul>
                                                     </li>

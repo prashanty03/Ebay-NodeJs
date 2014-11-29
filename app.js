@@ -62,6 +62,7 @@ app.get('/getBiddingHistory', customers.getBiddingHistory);
 app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
 app.get('/search', customers.searchproducts);
+app.get('/delete/:id/:status/:utype', customers.deleteUser);
 // ///prashant luthra/////
 app.get('/', customers.login);
 // app.get('/users', customers.list);
@@ -98,7 +99,6 @@ app.post('/upload', customers.uploadImage);
 // Kiran
 
 app.get('/test', kiran.start);
-app.get('/t', customers.test);
 app.get('/getUserDetails', kiran.getUserDetails);
 
 // app.get('/updateUserDetails',kiran.update);
