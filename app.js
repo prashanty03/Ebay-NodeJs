@@ -6,7 +6,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var crypto = require('crypto');
-var Chance= require('chance')
+var Chance = require('chance')
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -92,7 +92,6 @@ app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 
-
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);
 
@@ -108,6 +107,9 @@ app.get('/getAllCustomers', kiran.getCustomers);
 app.get('/getAllSellers', kiran.getSellers);
 app.get('/searchPerson', kiran.searchUsers);
 app.get('/signout', kiran.signout);
+app.get('/searchPurchasedProducts', kiran.searchPurchasedProducts);
+app.get('/searchBiddedProducts', kiran.searchBiddedProducts);
+app.get('/searchSoldProducts', kiran.searchSoldProducts);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function() {

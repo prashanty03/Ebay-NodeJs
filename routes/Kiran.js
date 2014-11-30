@@ -282,7 +282,89 @@ function signout(req, res) {
     }
 
 }
+function searchPurchasedProducts(req, res) {
+    var searchQuery = req.param("_nkw");
+    var flag = req.param("flag");
+    var id = req.session.uid;
 
+    var con = mysql.getConnection();
+    con
+            .query(
+                    "    select p.id as purchase_id, pr.id as product_id, pr.name "
+                            + " as product_name,pr.details as product_details, pr.image, s.id "
+                            + " as seller_id, p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount, "
+                            + " p.submitted_on, p.rating "
+                            + " from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s "
+                            + " ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1 AND pr.name REGEXP '"
+                            + searchQuery + "'", [ id ],
+                    function(err, results) {
+                        if (results.length > 0) {
+                            res.render('Purchase-History', {
+                                page_title : "",
+                                dataVar : results
+                            });
+                        } else {
+                            res.send("no matches");
+                        }
+                    });
+
+}
+function searchBiddedProducts(req, res) {
+    var searchQuery = req.param("_nkw");
+    var flag = req.param("flag");
+    var id = req.session.uid;
+
+    var con = mysql.getConnection();
+    con
+            .query(
+                    "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
+                            + " pr.image, s.id as seller_id,p.bid_amount, pr.min_bid, "
+                            + " s.firstname as seller_name, s.membership_no as membership_no, p.bid_amount, p.submitted_on, p.rating "
+                            + " from Purchase p JOIN Products pr"
+                            + " ON p.product_id = pr.id "
+                            + " JOIN person s ON s.id = pr.seller_id "
+                            + " WHERE p.customer_id = ? AND pr.isForAuction = 1 AND pr.name REGEXP '"
+                            + searchQuery + "'", [ id ],
+                    function(err, results) {
+                        if (results.length > 0) {
+                            res.render('BiddingHistory', {
+                                page_title : "",
+                                dataVar : results
+                            });
+                        } else {
+                            res.send("no matches");
+                        }
+                    });
+
+}
+function searchSoldProducts(req, res) {
+    var searchQuery = req.param("_nkw");
+    var flag = req.param("flag");
+    var id = req.session.uid;
+
+    var con = mysql.getConnection();
+    con
+            .query(
+                    "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
+                            + "pr.image as image, "
+                            + " s.id as seller_id,p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, "
+                            + " c.firstname as customer_name, c.id as customer_id, p.quantity "
+                            + " from Purchase p JOIN Products pr ON p.product_id = pr.id "
+                            + " JOIN person s ON s.id = pr.seller_id JOIN  person c "
+                            + " ON c.id = p.customer_id WHERE pr.seller_id = ? AND p.sold=1 AND pr.name REGEXP '"
+                            + searchQuery + "'", [ id ],
+                    function(err, results) {
+                        if (results.length > 0) {
+                            res.render('BiddingHistory', {
+                                page_title : "",
+                                dataVar : results
+                            });
+                        } else {
+                            res.send("no matches");
+                        }
+                    });
+
+}
 /*
  * function search(req,res) {
  * ejs.renderFile('./views/search.ejs',function(err,result) { if(!err){
@@ -301,3 +383,6 @@ exports.getCustomers = getCustomers;
 exports.getSellers = getSellers;
 exports.searchUsers = searchUsers;
 exports.signout = signout;
+exports.searchPurchasedProducts = searchPurchasedProducts;
+exports.searchBiddedProducts = searchPurchasedProducts;
+exports.searchSoldProducts = searchPurchasedProducts;
