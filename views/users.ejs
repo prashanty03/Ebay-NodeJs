@@ -439,7 +439,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
-                                        <% for(var i=0;i<data.length;i++){%>
+                                        <% for(var i=0;i<results.length;i++){%>
                                         <div class="rs rsw" id="e1-125">
                                             <a id="mainContent" tabindex=
                                             "-1"></a>
@@ -452,7 +452,8 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                 <ul id="ListViewInner">
                                                     <li class="sresult lvresult clearfix li shic" id="item43cfae67a5">
                                                         <div class="lvpic pic p225 img left">
-                                                        <div class="">
+                                                        
+                                                        <div  class="">
                                                             <a class=
                                                             "img imgWr2"
                                                                 href="#">
@@ -470,9 +471,9 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                         "Click to view details">
                                                        
                                                        
-                                                        <strong><%=data[i]%> <%=data1[i]%>
+                                                        <strong><%=results[i].firstname%> <%=results[i].lastname%>
                                                        
-                                                       </strong></a>[<a href="/getUserDetails/<%=id[i]%>">edit</a>]</h3>
+                                                       </strong></a></h3>
 														
 														<ul class=
                                                         "">
@@ -483,19 +484,20 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
                                                                      
-                                                                     Email:<%=data2[i]%>
-                                                                      <%isActive[i]%>
+                                                                     Email:<%=results[i].email%>
+                                                                      <%results[i].isActive%>
                                                                     </span></span>
-
+                                                                   
                                                                     <div>
-                                                                        Contact Number:<b><%=data3[i]%></b>
+                                                                        Contact Number:<b><%=results[i].contact%></b>
                                                                    </div>
+                                                                   
                                                                 </div>
-                                                                 <%if(isActive[i]==1){%>
-                                                                    <a href="/delete/id[i]/0/customers">In Activate</a>
+                                                                 <%if(results[i].isActive==1){%>
+                                                                    <a href="/delete/<%=results[i].id%>/0/customers">DeActivate</a>
                                                                     <%}%>
-                                                                    <%if(isActive[i]==0){%>
-                                                                    <a href="/delete/id[i]/1/customers">Activate</a>
+                                                                    <%if(results[i].isActive==0){%>
+                                                                    <a href="/delete/<%=results[i].id%>/1/customers">Activate</a>
                                                                     <%}%>
                                                             </li>
                                                              </ul>

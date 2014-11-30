@@ -453,7 +453,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
-                                        <% for(var i=0;i<data.length;i++)
+                                        <% for(var i=0;i<results.length;i++)
                                                        {%>
 
                                         <div class="rs rsw" id="e1-125">
@@ -490,9 +490,9 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                         "Click to view details">
                                                        
                                                        
-                                                        <strong><%=data[i]%><%=data1[i]%>
+                                                        <strong><%=results[i].firstname%><%=results[i].lastname%></strong></h3>
                                                        
-                                                       </strong></a>[<a href="/getUserDetails/<%=id[i]%>">edit</a>]</h3>
+                                                       
                                                                                                            <ul class=
                                                         "">
                                                         <li>
@@ -502,19 +502,22 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
                                                                      
-                                                                     Email:<%=data2[i]%>
+                                                                     Email:<%=results[i].email%>
                                                                      
                                                                     </span></span>
 
                                                                     <div>
                                                                         Contact Number:
-                                                                        
-                                                                        
-                                                                        <b><%=data3[i]%>
-                                                                        
-                                                                        </b>
+                                                                       
+                                                                        <b><%=results[i].contact%></b>
+                                                                       
                                                                     </div>
-                                                                    <%if(isActive[i]==1){%>
+                                                                    
+                                                                    <%if(results[i].isActive==1){%>
+                                                                    <a href="/delete/<%=results[i].id%>/0/sellers">DeActivate</a>
+                                                                    <%}%>
+                                                                    <%if(results[i].isActive==0){%>
+                                                                    <a href="/delete/<%=results[i].id%>/1/sellers">Activate</a>
                                                                     <%}%>
                                                                 </div>
                                                             </li>
