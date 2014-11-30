@@ -7,7 +7,7 @@ exports.getCategories = function(req, res) {
 	} else {
 		var connection = mysqldb.getConnection();
 		connection.connect();
-		var query = connection.query('SELECT name from category', function(err,
+		var query = connection.query('SELECT * from category', function(err,
 				rows) {
 			if (err)
 				console.log("Error getting vlaues % s", err);
@@ -168,15 +168,17 @@ exports.getProducts = function(req, res) {
 		req.flash('error', 'Please Login..!!');
 		res.redirect("/login");
 	} else {
+		var category_id = req.params.id;
 		var category_name = req.params.name;
+		console.log(category_id);
 		console.log(category_name);
 		var connection = mysqldb.getConnection();
 		connection.connect();
 
 		var query = connection
 				.query(
-						"Select * from products where isActive='1' and quantity>'0' and category_id = (select id from category where name = ?)",
-						[ category_name ],
+						"Select * from products where isActive='1' and quantity>'0' and category_id = ?",
+						[ category_id ],
 						function(err, rows) {
 							if (err)
 								console.log("Error fetching results : %s", err);
@@ -184,8 +186,10 @@ exports.getProducts = function(req, res) {
 							res.render('getProducts', {
 								page_title : "Products",
 								data : rows,
-								name : category_name
+								name : category_name,
+								category_id : category_id
 							});
+							console.log(rows.length);
 						});
 	}
 };
