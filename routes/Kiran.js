@@ -327,6 +327,7 @@ function searchBiddedProducts(req, res) {
                             + searchQuery + "'", [ id ],
                     function(err, results) {
                         if (results.length > 0) {
+                            console.log("hi");
                             res.render('BiddingHistory', {
                                 page_title : "",
                                 dataVar : results
@@ -384,5 +385,5 @@ exports.getSellers = getSellers;
 exports.searchUsers = searchUsers;
 exports.signout = signout;
 exports.searchPurchasedProducts = searchPurchasedProducts;
-exports.searchBiddedProducts = searchPurchasedProducts;
-exports.searchSoldProducts = searchPurchasedProducts;
+exports.searchBiddedProducts = searchBiddedProducts;
+exports.searchSoldProducts = searchSoldProducts;
