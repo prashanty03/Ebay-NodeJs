@@ -123,7 +123,7 @@ exports.buy = function(req, res){
 					{
 						console.log(typeof old_qty);
 						console.log(typeof input.quantity);
-						var query= connection.query("update products set quantity=?", [old_qty-input.quantity], function(err, rows){
+						var query= connection.query("update products set quantity=? where id = ?", [old_qty-input.quantity, input.productId], function(err, rows){
 							if(err)
 								console.log("Error inserting : %s", err);
 							else{
