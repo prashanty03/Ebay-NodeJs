@@ -102,7 +102,7 @@ exports.buy = function(req, res){
 					customer_id : sess.uid,   //to be replaced by sesion id
 					bid_amount : rows[0].cost,
 					submitted_on: new Date(),
-					sold : 0,
+					sold : 1,
 					quantity : input.quantity
 
 			};
