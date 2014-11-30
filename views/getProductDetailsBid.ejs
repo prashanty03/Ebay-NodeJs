@@ -620,11 +620,12 @@ function picOnLoad(isSetClkId){
                                         </div>
                                     </div><!-- volume pricing -->
                                     <!-- volume pricing ends -->
+                                    <% if (data[0].auction==1) { %>
 
                                     <div class="u-cb spcr a1"></div>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bid Ends : <%=new Date(data[0].bid_end_time).toDateString()%> <%=new Date(data[0].bid_end_time).toTimeString()%>
                                     <div class="u-cb spcr"></div>
-
+									<% } %>
                                     <div class="u-cb spcr vi-compat-hide">
                                     </div>
 
@@ -735,7 +736,7 @@ function picOnLoad(isSetClkId){
                                         
 										<%}%>
 											<%if(data[0].auction==0){%>
-											<a id="vi-VR-bid-lnk" class="vi-bidC" rel="nofollow" href="/bid"
+											<a id="vi-VR-bid-lnk" class="vi-bidC" rel="nofollow" href="/"
 <span id="qty-test">[<%=data[0].quantity%>]</span>
 <span> Qty Left </span>
 </a
