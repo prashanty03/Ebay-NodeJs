@@ -103,10 +103,10 @@ app.get('/getUserDetails', kiran.getUserDetails);
 
 // app.get('/updateUserDetails',kiran.update);
 // app.post('/update',kiran.updateUserDetails);
-app.post('/searchProducts', kiran.searchProducts);
+app.get('/searchProducts', kiran.searchProducts);
 app.get('/getAllCustomers', kiran.getCustomers);
 app.get('/getAllSellers', kiran.getSellers);
-app.post('/searchPerson', kiran.searchUsers);
+app.get('/searchPerson', kiran.searchUsers);
 app.get('/signout', kiran.signout);
 
 app.use(app.router);
