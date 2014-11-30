@@ -110,7 +110,7 @@ exports.buy = function(req, res){
 			console.log(data);
 			if(input.quantity==0)
 				{
-				req.flash('message','Please Enter Qty 1 Or More');
+				req.flash('message','Please Enter Quantity 1 Or More');
 				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
 				}
 			if(input.quantity<=old_qty)
