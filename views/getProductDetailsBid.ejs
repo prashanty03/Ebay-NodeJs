@@ -211,7 +211,7 @@ body #Body .btn, body #Body c-std {
                                                                 <a class=
                                                                 "vi-VR-spl-lnk"
                                                                 href=
-                                                                "/getProducts/<%=categoryName%>"
+                                                                "/getCategories"
                                                                 id=
                                                                 "smtBackToAnchor"
                                                                 style=
@@ -740,6 +740,8 @@ function picOnLoad(isSetClkId){
 <span> Qty Left </span>
 </a
 											<form action="/buy" method="post" id="BuyForm" name="BuyForm">
+											<input type="hidden" name="categoryName" value="<%=categoryName%>">
+											<input type="hidden" name="productId" value="<%=data[0].id%>">
                                             <div class="u-flL u-b w29" id="">
                                                 <label class="u-dspn" for=
                                                 "MaxBidId" id=

@@ -190,13 +190,7 @@ function getSellers(req, res) {
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-        var firstname = [];
-        var lastname = [];
-        var email = [];
-        var contact = [];
-        var id = [];
-        var isActive = [];
-        var query = "select * from person where isSeller=1 and isActive=1";
+        var query = "select * from person where isSeller=1";
         var con = mysql.getConnection();
         con.query(query, function(err, results) {
             if (results.length > 0) {
@@ -227,10 +221,6 @@ function searchUsers(req, res) {
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-        var firstname = [];
-        var lastname = [];
-        var email = [];
-        var contact = [];
         var searchQuery = req.param("_nkw");
         var flag = req.param("flag");
         var query = "select * from person where firstname REGEXP '"
@@ -239,12 +229,6 @@ function searchUsers(req, res) {
         var con = mysql.getConnection();
         con.query(query, function(err, results) {
             if (results.length > 0) {
-                for ( var i = 0; i < results.length; i++) {
-                    firstname[i] = results[i].firstname;
-                    lastname[i] = results[i].lastname;
-                    email[i] = results[i].email;
-                    contact[i] = results[i].contact;
-                }
                 if (flag === "AllSellers") {
                     ejs.renderFile('./views/sellers.ejs', {
                         results : results
