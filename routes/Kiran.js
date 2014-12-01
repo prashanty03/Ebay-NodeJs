@@ -88,6 +88,7 @@ function searchProducts(req, res) {
         res.redirect("/");
     } else {
 
+        var searchQuery = req.param("_nkw");
         var query = "select p.*,c.id as catId,c.name as catName from products p join category c on c.id = p.category_id where p.name REGEXP '"
                 + searchQuery
                 + "' OR details REGEXP '"
