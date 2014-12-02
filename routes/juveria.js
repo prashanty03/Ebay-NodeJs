@@ -25,7 +25,7 @@ exports.getProductDetails = function(req,res){
 			});
 	connection.end();
 
-};
+	}
 };
 
 exports.bid = function(req, res){
@@ -81,6 +81,18 @@ exports.bid = function(req, res){
 
 }};
 
+exports.cart = function(req, res){
+	var id = sess.uid;
+	var connection = mysqldb.getConnection();
+	connection.connect();
+	var query =connection.query("select pr.id,pr.name as product_name,uc.cost as cost, uc.quantity as quantity from Products pr JOIN user_cart uc  ON pr.id = uc.product_id WHERE uc.user_id=?",[id], function(err, rows){
+		if (err)
+			console.log("Error : %s ",err );
+		res.render('cart',{data:rows, message: req.flash('message')});
+			});
+	connection.end();
+	
+}
 exports.buy = function(req, res){
 	if (req.session.uid == undefined) {
 		req.flash('error', 'Please Login..!!');
@@ -89,65 +101,88 @@ exports.buy = function(req, res){
 
 	var id = req.params.id;
 	var input = JSON.parse(JSON.stringify(req.body));
+	var event = input.event;
+	console.log("event"+event);
 	var connection = mysqldb.getConnection();
 	connection.connect();
-	var query=connection.query("select cost,quantity from products where id =? ",[input.productId],function(err,rows){
-		if(err){
-			console.log("Error fecthing details : %s", err);
-			res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
-		} 	
-		else{
-			var data = {
-					product_id : input.productId,
-					customer_id : sess.uid,   //to be replaced by sesion id
-					bid_amount : rows[0].cost,
-					submitted_on: new Date(),
-					sold : 1,
-					quantity : input.quantity
-
-			};
-			var old_qty=rows[0].quantity;
-			console.log(data);
-			if(input.quantity==0)
-				{
-				req.flash('message','Please Enter Quantity 1 Or More');
-				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
-				}
-			if(input.quantity<=old_qty)
-			{
-				var query = connection.query("Insert into purchase set ? ", data, function(err, rows){
-					console.log(rows);
-					if(err)
-						console.log("Error inserting : %s", err);
-					else
-					{
-						console.log(typeof old_qty);
-						console.log(typeof input.quantity);
-						var query= connection.query("update products set quantity=? where id = ?", [old_qty-input.quantity, input.productId], function(err, rows){
-							if(err)
-								console.log("Error inserting : %s", err);
-							else{
-
-								req.flash('message','You have Successfully Placed your Order!');
-								res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
-
-							}
-						});
-						connection.end();
-					}
-
-				});
-			}
-			
+	if(event=="cart"){
+		
+		var cartdata = {
+				user_id : sess.uid,
+				product_id : input.productId,
+				stored_on : new Date(),
+				quantity : input.quantity,
+				cost : (input.cost) * (1*input.quantity)
+		}
+		var query=connection.query("insert into user_cart set ?", cartdata, function(err, rows){
+			console.log(rows);
+			if(err)
+				console.log("Error inserting : %s", err);
 			else{
-				req.flash('message','Invalid Quantity!');
+				req.flash('message','Product added in your cart!');
 				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
-
 			}
-		}	
-			
 		});
-						//connection.end();
+	}
+	else{
+		var query=connection.query("select cost,quantity from products where id =? ",[input.productId],function(err,rows){
+			if(err){
+				console.log("Error fecthing details : %s", err);
+				res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
+			} 	
+			else{
+				var data = {
+						product_id : input.productId,
+						customer_id : sess.uid,   //to be replaced by sesion id
+						bid_amount : rows[0].cost,
+						submitted_on: new Date(),
+						sold : 1,
+						quantity : input.quantity
+
+				};
+				var old_qty=rows[0].quantity;
+				console.log(data);
+				if(input.quantity==0)
+					{
+					req.flash('message','Please Enter Quantity 1 Or More');
+					res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
+					}
+				if(input.quantity<=old_qty)
+				{
+					var query = connection.query("Insert into purchase set ? ", data, function(err, rows){
+						console.log(rows);
+						if(err)
+							console.log("Error inserting : %s", err);
+						else
+						{
+							console.log(typeof old_qty);
+							console.log(typeof input.quantity);
+							var query= connection.query("update products set quantity=? where id = ?", [old_qty-input.quantity, input.productId], function(err, rows){
+								if(err)
+									console.log("Error inserting : %s", err);
+								else{
+
+									req.flash('message','You have Successfully Placed your Order!');
+									res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
+
+								}
+							});
+							connection.end();
+						}
+
+					});
+				}
+				
+				else{
+					req.flash('message','Invalid Quantity!');
+					res.redirect('/getProductDetailsBid/'+input.categoryName+'/'+input.productId);
+
+				}
+			}	
+				
+			});
+	}
+				//connection.end();
 
 	}
 };

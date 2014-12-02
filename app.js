@@ -79,6 +79,7 @@ app.post('/updateUser/:id', customers.updateUser);
 app.get('/getProductDetailsBid/:catName/:id', juveria.getProductDetails);
 app.post('/bid', juveria.bid);
 app.post('/buy', juveria.buy);
+app.get('/mycart', juveria.cart);
 
 // ///Meher/////
 app.get('/getCategories', meher.getCategories);
