@@ -568,77 +568,92 @@ exports.getHistoryPage = function(req, res) {
 }
 
 exports.getBiddingHistory = function(req, res) {
-    var connection = mysqldb.getConnection();
-    var id = sess.uid // session user-id
-    connection
-            .query(
-                    "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
-                            + " pr.image, s.id as seller_id,p.bid_amount, pr.min_bid, "
-                            + " s.firstname as seller_name, s.membership_no as membership_no, p.bid_amount, p.submitted_on, p.rating "
-                            + " from Purchase p JOIN Products pr"
-                            + " ON p.product_id = pr.id "
-                            + " JOIN person s ON s.id = pr.seller_id "
-                            + " WHERE p.customer_id = ? AND pr.isForAuction = 1",
-                    [ id ], function(err, rows) {
-                        if (err)
-                            console.log("Error fetching results : %s", err);
-                        console.log(rows + "************");
-                        res.render('BiddingHistory', {
-                            page_title : "",
-                            dataVar : rows
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var connection = mysqldb.getConnection();
+        var id = sess.uid // session user-id
+        connection
+                .query(
+                        "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
+                                + " pr.image, s.id as seller_id,p.bid_amount, pr.min_bid, "
+                                + " s.firstname as seller_name, s.membership_no as membership_no, p.bid_amount, p.submitted_on, p.rating "
+                                + " from Purchase p JOIN Products pr"
+                                + " ON p.product_id = pr.id "
+                                + " JOIN person s ON s.id = pr.seller_id "
+                                + " WHERE p.customer_id = ? AND pr.isForAuction = 1",
+                        [ id ],
+                        function(err, rows) {
+                            if (err)
+                                console.log("Error fetching results : %s", err);
+                            console.log(rows + "************");
+                            res.render('BiddingHistory', {
+                                page_title : "",
+                                dataVar : rows
+                            });
                         });
-                    });
 
-    connection.end();
+        connection.end();
+    }
 }
 
 exports.getPurchaseHistory = function(req, res) {
-    var connection = mysqldb.getConnection();
-    var id = sess.uid // session user-id
-    connection
-            .query(
-                    "	select p.id as purchase_id, pr.id as product_id, pr.name "
-                            + " as product_name,pr.details as product_details, pr.image, s.id "
-                            + " as seller_id, p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount, "
-                            + " p.submitted_on, p.rating "
-                            + " from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s "
-                            + " ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1",
-                    [ id ], function(err, rows) {
-                        if (err)
-                            console.log("Error fetching results : %s", err);
-                        console.log(rows + "************");
-                        res.render('Purchase-History', {
-                            page_title : "",
-                            dataVar : rows
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var connection = mysqldb.getConnection();
+        var id = sess.uid // session user-id
+        connection
+                .query(
+                        "	select p.id as purchase_id, pr.id as product_id, pr.name "
+                                + " as product_name,pr.details as product_details, pr.image, s.id "
+                                + " as seller_id, p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount, "
+                                + " p.submitted_on, p.rating "
+                                + " from Purchase p JOIN Products pr ON p.product_id = pr.id JOIN person s "
+                                + " ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1",
+                        [ id ],
+                        function(err, rows) {
+                            if (err)
+                                console.log("Error fetching results : %s", err);
+                            console.log(rows + "************");
+                            res.render('Purchase-History', {
+                                page_title : "",
+                                dataVar : rows
+                            });
                         });
-                    });
 
-    connection.end();
+        connection.end();
+    }
 }
 
 exports.getSellingHistory = function(req, res) {
-    var connection = mysqldb.getConnection();
-    var id = sess.uid // session user-id
-    connection
-            .query(
-                    "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
-                            + "pr.image as image, "
-                            + " s.id as seller_id,p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, "
-                            + " c.firstname as customer_name, c.id as customer_id, p.quantity "
-                            + " from Purchase p JOIN Products pr ON p.product_id = pr.id "
-                            + " JOIN person s ON s.id = pr.seller_id JOIN  person c "
-                            + " ON c.id = p.customer_id WHERE pr.seller_id = 2 AND p.sold=1",
-                    [ id ], function(err, rows) {
-                        if (err)
-                            console.log("Error fetching results : %s", err);
-                        console.log(rows + "************");
-                        res.render('SellingHistory', {
-                            page_title : "",
-                            dataVar : rows
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var connection = mysqldb.getConnection();
+        var id = sess.uid // session user-id
+        connection
+                .query(
+                        "select p.id as purchase_id, pr.id as product_id, pr.name as product_name, pr.details as product_details, "
+                                + "pr.image as image, "
+                                + " s.id as seller_id,p.bid_amount, pr.min_bid, s.firstname as seller_name, p.bid_amount as bid_amount, p.submitted_on, p.rating, "
+                                + " c.firstname as customer_name, c.id as customer_id, p.quantity "
+                                + " from Purchase p JOIN Products pr ON p.product_id = pr.id "
+                                + " JOIN person s ON s.id = pr.seller_id JOIN  person c "
+                                + " ON c.id = p.customer_id WHERE pr.seller_id = ? AND p.sold=1",
+                        [ id ],
+                        function(err, rows) {
+                            if (err)
+                                console.log("Error fetching results : %s", err);
+                            console.log(rows + "************");
+                            res.render('SellingHistory', {
+                                page_title : "",
+                                dataVar : rows
+                            });
                         });
-                    });
 
-    connection.end();
+        connection.end();
+    }
 }
 
 exports.imageForm = function(req, res) {
@@ -678,117 +693,126 @@ exports.uploadImage = function(req, res, next) {
 };
 
 exports.addProduct = function(req, res) {
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
 
-    var categoryName = req.params.categoryName;
-    var categoryId = req.params.categoryId;
-    res.render('addProduct', {
-        categoryName : categoryName,
-        categoryId : categoryId,
-        message : req.flash('error')
-    });
+        var categoryName = req.params.categoryName;
+        var categoryId = req.params.categoryId;
+        res.render('addProduct', {
+            categoryName : categoryName,
+            categoryId : categoryId,
+            message : req.flash('error')
+        });
+    }
 };
 
+exports.saveProduct = function(req, res) {
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var input = JSON.parse(JSON.stringify(req.body));
+        var connection = mysqldb.getConnection();
+        var condition = input.condition == "1000" ? "New" : "Refurbished";
+        var auction = input.format == "Auction" ? 1 : 0;
+        var temp_path = req.files.image.path;
+        console.log(temp_path);
+        var fs = require('fs');
+        var data = {
+            name : input.title,
+            details : input.details,
+            condition : condition,
+            isForAuction : auction,
+            min_bid : input.startPrice * 1,
+            quantity : parseInt(input.quantity),
+            bid_duration : parseInt(input.duration),
+            category_id : input.categoryId,
+            cost : input.startPrice * 1,
+            seller_id : sess.uid, // session management
+            bid_start_time : new Date(),
+            isActive : 1,
+            image : temp_path
+        };
+        // console.log(data);
 
-exports.saveProduct = function(req, res){
-	var input = JSON.parse(JSON.stringify(req.body));
-	var connection = mysqldb.getConnection();
-	var condition = input.condition=="1000"?"New":"Refurbished";
-	var auction = input.format=="Auction"?1:0;
-	var temp_path = req.files.image.path; 
-	console.log(temp_path);
-	var fs = require('fs');
-	var data = {
-			name : input.title,
-			details : input.details,
-			condition : condition,
-			isForAuction : auction,
-			min_bid : input.startPrice*1,
-			quantity : parseInt(input.quantity),
-			bid_duration : parseInt(input.duration),
-			category_id : input.categoryId,
-			cost : input.startPrice * 1,
-			seller_id : sess.uid,       //session management
-			bid_start_time : new Date(),
-			isActive : 1,
-			image : temp_path
-	};
-	//console.log(data);
+        var msg = validate(input, req.files.image.name);
 
-	var msg = validate(input, req.files.image.name);
+        console.log("Message : " + msg.length);
+        if (msg.length == 0) {
 
-	console.log("Message : "+msg.length);
-	if(msg.length==0){
+            console.log("inside if")
+            // get the temporary location of the file
+            var tmp_path = req.files.image.path;
+            // set where the file should actually exists - in this case it is in
+            // the
+            // "images" directory
+            var target_path = './public/images/' + req.files.image.name;
+            // move the file from the temporary location to the intended
+            // location
+            fs.rename(tmp_path, target_path, function(err) {
+                if (err)
+                    throw err;
+                // delete the temporary file, so that the explicitly set
+                // temporary
+                // upload dir does not get filled with unwanted files
+                fs.unlink(tmp_path, function() {
+                    if (err)
+                        throw err;
+                    console.log();
+                    // res.send('File uploaded to: ' + target_path + ' - ' +
+                    // req.files.image.size + ' bytes');
+                });
+            });
+            var myDate = new Date();
+            myDate.setDate(myDate.getDate() + parseInt(input.duration));
+            var data = {
+                name : input.title,
+                details : input.details,
+                condition : condition,
+                isForAuction : auction,
+                min_bid : input.startPrice * 1,
+                quantity : parseInt(input.quantity),
+                bid_duration : parseInt(input.duration),
+                category_id : input.categoryId,
+                cost : input.startPrice * 1,
+                seller_id : sess.uid,
+                bid_start_time : new Date(),
+                image : target_path.substring(8),
+                isActive : 1,
+                bid_end_time : myDate
+            };
+            connection.connect();
+            var query = connection.query("Insert into products set ? ", data,
+                    function(err, info) {
+                        if (err)
+                            console.log("Error inserting : %s", err);
+                        else {
+                            console.log(info.insertId);
+                            res.render('addProduct', {
+                                categoryName : input.categoryName,
+                                categoryId : input.categoryId,
+                                message : 'Product added successfuly'
+                            });
+                        }
 
-		console.log("inside if")
-		// get the temporary location of the file
-	    var tmp_path = req.files.image.path;
-	    // set where the file should actually exists - in this case it is in the "images" directory
-	    var target_path = './public/images/' + req.files.image.name;
-	    // move the file from the temporary location to the intended location
-	    fs.rename(tmp_path, target_path, function(err) {
-	        if (err) throw err;
-	        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-	        fs.unlink(tmp_path, function() {
-	            if (err) throw err;
-	            console.log();
-	            //res.send('File uploaded to: ' + target_path + ' - ' + req.files.image.size + ' bytes');
-	        });
-	    });
-	    var myDate = new Date();
-	    myDate.setDate(myDate.getDate() + parseInt(input.duration));
-	    var data = {
-				name : input.title,
-				details : input.details,
-				condition : condition,
-				isForAuction : auction,
-				min_bid : input.startPrice*1,
-				quantity : parseInt(input.quantity),
-				bid_duration : parseInt(input.duration),
-				category_id : input.categoryId,
-				cost : input.startPrice * 1,
-				seller_id : sess.uid,
-				bid_start_time : new Date(),
-				image : target_path.substring(8),
-				isActive : 1,
-				bid_end_time : myDate
-		};
-		connection.connect();
-		var query = connection.query("Insert into products set ? ", data, function(err, info){
-			if(err)
-				console.log("Error inserting : %s", err);
-			else
-			{
-				console.log(info.insertId);
-				res.render('addProduct', {categoryName: input.categoryName, categoryId : input.categoryId, message:'Product added successfuly'});
-			}
+                    });
+            connection.end();
+        } else {
+            console.log("inside else")
+            req.flash('error', msg);
+            res.redirect('/addProduct');
+        }
 
-		});
-		connection.end();
-	}
-	else
-	{
-		console.log("inside else")
-		req.flash('error', msg);
-		res.redirect('/addProduct');
-	}
-
-	// set where the file should actually exists - in this case it is in the "images" directory
-	//   var target_path = '/images/' + req.files.image.name;
-	// move the file from the temporary location to the intended location
-//	fs.rename(tmp_path, target_path, function(err) {
-//	if (err) throw err;
-//	// delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-//	fs.unlink(tmp_path, function() {
-//	if (err) throw err;
-//	res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
-//	});
-//	});
-
+    }
 
 }
 
 exports.home = function(req, res) {
-    res.render('home');
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        res.render('home');
+    }
 }
 validate = function(input, name) {
 
@@ -853,18 +877,22 @@ exports.getCategories = function(req, res) {
     /*
      * if(req.session.fname == undefined){ res.redirect("/"); } else{
      */
-    var connection = mysqldb.getConnection();
-    connection.connect();
-    var query = connection.query('SELECT * from category', function(err, rows) {
-        if (err)
-            console.log("Error getting vlaues % s", err);
-        connection.end();
-        res.render('selectCategories', {
-            page_title : "Categories",
-            data : rows
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var connection = mysqldb.getConnection();
+        connection.connect();
+        var query = connection.query('SELECT * from category', function(err,
+                rows) {
+            if (err)
+                console.log("Error getting vlaues % s", err);
+            connection.end();
+            res.render('selectCategories', {
+                page_title : "Categories",
+                data : rows
+            });
         });
-    });
-
+    }
 }
 
 var CronJob = require('cron').CronJob;

@@ -128,12 +128,15 @@ body #Body .btn, body #Body c-std {
 </div>
 </li>
 <li class="gh-eb-li rt" id="gh-cart">
-<p>Last Login:<%=sess.lastlogin%></p>
+<p><a href="/mycart"><b>My Cart<b></a></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login : <b><%=sess.lastlogin%><b></p>
 </li>
 <li class="gh-eb-li rt" id="gh-cart">
 <a class="gh-eb-li-a" href=
 "/signout" title=
-"Sign Out">Signout</a>
+"Sign Out"><b>Signout</b></a>
 </li>
 </ul>
 </div>
@@ -211,7 +214,7 @@ body #Body .btn, body #Body c-std {
                                                                 <a class=
                                                                 "vi-VR-spl-lnk"
                                                                 href=
-                                                                "/getProducts/<%=categoryName%>"
+                                                                "/getCategories"
                                                                 id=
                                                                 "smtBackToAnchor"
                                                                 style=
@@ -620,11 +623,12 @@ function picOnLoad(isSetClkId){
                                         </div>
                                     </div><!-- volume pricing -->
                                     <!-- volume pricing ends -->
+                                    <% if (data[0].auction==1) { %>
 
                                     <div class="u-cb spcr a1"></div>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bid Ends : <%=new Date(data[0].bid_end_time).toDateString()%> <%=new Date(data[0].bid_end_time).toTimeString()%>
                                     <div class="u-cb spcr"></div>
-
+									<% } %>
                                     <div class="u-cb spcr vi-compat-hide">
                                     </div>
 
@@ -662,7 +666,7 @@ function picOnLoad(isSetClkId){
 											<%}%>
                                             <div class="u-flL w29 vi-price">
                                                 <span class="notranslate" id=
-                                                "prcIsum_bidPrice">$&nbsp;<%=data[0].min_bid%></span>
+                                                "prcIsum_bidPrice">$&nbsp;<%=((data[0].auction==0)?data[0].cost:data[0].min_bid)%></span>
 
                                                 <div class="sh-CostBB" id=
                                                 "isum-shipCostDiv" style=
@@ -699,7 +703,7 @@ function picOnLoad(isSetClkId){
                                                 class="notranslate MaxBidClass"
                                                 id="bid_amount" 
                                                 name="bid_amount" 
-                                                type="number" value="" min="0" step="0.01">
+                                                required type="number" value="" min="0" step="0.01" placeholder="Amount">
                                             </div>
                                              
 
@@ -735,11 +739,14 @@ function picOnLoad(isSetClkId){
                                         
 										<%}%>
 											<%if(data[0].auction==0){%>
-											<a id="vi-VR-bid-lnk" class="vi-bidC" rel="nofollow" href="/bid"
+											<a id="vi-VR-bid-lnk" class="vi-bidC" rel="nofollow" href="/"
 <span id="qty-test">[<%=data[0].quantity%>]</span>
 <span> Qty Left </span>
 </a
 											<form action="/buy" method="post" id="BuyForm" name="BuyForm">
+											<input type="hidden" name="categoryName" value="<%=categoryName%>">
+											<input type="hidden" name="productId" value="<%=data[0].id%>">
+											<input type="hidden" name="cost" value="<%=data[0].cost%>">
                                             <div class="u-flL u-b w29" id="">
                                                 <label class="u-dspn" for=
                                                 "MaxBidId" id=
@@ -748,7 +755,7 @@ function picOnLoad(isSetClkId){
                                                 class="notranslate MaxBidClass"
                                                 id="quantity" 
                                                 name="quantity"
-                                                 type="number" value="" min="0" step="0.01">
+                                                required type="number" value="" min="1" placeholder="Quantity">
                                             </div>
                                             
 
@@ -762,7 +769,11 @@ function picOnLoad(isSetClkId){
                                                 <button class=
                                                 "btn btn-prim vi-VR-btnWdth-XL"
                                                 id="buyBtn_btn" rel="nofollow"
-                                                style="" type="submit" formaction="/buy" >Buy Now</button>
+                                                style="" type="submit" formaction="/buy" name="event" value="buy" >Buy Now</button>
+                                                <button class=
+                                                "btn btn-prim vi-VR-btnWdth-XL"
+                                                id="buyBtn_btn" rel="nofollow"
+                                                style="" type="submit" formaction="/buy" name="event" value="cart" >Add to Cart</button>
                                                 
                                             </div><!-- ShowStatusOnLoad -->
                                             

@@ -6,7 +6,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var crypto = require('crypto');
-var Chance= require('chance')
+var Chance = require('chance')
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -85,6 +85,7 @@ app.get('/getUserDetails_vertical/:id', customers.getUserDetails_vertical);
 app.get('/getProductDetailsBid/:catName/:id', juveria.getProductDetails);
 app.post('/bid', juveria.bid);
 app.post('/buy', juveria.buy);
+app.get('/mycart', juveria.cart);
 
 // ///Meher/////
 app.get('/getCategories', meher.getCategories);
@@ -98,7 +99,6 @@ app.get('/addProduct/:categoryName/:categoryId', customers.addProduct);
 app.post('/addProduct', customers.saveProduct)
 app.get('/home', customers.home);
 
-
 app.get('/upload', customers.imageForm);
 app.post('/upload', customers.uploadImage);
 
@@ -109,11 +109,14 @@ app.get('/getUserDetails', kiran.getUserDetails);
 
 // app.get('/updateUserDetails',kiran.update);
 // app.post('/update',kiran.updateUserDetails);
-app.post('/searchProducts', kiran.searchProducts);
+app.get('/searchProducts', kiran.searchProducts);
 app.get('/getAllCustomers', kiran.getCustomers);
 app.get('/getAllSellers', kiran.getSellers);
-app.post('/searchPerson', kiran.searchUsers);
+app.get('/searchPerson', kiran.searchUsers);
 app.get('/signout', kiran.signout);
+app.get('/searchPurchasedProducts', kiran.searchPurchasedProducts);
+app.get('/searchBiddedProducts', kiran.searchBiddedProducts);
+app.get('/searchSoldProducts', kiran.searchSoldProducts);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function() {

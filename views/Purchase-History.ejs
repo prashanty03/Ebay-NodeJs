@@ -96,10 +96,11 @@
                                 </td>
                                 <td class="gh-td-s">
                                     <form id=
-                                        "gh-f" method="post" name="gh-f">
+                                        "gh-f" method="GET" name="gh-f">
                                         <input name="_from" type="hidden" value=
                                             "R40"><input name="_trksid" type="hidden"
                                             value="p2055119.m570.l1313">
+                                        <input type="hidden" name="flag" value="purchase">
                                         <table class="gh-tbl2">
                                             <tbody>
                                                 <tr>
@@ -133,7 +134,7 @@
                                                     <td class="gh-td" id="gh-cat-td"></td>
                                                     <td class="gh-td"><input class=
                                                         "btn btn-prim gh-spr" id="gh-btn"
-                                                        type="submit" value="Search" formaction="/searchProducts"></td>
+                                                        type="submit" value="Search" formaction="/searchPurchasedProducts"></td>
                                                     <td class="gh-td" id="gh-as-td">
                                                         <div id="gh-as"></div>
                                                     </td>
@@ -363,9 +364,8 @@
                                             <div class="item-spec"><b>Seller:</b> <%=dataVar[i].seller_name%></a></div>
                                             <div class="item-spec"><b>Condition:</b>New</div>
                                             <div class="item-spec">
-                                                <b>Bidded for: </b>$ <%=dataVar[i].bid_amount%> &nbsp;&nbsp;&nbsp;
-                                                <b>Minimum bid: </b>$ <%=dataVar[i].min_bid%> &nbsp;&nbsp;&nbsp;
-                                                <b>Submitted on: </b><%=dataVar[i].submitted_on%> &nbsp;&nbsp;&nbsp;
+                                                <b>Purchased for: </b>$ <%=dataVar[i].bid_amount%> &nbsp;&nbsp;&nbsp;
+                                                <b>Purchased on: </b><%=dataVar[i].submitted_on%> &nbsp;&nbsp;&nbsp;
                                                 <% if(dataVar[i].rating){%>
                                                 <div class="media-title"><b>You rated this product: </b>&nbsp;
                                                     <% for (var j=0; j<dataVar[i].rating;j++) { %>
@@ -385,23 +385,23 @@
                                                         <br/>
                                                         <label>
                                                         <input type="radio" value="1" name="rating" id="av_box:rating:True">
-                                                        <span><i>Methinks not&nbsp;</i></span>
+                                                        <span><i><font color="white">Me thinks not&nbsp;</font></i></span>
                                                         </label>
                                                         <label>
                                                         <input type="radio" value="2" name="rating" id="av_box:rating:False">
-                                                        <span><i>I've experienced better&nbsp;</i></span>
+                                                        <span><i><font color="white">I've experienced better&nbsp;</font></i></span>
                                                         </label>
                                                         <label>
                                                         <input type="radio" value="3" name="rating" id="av_box:rating:False">
-                                                        <span><i>OK&nbsp;</i></span>
+                                                        <span><i><font color="white">OK&nbsp;</font></i></span>
                                                         </label>
                                                         <label>
                                                         <input type="radio" value="4" name="rating" id="av_box:rating:False">
-                                                        <span><i>I'm a fan&nbsp;</i></span>
+                                                        <span><i><font color="white">I'm a fan&nbsp;</font></i></span>
                                                         </label>
                                                         <label>
                                                         <input type="radio" value="5" name="rating" id="av_box:rating:False">
-                                                        <span><i>As good as it gets&nbsp;</i></span>
+                                                        <span><i><font color="white">As good as it gets&nbsp;</font></i></span>
                                                         </label>
                                                         <div align= "left"><br/><button value="submit" type="submit"><span>Post</span></button></div>
                                                     </div>
