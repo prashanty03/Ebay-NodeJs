@@ -42,7 +42,12 @@ exports.updateUser = function(req, res) {
                 country : input.country,
                 street : input.street,
                 zip : input.zip,
-                contact : input.contact
+                contact : input.contact,
+                card_number: input.card_number,
+                card_name: input.cardname,
+                code: input.csc,
+                expiry_mm: input.month,
+                expiry_yy: input.year
             };
         } else {
             var cipher = crypto.createCipher(algorithm, key);
@@ -58,7 +63,12 @@ exports.updateUser = function(req, res) {
                 country : input.country,
                 street : input.street,
                 zip : input.zip,
-                contact : input.contact
+                contact : input.contact,
+                card_number: input.card_number,
+                card_name: input.cardname,
+                code: input.csc,
+                expiry_mm: input.month,
+                expiry_yy: input.year
             };
         }
         var connection = mysqldb.getConnection();
@@ -174,7 +184,12 @@ exports.saveUser = function(req, res) {
         isAdmin : 'N',
         isActive : '1',
         isBuyer : buyer,
-        isSeller : seller
+        isSeller : seller,
+        card_number: input.card_number,
+        card_name: input.cardname,
+        code: input.csc,
+        expiry_mm: input.month,
+        expiry_yy: input.year
     };
     var connection = mysqldb.getConnection();
     connection.connect();
