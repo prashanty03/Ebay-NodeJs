@@ -808,7 +808,7 @@ exports.saveProduct = function(req, res) {
 }
 
 exports.home = function(req, res) {
-    if (req.session.fname == undefined) {
+    if (sess.fname == undefined) {
         res.redirect("/");
     } else {
         res.render('home');
@@ -897,7 +897,7 @@ exports.getCategories = function(req, res) {
 
 var CronJob = require('cron').CronJob;
 new CronJob(
-        '5 * * * * *',
+        '300 * * * * *',
         function() {
             var connection = mysqldb.getConnection();
             connection.connect();
