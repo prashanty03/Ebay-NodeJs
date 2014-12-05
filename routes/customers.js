@@ -299,6 +299,83 @@ exports.logindo = function(req, res) {
     // });
 };
 
+
+exports.logindo_vertical = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+    // req.getConnection(function(err,connection){
+    var data = {
+        email : input.email,
+        password : input.pass,
+    };
+    console.log(data);
+    var password_check = input.pass;
+    var cipher = crypto.createCipher(algorithm, key);
+    var encrypted_password = cipher.update(password_check, 'utf8', 'hex')
+            + cipher.final('hex');
+    var connection = mysqldb.getConnection();
+    connection.connect();
+    var query = connection
+            .query(
+                    "SELECT * from user WHERE email = ? ",
+                    [ data.email ],
+                    function(err, rows) {
+                        if (err) {
+                            console.log("Error fecthing details : %s", err);
+                            res.redirect('/');
+                        }
+                        var userexist = rows[0];
+                        console.log("rows: " + userexist);
+                        if (userexist == undefined) {
+                            console.log("rows: " + userexist);
+                            req.flash('error',
+                                    'Username does not exists in database');
+                            res.redirect('/');
+                        } else {
+                            if (rows[0].password == encrypted_password) {
+                                sess = req.session;
+                                console.log(req.session);
+                                console.log(rows[0].firstname);
+                                sess.uid = rows[0].id;
+                                sess.fname = rows[0].firstname;
+                                sess.lname = rows[0].lastname;
+                                sess.email = rows[0].email;
+                                sess.memberno = rows[0].membership_no;
+                                if (rows[0].lastlogin == null) {
+                                    sess.lastlogin = "First Login";
+                                } else {
+                                    sess.lastlogin = rows[0].lastlogin
+                                            .toString().substr(0, 24);
+                                }
+                                var lastlogin = new Date();
+                                connection
+                                        .query(
+                                                'UPDATE user SET lastlogin = ? WHERE email = ?',
+                                                [ lastlogin, sess.email ]);
+                                console.log("Session: " + JSON.stringify(sess));
+
+                                res.render('home_vertical', {
+                                    page_title : "After Login",
+                                    data : rows,
+                                    personId : sess.uid,
+                                    firstname : sess.fname,
+                                    lastname : sess.lname,
+                                    email : sess.email,
+                                    lastlogin : sess.lastlogin,
+                                    memberno : sess.memberno
+                                });
+                                connection.end();
+                            } else {
+                                req
+                                        .flash('error',
+                                                'Username or password is incorrect. Try Again!');
+                                res.redirect('/');
+                            }
+                        }
+                    });
+
+    // });
+};
+
 /* Rate a product */
 
 exports.rate = function(req, res) {
@@ -406,6 +483,30 @@ exports.getUserDetails = function(req, res) {
             });
     connection.end();
 };
+
+
+exports.getUserDetails_vertical = function(req, res) {
+    var personId = req.params.id;
+    var connection = mysqldb.getConnection();
+    connection.connect();
+    var query = connection.query("select u.id, u.firstname, u.lastname, u.email, ue.address, ue.street, ue.city, ue.state, ue.zip, ue.country, ue.contact, ue.membership_no from user u join user_ext ue where u.id = ue.user_id AND u.id = ?",
+            [ personId ], function(err, rows) {
+                if (err)
+                    console.log("Error fetching results : %s", err);
+                res.render('getUserDetails_vertical', {
+                    message : req.flash('error'),
+                    data : rows[0],
+                    personId : sess.uid,
+                    firstname : sess.fname,
+                    lastname : sess.lname,
+                    email : sess.email,
+                    lastlogin : sess.lastlogin,
+                    memberno : sess.memberno
+                });
+            });
+    connection.end();
+};
+
 
 exports.getDetails = function(req, res) {
     var name = req.params.name;

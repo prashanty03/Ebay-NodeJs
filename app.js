@@ -15,6 +15,7 @@ var customers = require('./routes/customers');
 var meher = require('./routes/meher');
 var kiran = require('./routes/Kiran');
 var juveria = require('./routes/juveria');
+var vertical = require('./routes/vertical');
 var app = express();
 var connection = require('express-myconnection');
 // var mysql = require('mysql');
@@ -65,7 +66,6 @@ app.get('/search', customers.searchproducts);
 app.get('/delete/:id/:status/:utype', customers.deleteUser);
 // ///prashant luthra/////
 app.get('/', customers.login);
-// app.get('/users', customers.list);
 app.get('/login', customers.login);
 app.get('/signup', customers.signup);
 app.post('/signup', customers.saveUser);
@@ -73,6 +73,12 @@ app.post('/login', customers.logindo);
 app.post('/rating', customers.rate);
 app.get('/getUserDetails/:id', customers.getUserDetails);
 app.post('/updateUser/:id', customers.updateUser);
+
+app.get('/signup_vertical', vertical.signup_vertical);
+app.post('/signup_vertical', vertical.saveUserVertical);
+app.get('/login_vertical', vertical.login_vertical);
+app.post('/login_vertical', customers.logindo_vertical);
+app.get('/getUserDetails_vertical/:id', customers.getUserDetails_vertical);
 // ////end//////
 
 // ////Juveria/////
