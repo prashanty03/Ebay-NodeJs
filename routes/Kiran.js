@@ -133,30 +133,23 @@ function searchProducts(req, res) {
     }
 
 }
+var redis = require("redis"),
+client = redis.createClient();
+var cache = require('../redisCache');
 function getCustomers(req, res) {
-
+var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-        var firstname = [];
-        var lastname = [];
-        var email = [];
-        var contact = [];
-        var id = [];
-        var isActive = [];
-        var query = "select * from person where isBuyer=1";
-        var con = mysql.getConnection();
-        con.query(query, function(err, results) {
-            if (results.length > 0) {
-                /*
-                 * for ( var i = 0; i < results.length; i++) { firstname[i] =
-                 * results[i].firstname; lastname[i] = results[i].lastname;
-                 * email[i] = results[i].email; contact[i] = results[i].contact;
-                 * id[i] = results[i].id; isActive = results[i].isActive }
-                 */
-                ejs.renderFile('./views/users.ejs', {
-                    results : results
+        var sql = "select * from person where isBuyer=1";
+        cache.vlmCache.get("buyers", sql, function(err, value) {
+    		if(value !== null) {
+    			rows1 = value;
+    			console.log("got data from cache");
+    			console.log(JSON.stringify(cache.vlmCache.getStats()));
 
+                ejs.renderFile('./views/users.ejs', {
+                    results : rows1
                 }, function(err, result) {
                     if (!err) {
                         res.end(result);
@@ -166,29 +159,55 @@ function getCustomers(req, res) {
                     }
                 });
 
-            } else {
-                console.log(results);
-                res.send("no results");
-                res.end();
+    		} else {
+    			console.log("have to set cache");
+    			var connection = mysql.getConnection();
+    			connection.query(sql,function(err, rows) {
+    				rows1=rows;
+    				if(err) {
+    					throw err;
+    				} else {
+    					//console.log(JSON.stringify(rows));
+    					cache.vlmCache.set("buyers", sql, rows, function(err, success) {
+    						if(err || !success) {
+    							throw err;
+    						}
+    					});
+    					console.log(JSON.stringify(cache.vlmCache.getStats()));
 
-            }
+    	                ejs.renderFile('./views/users.ejs', {
+    	                    results : rows1
+    	                }, function(err, result) {
+    	                    if (!err) {
+    	                        res.end(result);
+    	                    } else {
+    	                        res.end("An error occured");
+    	                        console.log(err);
+    	                    }
+    	                });
 
-        });
+    	            
+    				}});
+
+    			}});
+   
     }
 
 }
 function getSellers(req, res) {
-
+var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-        var query = "select * from person where isSeller=1";
-        var con = mysql.getConnection();
-        con.query(query, function(err, results) {
-            if (results.length > 0) {
+        var sql = "select * from person where isSeller=1";
+        cache.vlmCache.get("sellers", sql, function(err, value) {
+    		if(value !== null) {
+    			rows1 = value;
+    			console.log("got data from cache");
+    			console.log(JSON.stringify(cache.vlmCache.getStats()));
 
                 ejs.renderFile('./views/sellers.ejs', {
-                    results : results
+                    results : rows1
                 }, function(err, result) {
                     if (!err) {
                         res.end(result);
@@ -198,14 +217,38 @@ function getSellers(req, res) {
                     }
                 });
 
-            } else {
-                console.log(results);
-                res.send("no results");
-                res.end();
+    		} else {
+    			console.log("have to set cache");
+    			var connection = mysql.getConnection();
+    			connection.query(sql,function(err, rows) {
+    				rows1=rows;
+    				if(err) {
+    					throw err;
+    				} else {
+    					//console.log(JSON.stringify(rows));
+    					cache.vlmCache.set("sellers", sql, rows, function(err, success) {
+    						if(err || !success) {
+    							throw err;
+    						}
+    					});
+    					console.log(JSON.stringify(cache.vlmCache.getStats()));
 
-            }
+    	                ejs.renderFile('./views/sellers.ejs', {
+    	                    results : rows1
+    	                }, function(err, result) {
+    	                    if (!err) {
+    	                        res.end(result);
+    	                    } else {
+    	                        res.end("An error occured");
+    	                        console.log(err);
+    	                    }
+    	                });
 
-        });
+    	            
+    				}});
+
+    			}});
+   
     }
 
 }
@@ -213,44 +256,84 @@ function searchUsers(req, res) {
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-        var searchQuery = req.param("_nkw");
-        var flag = req.param("flag");
-        var query = "select * from person where firstname REGEXP '"
-                + searchQuery + "' OR lastname REGEXP '" + searchQuery
-                + "' OR email REGEXP '" + searchQuery + "'";
-        var con = mysql.getConnection();
-        con.query(query, function(err, results) {
-            if (results.length > 0) {
-                if (flag === "AllSellers") {
-                    ejs.renderFile('./views/sellers.ejs', {
-                        results : results
-                    }, function(err, result) {
-                        if (!err) {
-                            res.end(result);
-                        } else {
-                            res.end("An error occured");
-                            console.log(err);
-                        }
-                    });
-                }
-                if (flag === "AllCustomers") {
-                    ejs.renderFile('./views/users.ejs', {
-                        results : results
-                    }, function(err, result) {
-                        if (!err) {
-                            res.end(result);
-                        } else {
-                            res.end("An error occured");
-                            console.log(err);
-                        }
-                    });
-                }
-            } else {
-                console.log(results);
-                res.send("no results");
-                res.end();
-            }
-        });
+    	  var searchQuery = req.param("_nkw");
+          var flag = req.param("flag");
+          var sql = "select * from person where firstname REGEXP '"
+                  + searchQuery + "' OR lastname REGEXP '" + searchQuery
+                  + "' OR email REGEXP '" + searchQuery + "'";
+
+    	cache.vlmCache.get("users", sql, function(err, value) {
+    		if(value !== null) {
+    			rows1 = value;
+    			console.log("got data from cache");
+    			console.log(JSON.stringify(cache.vlmCache.getStats()));
+    			 if (flag === "AllSellers") {
+                     ejs.renderFile('./views/sellers.ejs', {
+                         results : rows1
+                     }, function(err, result) {
+                         if (!err) {
+                             res.end(result);
+                         } else {
+                             res.end("An error occured");
+                             console.log(err);
+                         }
+                     });
+                 }
+    			 if (flag === "AllCustomers") {
+                     ejs.renderFile('./views/users.ejs', {
+                         results : rows1
+                     }, function(err, result) {
+                         if (!err) {
+                             res.end(result);
+                         } else {
+                             res.end("An error occured");
+                             console.log(err);
+                         }
+                     });
+                 }
+    		} else {
+    			console.log("have to set cache");
+    			var connection = mysql.getConnection();
+    			connection.query(sql,function(err, rows) {
+    				rows1=rows;
+    				if(err) {
+    					throw err;
+    				} else {
+    					//console.log(JSON.stringify(rows));
+    					cache.vlmCache.set("users", sql, rows, function(err, success) {
+    						if(err || !success) {
+    							throw err;
+    						}
+    					});
+    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+    					 if (flag === "AllSellers") {
+    	                     ejs.renderFile('./views/sellers.ejs', {
+    	                         results : rows1
+    	                     }, function(err, result) {
+    	                         if (!err) {
+    	                             res.end(result);
+    	                         } else {
+    	                             res.end("An error occured");
+    	                             console.log(err);
+    	                         }
+    	                     });
+    	                 }
+    	    			 if (flag === "AllCustomers") {
+    	                     ejs.renderFile('./views/users.ejs', {
+    	                         results : rows1
+    	                     }, function(err, result) {
+    	                         if (!err) {
+    	                             res.end(result);
+    	                         } else {
+    	                             res.end("An error occured");
+    	                             console.log(err);
+    	                         }
+    	                     });
+    	                 }
+    					//res.render('allMovies.jade', {catas : rows1});
+    				}});
+
+    			}});
     }
 }
 function signout(req, res) {
@@ -370,14 +453,7 @@ function searchSoldProducts(req, res) {
                         });
     }
 }
-/*
- * function search(req,res) {
- * ejs.renderFile('./views/search.ejs',function(err,result) { if(!err){
- * 
- * res.end(result); } else { res.end('An error occured'); console.log(err); }
- * 
- * }); }
- */
+
 
 exports.getUserDetails = getUserDetails;
 exports.start = start;

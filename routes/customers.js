@@ -42,7 +42,12 @@ exports.updateUser = function(req, res) {
                 country : input.country,
                 street : input.street,
                 zip : input.zip,
-                contact : input.contact
+                contact : input.contact,
+                card_number: input.card_number,
+                card_name: input.cardname,
+                code: input.csc,
+                expiry_mm: input.month,
+                expiry_yy: input.year
             };
         } else {
             var cipher = crypto.createCipher(algorithm, key);
@@ -58,7 +63,12 @@ exports.updateUser = function(req, res) {
                 country : input.country,
                 street : input.street,
                 zip : input.zip,
-                contact : input.contact
+                contact : input.contact,
+                card_number: input.card_number,
+                card_name: input.cardname,
+                code: input.csc,
+                expiry_mm: input.month,
+                expiry_yy: input.year
             };
         }
         var connection = mysqldb.getConnection();
@@ -76,19 +86,38 @@ exports.updateUser = function(req, res) {
                                         console.log(
                                                 "Error fetching results : %s",
                                                 err);
-                                    res.render('getUserDetails', {
-                                        message : req.flash('error'),
-                                        data : rows[0],
-                                        personId : sess.uid,
-                                        firstname : sess.fname,
-                                        lastname : sess.lname,
-                                        email : sess.email,
-                                        lastlogin : sess.lastlogin,
-                                        isAdmin : sess.isAdmin,
-                                        isBuyer : sess.isBuyer,
-                                        isSeller : sess.isSeller,
-                                        memberno : sess.memberno
-                                    });
+                                    else{
+                                    	cache.vlmCache.invalidate("users", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                                    	cache.vlmCache.invalidate("buyers", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                                    	cache.vlmCache.invalidate("sellers", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+                                    	 res.render('getUserDetails', {
+                                             message : req.flash('error'),
+                                             data : rows[0],
+                                             personId : sess.uid,
+                                             firstname : sess.fname,
+                                             lastname : sess.lname,
+                                             email : sess.email,
+                                             lastlogin : sess.lastlogin,
+                                             isAdmin : sess.isAdmin,
+                                             isBuyer : sess.isBuyer,
+                                             isSeller : sess.isSeller,
+                                             memberno : sess.memberno
+                                         });
+                                    }
+                                   
 
                                 });
             }
@@ -174,7 +203,12 @@ exports.saveUser = function(req, res) {
         isAdmin : 'N',
         isActive : '1',
         isBuyer : buyer,
-        isSeller : seller
+        isSeller : seller,
+        card_number: input.card_number,
+        card_name: input.cardname,
+        code: input.csc,
+        expiry_mm: input.month,
+        expiry_yy: input.year
     };
     var connection = mysqldb.getConnection();
     connection.connect();
@@ -299,6 +333,83 @@ exports.logindo = function(req, res) {
     // });
 };
 
+
+exports.logindo_vertical = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+    // req.getConnection(function(err,connection){
+    var data = {
+        email : input.email,
+        password : input.pass,
+    };
+    console.log(data);
+    var password_check = input.pass;
+    var cipher = crypto.createCipher(algorithm, key);
+    var encrypted_password = cipher.update(password_check, 'utf8', 'hex')
+            + cipher.final('hex');
+    var connection = mysqldb.getConnection();
+    connection.connect();
+    var query = connection
+            .query(
+                    "SELECT * from user WHERE email = ? ",
+                    [ data.email ],
+                    function(err, rows) {
+                        if (err) {
+                            console.log("Error fecthing details : %s", err);
+                            res.redirect('/');
+                        }
+                        var userexist = rows[0];
+                        console.log("rows: " + userexist);
+                        if (userexist == undefined) {
+                            console.log("rows: " + userexist);
+                            req.flash('error',
+                                    'Username does not exists in database');
+                            res.redirect('/');
+                        } else {
+                            if (rows[0].password == encrypted_password) {
+                                sess = req.session;
+                                console.log(req.session);
+                                console.log(rows[0].firstname);
+                                sess.uid = rows[0].id;
+                                sess.fname = rows[0].firstname;
+                                sess.lname = rows[0].lastname;
+                                sess.email = rows[0].email;
+                                sess.memberno = rows[0].membership_no;
+                                if (rows[0].lastlogin == null) {
+                                    sess.lastlogin = "First Login";
+                                } else {
+                                    sess.lastlogin = rows[0].lastlogin
+                                            .toString().substr(0, 24);
+                                }
+                                var lastlogin = new Date();
+                                connection
+                                        .query(
+                                                'UPDATE user SET lastlogin = ? WHERE email = ?',
+                                                [ lastlogin, sess.email ]);
+                                console.log("Session: " + JSON.stringify(sess));
+
+                                res.render('home_vertical', {
+                                    page_title : "After Login",
+                                    data : rows,
+                                    personId : sess.uid,
+                                    firstname : sess.fname,
+                                    lastname : sess.lname,
+                                    email : sess.email,
+                                    lastlogin : sess.lastlogin,
+                                    memberno : sess.memberno
+                                });
+                                connection.end();
+                            } else {
+                                req
+                                        .flash('error',
+                                                'Username or password is incorrect. Try Again!');
+                                res.redirect('/');
+                            }
+                        }
+                    });
+
+    // });
+};
+
 /* Rate a product */
 
 exports.rate = function(req, res) {
@@ -406,6 +517,30 @@ exports.getUserDetails = function(req, res) {
             });
     connection.end();
 };
+
+
+exports.getUserDetails_vertical = function(req, res) {
+    var personId = req.params.id;
+    var connection = mysqldb.getConnection();
+    connection.connect();
+    var query = connection.query("select u.id, u.firstname, u.lastname, u.email, ue.address, ue.street, ue.city, ue.state, ue.zip, ue.country, ue.contact, ue.membership_no from user u join user_ext ue where u.id = ue.user_id AND u.id = ?",
+            [ personId ], function(err, rows) {
+                if (err)
+                    console.log("Error fetching results : %s", err);
+                res.render('getUserDetails_vertical', {
+                    message : req.flash('error'),
+                    data : rows[0],
+                    personId : sess.uid,
+                    firstname : sess.fname,
+                    lastname : sess.lname,
+                    email : sess.email,
+                    lastlogin : sess.lastlogin,
+                    memberno : sess.memberno
+                });
+            });
+    connection.end();
+};
+
 
 exports.getDetails = function(req, res) {
     var name = req.params.name;
@@ -707,24 +842,15 @@ exports.saveProduct = function(req, res) {
 }
 
 exports.home = function(req, res) {
-    if (req.session.fname == undefined) {
+    if (sess.fname == undefined) {
         res.redirect("/");
     } else {
         res.render('home');
     }
 }
 validate = function(input, name) {
-
     var msgappender = " is mandoatory";
     var msg = "";
-    console.log(typeof (input.startPrice * 1));
-    console.log(name.toString());
-    console.log(name.toString().indexOf("JPEG") != -1);
-    console.log(name.toString().indexOf("jpeg") != -1);
-    console.log(name.toString().indexOf("JPG") != -1);
-    console.log(name.toString().indexOf("jpg") != -1);
-    console.log(name.toString().indexOf("PNG") != -1);
-    console.log(name.toString().indexOf("png") != -1);
 
     if (input.title == "" || input.title.length == 0) {
         msg = "Title" + msgappender;
@@ -796,7 +922,7 @@ exports.getCategories = function(req, res) {
 
 var CronJob = require('cron').CronJob;
 new CronJob(
-        '5 * * * * *',
+        '300 * * * * *',
         function() {
             var connection = mysqldb.getConnection();
             connection.connect();
@@ -857,4 +983,39 @@ exports.deleteUser = function(req, res) {
     });
 
     connection.end();
+}
+
+ 
+/// REDIS TEST
+var redis = require("redis"),
+client = redis.createClient();
+var cache = require('../redisCache');
+var rows1;
+exports.test2 = function(req, res){
+	var sql = 'select * from person limit 1000';
+	cache.vlmCache.get("users", sql, function(err, value) {
+		if(value !== null) {
+			rows1 = value;
+			console.log("got data from cache");
+			console.log(JSON.stringify(cache.vlmCache.getStats()));
+			res.send(rows1);
+		} else {
+			console.log("have to set cache");
+			var connection = mysqldb.getConnection();
+			connection.query(sql,function(err, rows) {
+				rows1=rows;
+				if(err) {
+					throw err;
+				} else {
+					//console.log(JSON.stringify(rows));
+					cache.vlmCache.set("users", sql, rows, function(err, success) {
+						if(err || !success) {
+							throw err;
+						}
+					});
+					console.log(JSON.stringify(cache.vlmCache.getStats()));
+					res.send(rows1);
+				}});
+
+			}});
 }
