@@ -1,9 +1,11 @@
 var ejs = require("ejs");
 var mysql = require('../mysqldb');
 var url = require('url');
-var redis = require("redis"),
-client = redis.createClient();
+var redis = require("redis"), client = redis.createClient();
 var cache = require('../redisCache');
+var product_id = [];
+var quantity = [];
+var cost = [];
 
 function getUserDetails(req, res) {
     if (req.session.fname == undefined) {
@@ -89,7 +91,7 @@ function updateUserDetails(req, res) {
 }
 
 function searchProducts(req, res) {
-	var rows1;
+    var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
@@ -103,12 +105,11 @@ function searchProducts(req, res) {
                 + searchQuery
                 + "' and p.isActive='1' and p.quantity>'0'";
 
-
         cache.vlmCache.get("products", sql, function(err, value) {
-    		if(value !== null) {
-    			rows1 = value;
-    			console.log("got data from cache");
-    			console.log(JSON.stringify(cache.vlmCache.getStats()));
+            if (value !== null) {
+                rows1 = value;
+                console.log("got data from cache");
+                console.log(JSON.stringify(cache.vlmCache.getStats()));
 
                 ejs.renderFile('./views/sample.ejs', {
                     results : rows1,
@@ -122,53 +123,56 @@ function searchProducts(req, res) {
                     }
                 });
 
-    		} else {
-    			console.log("have to set cache");
-    			var connection = mysql.getConnection();
-    			connection.query(sql,function(err, rows) {
-    				rows1=rows;
-    				if(err) {
-    					throw err;
-    				} else {
-    					//console.log(JSON.stringify(rows));
-    					cache.vlmCache.set("products", sql, rows, function(err, success) {
-    						if(err || !success) {
-    							throw err;
-    						}
-    					});
-    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+            } else {
+                console.log("have to set cache");
+                var connection = mysql.getConnection();
+                connection.query(sql, function(err, rows) {
+                    rows1 = rows;
+                    if (err) {
+                        throw err;
+                    } else {
+                        // console.log(JSON.stringify(rows));
+                        cache.vlmCache.set("products", sql, rows, function(err,
+                                success) {
+                            if (err || !success) {
+                                throw err;
+                            }
+                        });
+                        console.log(JSON.stringify(cache.vlmCache.getStats()));
 
-    	                ejs.renderFile('./views/sample.ejs', {
-    	                    results : rows1,
-    	                    searchName : searchQuery
-    	                }, function(err, result) {
-    	                    if (!err) {
-    	                        res.end(result);
-    	                    } else {
-    	                        res.end("An error occured");
-    	                        console.log(err);
-    	                    }
-    	                });
+                        ejs.renderFile('./views/sample.ejs', {
+                            results : rows1,
+                            searchName : searchQuery
+                        }, function(err, result) {
+                            if (!err) {
+                                res.end(result);
+                            } else {
+                                res.end("An error occured");
+                                console.log(err);
+                            }
+                        });
 
-    	            
-    				}});
+                    }
+                });
+                connection.end();
 
-    			}});
+            }
+        });
     }
 
 }
 
 function getCustomers(req, res) {
-var rows1;
+    var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
         var sql = "select * from person where isBuyer=1";
         cache.vlmCache.get("buyers", sql, function(err, value) {
-    		if(value !== null) {
-    			rows1 = value;
-    			console.log("got data from cache");
-    			console.log(JSON.stringify(cache.vlmCache.getStats()));
+            if (value !== null) {
+                rows1 = value;
+                console.log("got data from cache");
+                console.log(JSON.stringify(cache.vlmCache.getStats()));
 
                 ejs.renderFile('./views/users.ejs', {
                     results : rows1
@@ -181,52 +185,55 @@ var rows1;
                     }
                 });
 
-    		} else {
-    			console.log("have to set cache");
-    			var connection = mysql.getConnection();
-    			connection.query(sql,function(err, rows) {
-    				rows1=rows;
-    				if(err) {
-    					throw err;
-    				} else {
-    					//console.log(JSON.stringify(rows));
-    					cache.vlmCache.set("buyers", sql, rows, function(err, success) {
-    						if(err || !success) {
-    							throw err;
-    						}
-    					});
-    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+            } else {
+                console.log("have to set cache");
+                var connection = mysql.getConnection();
+                connection.query(sql, function(err, rows) {
+                    rows1 = rows;
+                    if (err) {
+                        throw err;
+                    } else {
+                        // console.log(JSON.stringify(rows));
+                        cache.vlmCache.set("buyers", sql, rows, function(err,
+                                success) {
+                            if (err || !success) {
+                                throw err;
+                            }
+                        });
+                        console.log(JSON.stringify(cache.vlmCache.getStats()));
 
-    	                ejs.renderFile('./views/users.ejs', {
-    	                    results : rows1
-    	                }, function(err, result) {
-    	                    if (!err) {
-    	                        res.end(result);
-    	                    } else {
-    	                        res.end("An error occured");
-    	                        console.log(err);
-    	                    }
-    	                });
+                        ejs.renderFile('./views/users.ejs', {
+                            results : rows1
+                        }, function(err, result) {
+                            if (!err) {
+                                res.end(result);
+                            } else {
+                                res.end("An error occured");
+                                console.log(err);
+                            }
+                        });
 
-    	            
-    				}});
+                    }
+                });
+                connection.end();
 
-    			}});
-   
+            }
+        });
+
     }
 
 }
 function getSellers(req, res) {
-var rows1;
+    var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
         var sql = "select * from person where isSeller=1";
         cache.vlmCache.get("sellers", sql, function(err, value) {
-    		if(value !== null) {
-    			rows1 = value;
-    			console.log("got data from cache");
-    			console.log(JSON.stringify(cache.vlmCache.getStats()));
+            if (value !== null) {
+                rows1 = value;
+                console.log("got data from cache");
+                console.log(JSON.stringify(cache.vlmCache.getStats()));
 
                 ejs.renderFile('./views/sellers.ejs', {
                     results : rows1
@@ -239,38 +246,41 @@ var rows1;
                     }
                 });
 
-    		} else {
-    			console.log("have to set cache");
-    			var connection = mysql.getConnection();
-    			connection.query(sql,function(err, rows) {
-    				rows1=rows;
-    				if(err) {
-    					throw err;
-    				} else {
-    					//console.log(JSON.stringify(rows));
-    					cache.vlmCache.set("sellers", sql, rows, function(err, success) {
-    						if(err || !success) {
-    							throw err;
-    						}
-    					});
-    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+            } else {
+                console.log("have to set cache");
+                var connection = mysql.getConnection();
+                connection.query(sql, function(err, rows) {
+                    rows1 = rows;
+                    if (err) {
+                        throw err;
+                    } else {
+                        // console.log(JSON.stringify(rows));
+                        cache.vlmCache.set("sellers", sql, rows, function(err,
+                                success) {
+                            if (err || !success) {
+                                throw err;
+                            }
+                        });
+                        console.log(JSON.stringify(cache.vlmCache.getStats()));
 
-    	                ejs.renderFile('./views/sellers.ejs', {
-    	                    results : rows1
-    	                }, function(err, result) {
-    	                    if (!err) {
-    	                        res.end(result);
-    	                    } else {
-    	                        res.end("An error occured");
-    	                        console.log(err);
-    	                    }
-    	                });
+                        ejs.renderFile('./views/sellers.ejs', {
+                            results : rows1
+                        }, function(err, result) {
+                            if (!err) {
+                                res.end(result);
+                            } else {
+                                res.end("An error occured");
+                                console.log(err);
+                            }
+                        });
 
-    	            
-    				}});
+                    }
+                });
+                connection.end();
 
-    			}});
-   
+            }
+        });
+
     }
 
 }
@@ -278,84 +288,87 @@ function searchUsers(req, res) {
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
-    	  var searchQuery = req.param("_nkw");
-          var flag = req.param("flag");
-          var sql = "select * from person where firstname REGEXP '"
-                  + searchQuery + "' OR lastname REGEXP '" + searchQuery
-                  + "' OR email REGEXP '" + searchQuery + "'";
+        var searchQuery = req.param("_nkw");
+        var flag = req.param("flag");
+        var sql = "select * from person where firstname REGEXP '" + searchQuery
+                + "' OR lastname REGEXP '" + searchQuery
+                + "' OR email REGEXP '" + searchQuery + "'";
 
-    	cache.vlmCache.get("users", sql, function(err, value) {
-    		if(value !== null) {
-    			rows1 = value;
-    			console.log("got data from cache");
-    			console.log(JSON.stringify(cache.vlmCache.getStats()));
-    			 if (flag === "AllSellers") {
-                     ejs.renderFile('./views/sellers.ejs', {
-                         results : rows1
-                     }, function(err, result) {
-                         if (!err) {
-                             res.end(result);
-                         } else {
-                             res.end("An error occured");
-                             console.log(err);
-                         }
-                     });
-                 }
-    			 if (flag === "AllCustomers") {
-                     ejs.renderFile('./views/users.ejs', {
-                         results : rows1
-                     }, function(err, result) {
-                         if (!err) {
-                             res.end(result);
-                         } else {
-                             res.end("An error occured");
-                             console.log(err);
-                         }
-                     });
-                 }
-    		} else {
-    			console.log("have to set cache");
-    			var connection = mysql.getConnection();
-    			connection.query(sql,function(err, rows) {
-    				rows1=rows;
-    				if(err) {
-    					throw err;
-    				} else {
-    					//console.log(JSON.stringify(rows));
-    					cache.vlmCache.set("users", sql, rows, function(err, success) {
-    						if(err || !success) {
-    							throw err;
-    						}
-    					});
-    					console.log(JSON.stringify(cache.vlmCache.getStats()));
-    					 if (flag === "AllSellers") {
-    	                     ejs.renderFile('./views/sellers.ejs', {
-    	                         results : rows1
-    	                     }, function(err, result) {
-    	                         if (!err) {
-    	                             res.end(result);
-    	                         } else {
-    	                             res.end("An error occured");
-    	                             console.log(err);
-    	                         }
-    	                     });
-    	                 }
-    	    			 if (flag === "AllCustomers") {
-    	                     ejs.renderFile('./views/users.ejs', {
-    	                         results : rows1
-    	                     }, function(err, result) {
-    	                         if (!err) {
-    	                             res.end(result);
-    	                         } else {
-    	                             res.end("An error occured");
-    	                             console.log(err);
-    	                         }
-    	                     });
-    	                 }
-    					//res.render('allMovies.jade', {catas : rows1});
-    				}});
-
-    			}});
+        cache.vlmCache.get("users", sql, function(err, value) {
+            if (value !== null) {
+                rows1 = value;
+                console.log("got data from cache");
+                console.log(JSON.stringify(cache.vlmCache.getStats()));
+                if (flag === "AllSellers") {
+                    ejs.renderFile('./views/sellers.ejs', {
+                        results : rows1
+                    }, function(err, result) {
+                        if (!err) {
+                            res.end(result);
+                        } else {
+                            res.end("An error occured");
+                            console.log(err);
+                        }
+                    });
+                }
+                if (flag === "AllCustomers") {
+                    ejs.renderFile('./views/users.ejs', {
+                        results : rows1
+                    }, function(err, result) {
+                        if (!err) {
+                            res.end(result);
+                        } else {
+                            res.end("An error occured");
+                            console.log(err);
+                        }
+                    });
+                }
+            } else {
+                console.log("have to set cache");
+                var connection = mysql.getConnection();
+                connection.query(sql, function(err, rows) {
+                    rows1 = rows;
+                    if (err) {
+                        throw err;
+                    } else {
+                        // console.log(JSON.stringify(rows));
+                        cache.vlmCache.set("users", sql, rows, function(err,
+                                success) {
+                            if (err || !success) {
+                                throw err;
+                            }
+                        });
+                        console.log(JSON.stringify(cache.vlmCache.getStats()));
+                        if (flag === "AllSellers") {
+                            ejs.renderFile('./views/sellers.ejs', {
+                                results : rows1
+                            }, function(err, result) {
+                                if (!err) {
+                                    res.end(result);
+                                } else {
+                                    res.end("An error occured");
+                                    console.log(err);
+                                }
+                            });
+                        }
+                        if (flag === "AllCustomers") {
+                            ejs.renderFile('./views/users.ejs', {
+                                results : rows1
+                            }, function(err, result) {
+                                if (!err) {
+                                    res.end(result);
+                                } else {
+                                    res.end("An error occured");
+                                    console.log(err);
+                                }
+                            });
+                        }
+                        // res.render('allMovies.jade', {catas : rows1});
+                    }
+                });
+                connection.end();
+            }
+        });
     }
 }
 function signout(req, res) {
@@ -407,6 +420,7 @@ function searchPurchasedProducts(req, res) {
                                 res.send("no matches");
                             }
                         });
+        con.end();
     }
 
 }
@@ -441,6 +455,7 @@ function searchBiddedProducts(req, res) {
                                 res.send("no matches");
                             }
                         });
+        con.end();
     }
 
 }
@@ -473,9 +488,103 @@ function searchSoldProducts(req, res) {
                                 res.send("no matches");
                             }
                         });
+        con.end();
     }
 }
+function myCart(req, res) {
+    var id = req.session.uid;
 
+    var con = mysql.getConnection();
+    con
+            .query(
+                    "select u.id,pr.name,u.cost,u.quantity,pr.id from user_cart AS u  join products AS pr ON u.product_id=pr.id where u.user_id= ?",
+                    [ id ], function(err, results) {
+                        console.log(results);
+                        if (!err) {
+                            for ( var i = 0; i < results.length; i++) {
+
+                                product_id[i] = results[i].id;
+                                quantity[i] = results[i].quantity;
+                                cost[i] = results[i].cost;
+                            }
+                            res.render('Cart', {
+                                page_title : "",
+                                results : results,
+                                message : req.flash('message')
+                            });
+                        } else {
+                            res.send("no matches");
+                        }
+                    });
+    con.end();
+
+}
+function searchAllProductsInHistory(req, res) {
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var searchQuery = req.param("_nkw");
+        // var flag = req.param("flag");
+        var id = req.session.uid;
+
+        var con = mysql.getConnection();
+        con
+                .query(
+                        "Select p.*, c.name as cname from products p join category c on c.id = p.category_id where p.seller_id = ? AND p.name REGEXP '"
+                                + searchQuery + "'", [ id ], function(err,
+                                results) {
+                            if (results.length > 0) {
+                                res.render('getSellerProducts', {
+                                    page_title : "",
+                                    data : results
+                                });
+                            } else {
+                                res.send("no matches");
+                            }
+                        });
+        con.end();
+    }
+
+}
+function deleteFromCart(req, res) {
+    var id = req.params.id;
+    var con = mysql.getConnection();
+    con.query("delete from user_cart where product_id=?", [ id ], function(err,
+            results) {
+        res.redirect('/mycart');
+    });
+    con.end();
+}
+function checkout(req, res) {
+    var con = mysql.getConnection();
+    for ( var i = 0; i < product_id.length; i++) {
+        console.log(product_id[i]);
+        console.log(quantity[i]);
+        console.log(cost[i]);
+        var id = product_id[i];
+        var soldquantity = quantity[i];
+        var totalcost = cost[i];
+        con.query("update products set quantity=quantity-? where id=?", [
+                soldquantity, id ]);
+        con.query("delete from user_cart where product_id= ?", id);
+        var data = {
+            product_id : id,
+            customer_id : sess.uid, // to be replaced by sesion id
+            bid_amount : totalcost,
+            submitted_on : new Date(),
+            sold : 1,
+            quantity : soldquantity
+
+        };
+        con.query("insert into purchase set ?", data);
+        req.flash('message', "Successfully placed the order...");
+        // req.flash('message', 'Successfully Checked out!');
+        res.redirect('/mycart');
+
+    }
+
+    con.end();
+}
 
 exports.getUserDetails = getUserDetails;
 exports.start = start;
@@ -489,3 +598,7 @@ exports.signout = signout;
 exports.searchPurchasedProducts = searchPurchasedProducts;
 exports.searchBiddedProducts = searchBiddedProducts;
 exports.searchSoldProducts = searchSoldProducts;
+exports.searchAllProductsInHistory = searchAllProductsInHistory;
+exports.myCart = myCart;
+exports.checkout = checkout;
+exports.deleteFromCart = deleteFromCart;

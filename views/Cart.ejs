@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 
 <html class="no-touch" lang="en">
-
-<head>
 <style>
  .table_data{
-    border: 1px solid black;
+    
     text-align:center;
 }
 </style>
+<head>
 
     <script async="" src=
     "http://srx.main.ebayrtm.com/rtm?RtmIt&amp;p=185:234:964:569:701:566:274:982:391:984:985:278:876:912:433:1650:1651&amp;ite=2&amp;to=3000"></script>
@@ -43,7 +42,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     <meta content="8kHr3jd3Z43q1ovwo0KVgo_NZKIEMjthBxti8m8fYTg" name=
     "google-site-verification">
 
-    <title></title>
+    <title>laptop | eBay</title>
     <link href="http://m.ebay.com/sch/i.html?_nkw=laptop" media=
     "only screen and (max-width: 640px)" rel="alternate">
     <meta content="acf32e2a69cbc2b0" name="y_key">
@@ -260,7 +259,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 </li>
 <li class="gh-t gh-spr" id="gh-p-2">
 <a class="gh-p" href=
-"/addProduct">Sell your product</a>
+"/selectCategory">Sell your product</a>
 </li>
 <%if((sess.isAdmin).toString()=="Y"){%>
 <li class="gh-t gh-spr" id="gh-p-1">
@@ -327,6 +326,11 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                 <div class="rr_present" id="Center">
                     <div class="full-width left c-std" id="CenterPanel">
                         <div id="CenterPanelInner">
+                         <div class="cart" style="position:relative;left:200px; right:500px">  
+          <% if (message) { %>
+                                                               <b><font size = "4" color ="red"><%= message %></font></b>
+                                                               <% } %>
+                                                               </div>
                             <div class="cbrt" id="cbrt">
                                 <div class="cb clearfix" id="cbelm">
                                     <a class="btn small btn-prim" href=
@@ -396,11 +400,60 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                 </div>
                             </div>
 
-                         
+                            <div class="brcnt" id="brcnt">
+                                <div class="bciw" id="bciw">
+                                    <div class="bclt">
+                                        <div class="brcrCatAsp"></div>
+
+                                        <h1 class="bcrs" title="laptop">
+                                        <span class="cptname" style=
+                                        "font-weight: bold"></span></h1>
+
+                                        <div id="followMessage" style=
+                                        "display:none">
+                                            <p class="dContent"><span>Follow
+                                            <strong>laptop</strong> to get
+                                            e-mail alerts and updates on your
+                                            eBay Feed.</span></p>
+                                        </div>
+
+                                        <div id="unfollowMessage" style=
+                                        "display:none">
+                                            <p class="dContent"><span>Unfollow
+                                            <strong>laptop</strong> to stop
+                                            getting updates on your eBay
+                                            Feed.</span></p>
+                                        </div>
+
+                                        <div id="followingMessage" style=
+                                        "display:none">
+                                            <p class="dContent">Yay! You're now
+                                            following <strong>laptop</strong>
+                                            in your <a href=
+                                            "http://www.ebay.com">eBay
+                                            Feed</a>.<span id=
+                                            "email_msg"><span>You will receive
+                                            email alerts for new
+                                            listings.</span><br>
+                                            <br>
+                                            <a id="fs_email">Dont send me
+                                            e-mail alerts.</a></span></p>
+                                        </div><span class="saveSearch"><a href=
+                                        "#save" id="e1-124" onclick=
+                                        "return false;"></a></span>
+
+                                        <form>
+                                            <span class=
+                                            "saveSearch"><input name=
+                                            "following" type="hidden" value=
+                                            "false"><input name="searchid"
+                                            type="hidden" value=""></span>
+                                        </form>
+
                                         <div id="shiptoZip"></div>
                                     </div>
-                                
-                            
+                                </div>
+                            </div>
 
                             <div class="" id="Results">
                                 <div class="rst" id="rsTabs">
@@ -418,7 +471,6 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                           <th style="width=25%">Quantity</th>
                                           <th style="width=25%"></th>
                                          </tr>
-                                         
                                         <% for(var i=0;i<results.length;i++)
                                                        {%>
 
@@ -432,36 +484,47 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                 search results</h2>
 
                                                 <ul id="ListViewInner">
-                                                    
-                                                     
+                                                  
+                                                        <div class=
+                                                        "lvpic pic p225 img left">
+                                                        <div class=
+                                                        ""><tr>
+                                                           <strong> <td class="table_data"><%=results[i].name%></td></strong>
+                                                            </div>
                                                         
-                                                        <tr>
-                                                        <td class="table_data"><%=results[i].name%></td>
-                                                         
 
-                                                                   <div class="FnF"> 
-                                                                     <td class="table_data"><%=results[i].cost%></td>
-                                                    
-                                                                       <td class="table_data"> <%=results[i].quantity%></td>
-                                                                       
-                                                                       
+                                                        
+                                                        <td class="table_data"><%=results[i].cost%></td>
+                                                       
+                                                       
+                                                                                                           
+                                                       
+                                                        
+                                                                <div class=
+                                                                "FnF">
                                                                     
-                                                                    
+                                                                    <span class="fnftxt">
+                                                                    <span class="FnFl">
+                                                                     
+                                                                     <td class="table_data"> <%=results[i].quantity%></td>
+                                                                     
+                                                                    </span></span>
+
                                                                    <td class="table_data"> <a href="/deleteFromCart/<%=results[i].id%>">Delete from Cart</a></td>
                                                                     </tr>
                                                                 </div>
-                                                           
+                                                                </div>
+                                                            
 
-                                                        
-                                                        
+                                                            
+
+                                                            
+                                                       
+                                                   
+
                                                     
 
                                                     
-
-                                                    <li style=
-                                                    "list-style: none; display: inline">
-                                                    
-                                                    </li>
                                                 </ul>
 
                                                 
@@ -471,8 +534,6 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                        <%}%>
                                        </table>
                                     </div>
-                                </div>
-                                </div>
                                 </div>
                                 
 
@@ -534,17 +595,16 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
             </div>
         </div>
     </div>
-    <form method="post">
+
+    
+     <form method="post">
     <div id="Foot">
                        
                                  <input class="btn btn-prim gh-spr" id="gh-btn" type="submit" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout">
-                                <div class="cart" style="position:relative;left:1000px; right:20px">  
-          <% if (message) { %>
-                                                               <b><font size = "4" color ="red"><%= message %></font></b>
-                                                               <% } %>
-                                                               </div>
+                               
     </div>
     </form>
+    
 
     <div id="HtmlFrags"></div>
 
