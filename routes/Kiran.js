@@ -556,6 +556,7 @@ function deleteFromCart(req, res) {
     con.end();
 }
 function checkout(req, res) {
+    console.log(product_id.length);
     if (product_id.length === 0) {
         req.flash('message', "No items in the Cart to place the order");
         res.redirect('/mycart');

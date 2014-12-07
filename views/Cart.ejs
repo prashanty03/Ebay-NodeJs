@@ -42,7 +42,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     <meta content="8kHr3jd3Z43q1ovwo0KVgo_NZKIEMjthBxti8m8fYTg" name=
     "google-site-verification">
 
-    <title>laptop | eBay</title>
+    <title>Cart|eBay</title>
     <link href="http://m.ebay.com/sch/i.html?_nkw=laptop" media=
     "only screen and (max-width: 640px)" rel="alternate">
     <meta content="acf32e2a69cbc2b0" name="y_key">
@@ -282,11 +282,16 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 
                             <ul id="gh-eb">
                                 <li class="gh-eb-li rt" id="gh-cart">
-                                               <p>Last Login:<%=sess.lastlogin%></p>
-                                               </li>
-                                               <li class="gh-eb-li rt" id="gh-cart">
-                                               <a class="gh-eb-li-a" href="/signout" title="Sign Out">Signout</a>
-                                               </li>
+<p><a href="/mycart"><b>My Cart<b></a></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login: <b><%=sess.lastlogin%></b></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out"><b>Signout</b></a>
+</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -599,9 +604,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     
      <form method="post">
     <div id="Foot">
-                       
-                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="submit" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout">
-                               
+                         <%if(results.length!==0)
+                         {%>
+                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="hidden" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout" >
+                         <%}%>  
+                         <%if(results.length>0)
+                         {%>
+                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="submit" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout" >
+                         <%}%>  
     </div>
     </form>
     
