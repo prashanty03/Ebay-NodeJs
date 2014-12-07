@@ -556,6 +556,11 @@ function deleteFromCart(req, res) {
     con.end();
 }
 function checkout(req, res) {
+    if (product_id.length === 0) {
+        req.flash('message', "No items in the Cart to place the order");
+        res.redirect('/mycart');
+
+    }
     var con = mysql.getConnection();
     for ( var i = 0; i < product_id.length; i++) {
         console.log(product_id[i]);
@@ -578,7 +583,6 @@ function checkout(req, res) {
         };
         con.query("insert into purchase set ?", data);
         req.flash('message', "Successfully placed the order...");
-        // req.flash('message', 'Successfully Checked out!');
         res.redirect('/mycart');
 
     }
