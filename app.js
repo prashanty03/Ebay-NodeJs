@@ -6,7 +6,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var crypto = require('crypto');
-var Chance = require('chance')
+var Chance = require('chance');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -79,7 +79,7 @@ app.post('/updateUser/:id', customers.updateUser);
 app.get('/getProductDetailsBid/:catName/:id', juveria.getProductDetails);
 app.post('/bid', juveria.bid);
 app.post('/buy', juveria.buy);
-app.get('/mycart', juveria.cart);
+// app.get('/mycart', juveria.cart);
 
 // ///Meher/////
 app.get('/getCategories', meher.getCategories);
@@ -111,6 +111,10 @@ app.get('/signout', kiran.signout);
 app.get('/searchPurchasedProducts', kiran.searchPurchasedProducts);
 app.get('/searchBiddedProducts', kiran.searchBiddedProducts);
 app.get('/searchSoldProducts', kiran.searchSoldProducts);
+app.get('/searchAllProductsInHistory', kiran.searchAllProductsInHistory);
+app.get('/mycart', kiran.myCart);
+app.get('/deleteFromCart/:id', kiran.deleteFromCart);
+app.post('/checkout', kiran.checkout);
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function() {

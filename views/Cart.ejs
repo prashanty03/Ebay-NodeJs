@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 
 <html class="no-touch" lang="en">
+
 <head>
+<style>
+ .table_data{
+    border: 1px solid black;
+    text-align:center;
+}
+</style>
 
     <script async="" src=
     "http://srx.main.ebayrtm.com/rtm?RtmIt&amp;p=185:234:964:569:701:566:274:982:391:984:985:278:876:912:433:1650:1651&amp;ite=2&amp;to=3000"></script>
@@ -36,7 +43,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     <meta content="8kHr3jd3Z43q1ovwo0KVgo_NZKIEMjthBxti8m8fYTg" name=
     "google-site-verification">
 
-    <title><%=searchName%></title>
+    <title></title>
     <link href="http://m.ebay.com/sch/i.html?_nkw=laptop" media=
     "only screen and (max-width: 640px)" rel="alternate">
     <meta content="acf32e2a69cbc2b0" name="y_key">
@@ -172,9 +179,9 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                     </td>
 
                                     <td class="gh-td-s">
-                                        <form  method="get">
+                                        <form  method="get"  >
                                         
-
+                                          <input type="hidden" value="AllSellers" name="flag">
                                             <table class="gh-tbl2">
                                                 <tbody>
                                                     <tr>
@@ -220,7 +227,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                         "btn btn-prim gh-spr"
                                                         id="gh-btn" type=
                                                         "submit" value=
-                                                        "Search" formaction="/searchProducts"></td>
+                                                        "Search" formaction="/searchPerson"></td>
 
                                                         <td class="gh-td" id=
                                                         "gh-as-td">
@@ -239,13 +246,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                         </table>
 
                         <div id="gh-top">
+                        <form method="get">
                             <ul id="gh-topl">
                                 <li class="gh-t gh-spr" id="gh-eb-u">
 <a class="gh-ua gh-control" href="/getUserDetails/<%=sess.uid%>" id="gh-ug">Hi
 <b><%=sess.fname%>&nbsp;<%=sess.lname%></b>!<b class=
 "gh-eb-arw gh-sprRetina"></b></a>
 </li>
-                                
+
                                 <li class="gh-t gh-spr" id="gh-p-3">
 <a class="gh-p" href=
 "/history">Your History</a>
@@ -253,11 +261,28 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 <li class="gh-t gh-spr" id="gh-p-2">
 <a class="gh-p" href=
 "/addProduct">Sell your product</a>
-</li>      
+</li>
+<%if((sess.isAdmin).toString()=="Y"){%>
+<li class="gh-t gh-spr" id="gh-p-1">
+<a class="gh-p" href="/getAllCustomers">All Customers
+</a>
+</li>
+<li class="gh-t gh-spr" id="gh-p-4">
+<a class="gh-p" href=
+"/getAllSellers">All Sellers</a>
+</li>
+
+<li class="gh-t gh-spr" id="gh-ti">
+<a href="http://www.ebay.com/rpp/holiday-gifts" id=
+"gh-doodleS" rel="nofollow" style=
+"visibility: visible;"></a>
+</li>
+<%}%>                     
                             </ul>
+                            </form>
 
                             <ul id="gh-eb">
-                               <li class="gh-eb-li rt" id="gh-cart">
+                                <li class="gh-eb-li rt" id="gh-cart">
                                                <p>Last Login:<%=sess.lastlogin%></p>
                                                </li>
                                                <li class="gh-eb-li rt" id="gh-cart">
@@ -285,12 +310,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                     
                 </div>
 
-          
+                <div id="TopPanelDFItemCount">
+                   
+                </div>
             </div>
         </div>
 
         <div id="LeftCenterBottomPanelDF">
-            	
+            
 
             <div id="RightPanelContainer">
                 <div id="Right"></div>
@@ -320,9 +347,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                             "pnl-h">Format</span></h3>
                                         </div>
 
-                                        <div class="pnl-b frmt">
-                                            
-                                        </div>
+                                       
                                     </div>
 
                                     <div class="right">
@@ -371,61 +396,11 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                 </div>
                             </div>
 
-                            <div class="brcnt" id="brcnt">
-                                <div class="bciw" id="bciw">
-                                    <div class="bclt">
-                                        <div class="brcrCatAsp"></div>
-
-                                        <h1 class="bcrs" title="laptop">
-                                       	Search results for : 
-                                        <span class="cptname" style=
-                                        "font-weight: bold">"<i><%=searchName%>"</i></span></h1>
-
-                                        <div id="followMessage" style=
-                                        "display:none">
-                                            <p class="dContent"><span>Follow
-                                            <strong>laptop</strong> to get
-                                            e-mail alerts and updates on your
-                                            eBay Feed.</span></p>
-                                        </div>
-
-                                        <div id="unfollowMessage" style=
-                                        "display:none">
-                                            <p class="dContent"><span>Unfollow
-                                            <strong>laptop</strong> to stop
-                                            getting updates on your eBay
-                                            Feed.</span></p>
-                                        </div>
-
-                                        <div id="followingMessage" style=
-                                        "display:none">
-                                            <p class="dContent">Yay! You're now
-                                            following <strong>laptop</strong>
-                                            in your <a href=
-                                            "http://www.ebay.com">eBay
-                                            Feed</a>.<span id=
-                                            "email_msg"><span>You will receive
-                                            email alerts for new
-                                            listings.</span><br>
-                                            <br>
-                                            <a id="fs_email">Dont send me
-                                            e-mail alerts.</a></span></p>
-                                        </div><span class="saveSearch"><a href=
-                                        "#save" id="e1-124" onclick=
-                                        "return false;"></a></span>
-
-                                        <form>
-                                            <span class=
-                                            "saveSearch"><input name=
-                                            "following" type="hidden" value=
-                                            "false"><input name="searchid"
-                                            type="hidden" value=""></span>
-                                        </form>
-
+                         
                                         <div id="shiptoZip"></div>
                                     </div>
-                                </div>
-                            </div>
+                                
+                            
 
                             <div class="" id="Results">
                                 <div class="rst" id="rsTabs">
@@ -436,6 +411,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
+                                        <table style="width:100%">
+                                         <tr>
+                                          <th style="width=25%">Product Name</th>
+                                          <th style="width=25%">Cost</th>
+                                          <th style="width=25%">Quantity</th>
+                                          <th style="width=25%"></th>
+                                         </tr>
+                                         
                                         <% for(var i=0;i<results.length;i++)
                                                        {%>
 
@@ -449,84 +432,29 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                 search results</h2>
 
                                                 <ul id="ListViewInner">
-                                                    <li class=
-                                                    "sresult lvresult clearfix li shic"
-                                                    id="item43cfae67a5">
-                                                        <div class=
-                                                        "lvpic pic p225 img left">
-                                                        <div class=
-                                                        "lvpicinner full-width picW s225">
-                                                            <a class=
-                                                            "img imgWr2"
-                                                                href="#">
-                                                                <img alt="<%=results[i].name%>"
-                                                                class="img"
-                                                                src="<%=results[i].image%>"></a>
-                                                            </div>
-                                                        </div>
-
-                                                        <h3 class="lvtitle">
-                                                        <a class="vip" href="/getProductDetailsBid/<%=results[i].catName%>/<%=results[i].id%>"
-                                                        title=
-                                                        "Click this link to access <%=results[i].name%>">
-                                                       
-                                                       
-                                                        <strong><%=results[i].name %>
-                                                       
-                                                       </strong></a></h3>
-                                                       
+                                                    
+                                                     
                                                         
-                                                        <div class=
-                                                        "lvsubtitle">
-                                                            <%=results[i].details%>
-                                                            
-                                                            
-                                                        </div>
-                                                                                                                 <ul class=
-                                                        "lvprices left space-zero">
-                                                        <li class=
-                                                        "lvprice prc">
-                                                                <span class=
-                                                                "g-b">$&nbsp;<%=results[i].cost%></span>
+                                                        <tr>
+                                                        <td class="table_data"><%=results[i].name%></td>
+                                                         
 
-                                                                
-                                                            </li>
-                                                            
-
-                                                           
-
-                                                            
-
-                                                            
-                                                        </ul>
-
-                                                        <ul class=
-                                                        "lvdetails left space-zero full-width">
-                                                        <li>
-                                                                <div class=
-                                                                "FnF">
+                                                                   <div class="FnF"> 
+                                                                     <td class="table_data"><%=results[i].cost%></td>
+                                                    
+                                                                       <td class="table_data"> <%=results[i].quantity%></td>
+                                                                       
+                                                                       
                                                                     
-                                                                    <span class="fnftxt">
-                                                                    <span class="FnFl">
-                                                                     Condition:<%=results[i].condition%>
-                                                                    </span></span>
-
-                                                                    <div>
-                                                                        Available Quantity:
-                                                                        
-                                                                        
-                                                                        <b><%=results[i].quantity%>
-                                                                        
-                                                                        </b>
-                                                                    </div>
+                                                                    
+                                                                   <td class="table_data"> <a href="/deleteFromCart/<%=results[i].id%>">Delete from Cart</a></td>
+                                                                    </tr>
                                                                 </div>
-                                                            </li>
-
-                                                            
-
                                                            
-                                                        </ul>
-                                                    </li>
+
+                                                        
+                                                        
+                                                    
 
                                                     
 
@@ -540,8 +468,11 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                             </div>
                                         </div>
 
-                                        <%}%>
+                                       <%}%>
+                                       </table>
                                     </div>
+                                </div>
+                                </div>
                                 </div>
                                 
 
@@ -603,17 +534,22 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
             </div>
         </div>
     </div>
-
+    <form method="post">
     <div id="Foot">
-        <div id="VRFooterDF">
-           
-        </div>
+                       
+                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="submit" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout">
+                                <div class="cart" style="position:relative;left:1000px; right:20px">  
+          <% if (message) { %>
+                                                               <b><font size = "4" color ="red"><%= message %></font></b>
+                                                               <% } %>
+                                                               </div>
     </div>
+    </form>
 
     <div id="HtmlFrags"></div>
 
     <div id="JSDF">
-        <script>
+       <script>
 var pCon = {isDash:true,isVR:true,browser:{type:'FIREFOX',majorVersion:33,minorVersion:0},treatments:[27858,18389,28101,27762,26807,17547,24012,22653,27813,27964,27758,27176,22170],poolType:'production',showJSErrors:false};
         </script>
 
