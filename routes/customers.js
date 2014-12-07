@@ -232,6 +232,21 @@ exports.saveUser = function(req, res) {
                                                             .log(
                                                                     "Error Inserting: %s",
                                                                     err);
+                                                cache.vlmCache.invalidate("users", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
+                                            	cache.vlmCache.invalidate("buyers", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
+                                            	cache.vlmCache.invalidate("sellers", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
                                                 req
                                                         .flash('error',
                                                                 'You are registerd.Please Login!');
@@ -821,6 +836,11 @@ exports.saveProduct = function(req, res) {
                         if (err)
                             console.log("Error inserting : %s", err);
                         else {
+                        	cache.vlmCache.invalidate("products", function(err) {
+        						if(err) {
+        							throw err;
+        						}
+        					});
                             console.log(info.insertId);
                             res.render('addProduct', {
                                 categoryName : input.categoryName,

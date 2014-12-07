@@ -63,52 +63,10 @@ exports.saveUpdatedProduct = function(req, res) {
 		var active = input.format == "Active" ? 1 : 0;
 		var myDate = new Date();
 		myDate.setDate(myDate.getDate() + parseInt(input.duration));
-		//var temp_path = req.files.image.path;
-		//console.log(temp_path);
-		//var fs = require('fs');
-		//		var data = {
-		//			name : input.title,
-		//			details : input.details,
-		//			condition : condition,
-		//			isForAuction : auction,
-		//			min_bid : input.startPrice * 1,
-		//			quantity : parseInt(input.quantity),
-		//			bid_duration : parseInt(input.duration),
-		//			category_id : input.categoryId,
-		//			cost : input.startPrice * 1,
-		//			bid_start_time : new Date(),
-		//			image : input.image
-		//		};
-		//		// console.log(data);
-
-		//var msg = validate(input, req.files.image.name);
-		//console.log(msg);
-		//console.log("Message : " + msg.length);
-		//if (msg.length == 0) {
+		
 
 		console.log("inside if")
-		// get the temporary location of the file
-		//var tmp_path = req.files.image.path;
-		// set where the file should actually exists - in this case it is in
-		// the
-		// "images" directory
-		//	var target_path = './public/images/' + req.files.image.name;
-		// move the file from the temporary location to the intended
-		// location
-		//fs.rename(tmp_path, target_path, function(err) {
-		//if (err)
-		//throw err;
-		// delete the temporary file, so that the explicitly set
-		// temporary
-		// upload dir does not get filled with unwanted files
-		//	fs.unlink(tmp_path, function() {
-		//	if (err)
-		//	throw err;
-		//	console.log();
-		// res.send('File uploaded to: ' + target_path + ' - ' +
-		// req.files.image.size + ' bytes');
-		//});
-		//});
+		
 		var data = {
 			name : input.title,
 			details : input.details,

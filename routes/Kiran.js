@@ -1,6 +1,10 @@
 var ejs = require("ejs");
 var mysql = require('../mysqldb');
 var url = require('url');
+var redis = require("redis"),
+client = redis.createClient();
+var cache = require('../redisCache');
+
 function getUserDetails(req, res) {
     if (req.session.fname == undefined) {
         res.redirect("/");
@@ -83,13 +87,15 @@ function updateUserDetails(req, res) {
     con.end();
 
 }
+
 function searchProducts(req, res) {
+	var rows1;
     if (req.session.fname == undefined) {
         res.redirect("/");
     } else {
 
         var searchQuery = req.param("_nkw");
-        var query = "select p.*,c.id as catId,c.name as catName from products p join category c on c.id = p.category_id where p.name REGEXP '"
+        var sql = "select p.*,c.id as catId,c.name as catName from products p join category c on c.id = p.category_id where p.name REGEXP '"
                 + searchQuery
                 + "' OR details REGEXP '"
                 + searchQuery
@@ -97,24 +103,15 @@ function searchProducts(req, res) {
                 + searchQuery
                 + "' and p.isActive='1' and p.quantity>'0'";
 
-        var con = mysql.getConnection();
-        con.query(query, function(err, results) {
-            if (!err) {
-                // res.send(results);
-                // for(var i=0; i<results.length;i++)
-                // {
-                // name[i]=results[i].name;
-                // details[i]=results[i].details;
-                // cost[i]=results[i].cost;
-                // condition[i]=results[i].condition;
-                // availableQuantity[i]=results[i].quantity;
-                // image[i]=results[i].image;
-                // catId[i]=results[i].catId;
-                // catName[i]=results[i].catName;
-                // productId[i]=results[i];
-                // }
+
+        cache.vlmCache.get("products", sql, function(err, value) {
+    		if(value !== null) {
+    			rows1 = value;
+    			console.log("got data from cache");
+    			console.log(JSON.stringify(cache.vlmCache.getStats()));
+
                 ejs.renderFile('./views/sample.ejs', {
-                    results : results,
+                    results : rows1,
                     searchName : searchQuery
                 }, function(err, result) {
                     if (!err) {
@@ -124,18 +121,43 @@ function searchProducts(req, res) {
                         console.log(err);
                     }
                 });
-                res.end();
-            } else {
-                console.log(results);
-                res.send("no results");
-            }
-        });
+
+    		} else {
+    			console.log("have to set cache");
+    			var connection = mysql.getConnection();
+    			connection.query(sql,function(err, rows) {
+    				rows1=rows;
+    				if(err) {
+    					throw err;
+    				} else {
+    					//console.log(JSON.stringify(rows));
+    					cache.vlmCache.set("products", sql, rows, function(err, success) {
+    						if(err || !success) {
+    							throw err;
+    						}
+    					});
+    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+
+    	                ejs.renderFile('./views/sample.ejs', {
+    	                    results : rows1,
+    	                    searchName : searchQuery
+    	                }, function(err, result) {
+    	                    if (!err) {
+    	                        res.end(result);
+    	                    } else {
+    	                        res.end("An error occured");
+    	                        console.log(err);
+    	                    }
+    	                });
+
+    	            
+    				}});
+
+    			}});
     }
 
 }
-var redis = require("redis"),
-client = redis.createClient();
-var cache = require('../redisCache');
+
 function getCustomers(req, res) {
 var rows1;
     if (req.session.fname == undefined) {
