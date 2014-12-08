@@ -1,7 +1,8 @@
 var ejs = require("ejs");
 var mysql = require('../mysqldb');
 var url = require('url');
-var redis = require("redis"), client = redis.createClient();
+var redis = require("redis"), 
+client = redis.createClient();
 var cache = require('../redisCache');
 var validator = require('validator');
 var product_id = [];

@@ -1,4 +1,7 @@
 var mysqldb = require('../mysqldb.js');
+var redis = require("redis"), 
+client = redis.createClient();
+var cache = require('../redisCache');
 
 exports.getCategories = function(req, res) {
 	if (req.session.uid == undefined) {
@@ -34,6 +37,11 @@ exports.updateProduct = function(req, res) {
 				[ productId ], function(err, rows) {
 					if (err)
 						console.log("Error getting vlaues % s", err);
+					cache.vlmCache.invalidate("products", function(err) {
+						if(err) {
+							throw err;
+						}
+					});
 					connection.end();
 					//console.log(rows);
 					console.log(rows[0].name.length);

@@ -7,6 +7,10 @@ var password_temp;
 
 var mysqldb = require('../mysqldb.js');
 var util = require('util');
+/// REDIS TEST
+var redis = require("redis"),
+client = redis.createClient();
+var cache = require('../redisCache');
 
 // var md5 = require('MD5');
 /*
@@ -990,13 +994,8 @@ exports.deleteUser = function(req, res) {
     connection.end();
 }
 
- 
-/// REDIS TEST
-var redis = require("redis"),
-client = redis.createClient();
-var cache = require('../redisCache');
-var rows1;
 exports.test2 = function(req, res){
+	var rows1;
 	var sql = 'select * from person limit 1000';
 	cache.vlmCache.get("users", sql, function(err, value) {
 		if(value !== null) {
