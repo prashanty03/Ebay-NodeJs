@@ -476,8 +476,15 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                        
                                                         <strong><%=results[i].name %>
                                                        
-                                                       </strong></a></h3>
-                                                       
+                                                       </strong></a> </h3> 
+                                                       <%if(results[i].isForAuction===1)
+                                                       {%>
+                                                       <b>Is Available For Auction</b>
+                                                       <%}%>
+                                                       <%if(results[i].isForAuction===0)
+                                                       {%>
+                                                       <b>Is Available For Purchase</b>
+                                                       <%}%>
                                                         
                                                         <div class=
                                                         "lvsubtitle">
