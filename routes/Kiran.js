@@ -3,6 +3,7 @@ var mysql = require('../mysqldb');
 var url = require('url');
 var redis = require("redis"), client = redis.createClient();
 var cache = require('../redisCache');
+var validator = require('validator');
 var product_id = [];
 var quantity = [];
 var cost = [];
@@ -97,6 +98,7 @@ function searchProducts(req, res) {
     } else {
 
         var searchQuery = req.param("_nkw");
+
         var sql = "select p.*,c.id as catId,c.name as catName from products p join category c on c.id = p.category_id where p.name REGEXP '"
                 + searchQuery
                 + "' OR details REGEXP '"
@@ -492,31 +494,35 @@ function searchSoldProducts(req, res) {
     }
 }
 function myCart(req, res) {
-    var id = req.session.uid;
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var id = req.session.uid;
 
-    var con = mysql.getConnection();
-    con
-            .query(
-                    "select u.id,pr.name,u.cost,u.quantity,pr.id from user_cart AS u  join products AS pr ON u.product_id=pr.id where u.user_id= ?",
-                    [ id ], function(err, results) {
-                        console.log(results);
-                        if (!err) {
-                            for ( var i = 0; i < results.length; i++) {
+        var con = mysql.getConnection();
+        con
+                .query(
+                        "select u.id,pr.name,u.cost,u.quantity,pr.id from user_cart AS u  join products AS pr ON u.product_id=pr.id where u.user_id= ?",
+                        [ id ], function(err, results) {
+                            console.log(results);
+                            if (!err) {
+                                for ( var i = 0; i < results.length; i++) {
 
-                                product_id[i] = results[i].id;
-                                quantity[i] = results[i].quantity;
-                                cost[i] = results[i].cost;
+                                    product_id[i] = results[i].id;
+                                    quantity[i] = results[i].quantity;
+                                    cost[i] = results[i].cost;
+                                }
+                                res.render('Cart', {
+                                    page_title : "",
+                                    results : results,
+                                    message : req.flash('message')
+                                });
+                            } else {
+                                res.send("no matches");
                             }
-                            res.render('Cart', {
-                                page_title : "",
-                                results : results,
-                                message : req.flash('message')
-                            });
-                        } else {
-                            res.send("no matches");
-                        }
-                    });
-    con.end();
+                        });
+        con.end();
+    }
 
 }
 function searchAllProductsInHistory(req, res) {
@@ -547,48 +553,55 @@ function searchAllProductsInHistory(req, res) {
 
 }
 function deleteFromCart(req, res) {
-    var id = req.params.id;
-    var con = mysql.getConnection();
-    con.query("delete from user_cart where product_id=?", [ id ], function(err,
-            results) {
-        res.redirect('/mycart');
-    });
-    con.end();
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        var id = req.params.id;
+        var con = mysql.getConnection();
+        con.query("delete from user_cart where product_id=?", [ id ], function(
+                err, results) {
+            res.redirect('/mycart');
+        });
+        con.end();
+    }
 }
 function checkout(req, res) {
-    console.log(product_id.length);
-    if (product_id.length === 0) {
-        req.flash('message', "No items in the Cart to place the order");
-        res.redirect('/mycart');
+    if (req.session.fname == undefined) {
+        res.redirect("/");
+    } else {
+        if (product_id.length === 0) {
+            req.flash('message', "No items in the Cart to place the order");
+            res.redirect('/mycart');
 
+        }
+        var con = mysql.getConnection();
+        for ( var i = 0; i < product_id.length; i++) {
+            console.log(product_id[i]);
+            console.log(quantity[i]);
+            console.log(cost[i]);
+            var id = product_id[i];
+            var soldquantity = quantity[i];
+            var totalcost = cost[i];
+            con.query("update products set quantity=quantity-? where id=?", [
+                    soldquantity, id ]);
+            con.query("delete from user_cart where product_id= ?", id);
+            var data = {
+                product_id : id,
+                customer_id : sess.uid, // to be replaced by sesion id
+                bid_amount : totalcost,
+                submitted_on : new Date(),
+                sold : 1,
+                quantity : soldquantity
+
+            };
+            con.query("insert into purchase set ?", data);
+            req.flash('message', "Successfully placed the order...");
+            res.redirect('/mycart');
+
+        }
+
+        con.end();
     }
-    var con = mysql.getConnection();
-    for ( var i = 0; i < product_id.length; i++) {
-        console.log(product_id[i]);
-        console.log(quantity[i]);
-        console.log(cost[i]);
-        var id = product_id[i];
-        var soldquantity = quantity[i];
-        var totalcost = cost[i];
-        con.query("update products set quantity=quantity-? where id=?", [
-                soldquantity, id ]);
-        con.query("delete from user_cart where product_id= ?", id);
-        var data = {
-            product_id : id,
-            customer_id : sess.uid, // to be replaced by sesion id
-            bid_amount : totalcost,
-            submitted_on : new Date(),
-            sold : 1,
-            quantity : soldquantity
-
-        };
-        con.query("insert into purchase set ?", data);
-        req.flash('message', "Successfully placed the order...");
-        res.redirect('/mycart');
-
-    }
-
-    con.end();
 }
 
 exports.getUserDetails = getUserDetails;
