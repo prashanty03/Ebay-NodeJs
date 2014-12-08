@@ -276,10 +276,10 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 
                             <ul id="gh-eb">
                                 <li class="gh-eb-li rt" id="gh-cart">
-                                               <p>Last Login:<%=sess.lastlogin%></p>
+                                               <p>Last Login:<b><%=sess.lastlogin%></b></p>
                                                </li>
                                                <li class="gh-eb-li rt" id="gh-cart">
-                                               <a class="gh-eb-li-a" href="/signout" title="Sign Out">Signout</a>
+                                               <b><a class="gh-eb-li-a" href="/signout" title="Sign Out">Signout</a></b>
                                                </li>
                                             </ul>
                                         </div>
@@ -479,7 +479,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                         "Click to view details">
                                                        
                                                        
-                                                        <strong><%=results[i].firstname%><%=results[i].lastname%></strong></h3>
+                                                        <strong><%=results[i].firstname%>&nbsp;<%=results[i].lastname%></strong></h3></a>
                                                        
                                                        
                                                                                                            <ul class=
