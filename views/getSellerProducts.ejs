@@ -111,7 +111,7 @@
                                                 </td>
                                                 <td class="gh-td"><input class=
                                                     "btn btn-prim gh-spr" id="gh-btn"
-                                                    type="submit" value="Search" formaction="/searchProducts"></td>
+                                                    type="submit" value="Search" formaction="/searchAllProductsInHistory"></td>
                                                 <td class="gh-td" id="gh-as-td">
                                                     <div id="gh-as"></div>
                                                 </td>
@@ -138,14 +138,17 @@
                         </li>
                     </ul>
                     <ul id="gh-eb">
-                        <li class="gh-eb-li rt" id="gh-cart">
-                            <p>Last Login:<%=sess.lastlogin%></p>
-                        </li>
-                        <li class="gh-eb-li rt" id="gh-cart">
-                            <a class="gh-eb-li-a" href=
-                                "/signout" title=
-                                "Sign Out">Signout</a>
-                        </li>
+                    <li class="gh-eb-li rt" id="gh-cart">
+<p><a href="/mycart"><b>My Cart<b></a></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login: <b><%=sess.lastlogin%></b></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out"><b>Signout</b></a>
+</li>
                     </ul>
                 </div>
             </div>

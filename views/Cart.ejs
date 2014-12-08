@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 
 <html class="no-touch" lang="en">
+<style>
+ .table_data{
+    
+    text-align:center;
+}
+</style>
 <head>
 
     <script async="" src=
@@ -36,7 +42,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     <meta content="8kHr3jd3Z43q1ovwo0KVgo_NZKIEMjthBxti8m8fYTg" name=
     "google-site-verification">
 
-    <title>laptop | eBay</title>
+    <title>Cart|eBay</title>
     <link href="http://m.ebay.com/sch/i.html?_nkw=laptop" media=
     "only screen and (max-width: 640px)" rel="alternate">
     <meta content="acf32e2a69cbc2b0" name="y_key">
@@ -146,7 +152,9 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
         <div id="Top">
             <div id="TopPanel">
                 <div id="TopPanelDF">
-                     <div class="gh-acc-exp-div">
+                    
+
+                    <div class="gh-acc-exp-div">
                         <a class="gh-acc-a" href="#mainContent" id=
                         "gh-hdn-stm">Skip to main content</a>
                     </div>
@@ -171,8 +179,8 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 
                                     <td class="gh-td-s">
                                         <form  method="get"  >
-                                         <input type="hidden" value="AllCustomers" name="flag">
-
+                                        
+                                          <input type="hidden" value="AllSellers" name="flag">
                                             <table class="gh-tbl2">
                                                 <tbody>
                                                     <tr>
@@ -244,7 +252,8 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 <b><%=sess.fname%>&nbsp;<%=sess.lname%></b>!<b class=
 "gh-eb-arw gh-sprRetina"></b></a>
 </li>
-                              <li class="gh-t gh-spr" id="gh-p-3">
+
+                                <li class="gh-t gh-spr" id="gh-p-3">
 <a class="gh-p" href=
 "/history">Your History</a>
 </li>
@@ -267,18 +276,35 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 "gh-doodleS" rel="nofollow" style=
 "visibility: visible;"></a>
 </li>
-<%}%>
- </ul>
-                      <ul id="gh-eb">
-                                  
-                                               <li class="gh-eb-li rt" id="gh-cart">
-                                               <p>Last Login:<%=sess.lastlogin%></p>
-                                               </li>
-                                               <li class="gh-eb-li rt" id="gh-cart">
-                                               <a class="gh-eb-li-a" href="/signout" title="Sign Out">Signout</a>
-                                               </li>
-                                            </ul>
+<%}%>                     
+                            </ul>
+                            </form>
 
+                            <ul id="gh-eb">
+                                <li class="gh-eb-li rt" id="gh-cart">
+<p><a href="/mycart"><b>My Cart<b></a></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login: <b><%=sess.lastlogin%></b></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out"><b>Signout</b></a>
+</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class=
+                                "gh-eb-li gh-layer rt gh-eb-Alerts-tab-0" id=
+                                "gh-eb-Alerts">
+                                    <div class="gh-menu">
+                                        <div class="gh-sublayer"></div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div><!--ts:2014.11.19.11:42--><!--rq:-->
                     <!--rvr:59rc5--><script></script>
@@ -289,13 +315,14 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                 </div>
 
                 <div id="TopPanelDFItemCount">
-                    
+                   
                 </div>
             </div>
         </div>
 
         <div id="LeftCenterBottomPanelDF">
             
+
             <div id="RightPanelContainer">
                 <div id="Right"></div>
             </div>
@@ -304,6 +331,11 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                 <div class="rr_present" id="Center">
                     <div class="full-width left c-std" id="CenterPanel">
                         <div id="CenterPanelInner">
+                         <div class="cart" style="position:relative;left:200px; right:500px">  
+          <% if (message) { %>
+                                                               <b><font size = "4" color ="red"><%= message %></font></b>
+                                                               <% } %>
+                                                               </div>
                             <div class="cbrt" id="cbrt">
                                 <div class="cb clearfix" id="cbelm">
                                     <a class="btn small btn-prim" href=
@@ -324,9 +356,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                             "pnl-h">Format</span></h3>
                                         </div>
 
-                                        <div class="pnl-b frmt">
-                                           
-                                        </div>
+                                       
                                     </div>
 
                                     <div class="right">
@@ -439,100 +469,157 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                         <div id="MessageContainer"></div>
 
                                         <div id="VEPMContainer"></div>
-                                        <% for(var i=0;i<results.length;i++){%>
+                                        <table style="width:100%">
+                                         <tr>
+                                          <th style="width=25%">Product Name</th>
+                                          <th style="width=25%">Cost</th>
+                                          <th style="width=25%">Quantity</th>
+                                          <th style="width=25%"></th>
+                                         </tr>
+                                        <% for(var i=0;i<results.length;i++)
+                                                       {%>
+
                                         <div class="rs rsw" id="e1-125">
                                             <a id="mainContent" tabindex=
                                             "-1"></a>
-                                            
+
                                             <div class="clearfix" id=
                                             "ResultSetItems">
                                                 <h2 class="hdnAcc">Items in
                                                 search results</h2>
-                                                
-                                                <ul id="ListViewInner">
-                                                    <li class="sresult lvresult clearfix li shic" id="item43cfae67a5">
-                                                        <div class="lvpic pic p225 img left">
-                                                        
-                                                        <div  class="">
-                                                            <a class=
-                                                            "img imgWr2"
-                                                                href="#">
-                                                                <img alt=
-                                                                "image cannot be loaded"
-                                                                class="img"
-                                                                src="http://c1.tacdn.com/img2/generic/site/no_user_photo-v1.gif"></a>
-                                                            </div>
-                                                        </div>
 
-                                                        <h3 class="lvtitle">
-                                                        <a class="vip" href=
-                                                        "#"
-                                                        title=
-                                                        "Click to view details">
+                                                <ul id="ListViewInner">
+                                                  
+                                                        <div class=
+                                                        "lvpic pic p225 img left">
+                                                        <div class=
+                                                        ""><tr>
+                                                           <strong> <td class="table_data"><%=results[i].name%></td></strong>
+                                                            </div>
+                                                        
+
+                                                        
+                                                        <td class="table_data"><%=results[i].cost%></td>
                                                        
                                                        
-                                                        <strong><%=results[i].firstname%> <%=results[i].lastname%>
+                                                                                                           
                                                        
-                                                       </strong></a></h3>
-														
-														<ul class=
-                                                        "">
-                                                        <li>
+                                                        
                                                                 <div class=
                                                                 "FnF">
                                                                     
                                                                     <span class="fnftxt">
                                                                     <span class="FnFl">
                                                                      
-                                                                     Email:<%=results[i].email%>
-                                                                      <%results[i].isActive%>
+                                                                     <td class="table_data"> <%=results[i].quantity%></td>
+                                                                     
                                                                     </span></span>
-                                                                   
-                                                                    <div>
-                                                                        Contact Number:<b><%=results[i].contact%></b>
-                                                                   </div>
-                                                                   
-                                                                </div>
-                                                                 <%if(results[i].isActive==1){%>
-                                                                    <a href="/delete/<%=results[i].id%>/0/customers">DeActivate</a>
-                                                                    <%}%>
-                                                                    <%if(results[i].isActive==0){%>
-                                                                    <a href="/delete/<%=results[i].id%>/1/customers">Activate</a>
-                                                                    <%}%>
-                                                            </li>
-                                                             </ul>
-                                                    </li>
 
-                                                    <li style=
-                                                    "list-style: none; display: inline">
+                                                                   <td class="table_data"> <a href="/deleteFromCart/<%=results[i].id%>">Delete from Cart</a></td>
+                                                                    </tr>
+                                                                </div>
+                                                                </div>
+                                                            
+
+                                                            
+
+                                                            
+                                                       
                                                    
-                                                    </li>
-                                            </ul>
-                                               </div>
+
+                                                    
+
+                                                    
+                                                </ul>
+
+                                                
+                                            </div>
                                         </div>
-                                        <%}%>
-                                     </div>
+
+                                       <%}%>
+                                       </table>
+                                    </div>
                                 </div>
                                 
 
+                                <div class="medianprcText g-hdn">
+                                    This is the median price based on sales of
+                                    this product in the same condition from all
+                                    listings on <a href=
+                                    "http://www.ebay.com/">ebay.com</a> in the
+                                    past 14 days, or if there are any
+                                    insufficient number of listings for a
+                                    meaningful calculation, the past 90 days.
+                                </div>
+
+                                <div class="etrs2 g-hdn">
+                                    <b style="color:#333333">Top Rated
+                                    Plus</b><br>
+
+                                    <ul style="color:#666666;margin: 3px 0;">
+                                        <li>Sellers with highest buyer
+                                        ratings</li>
+
+                                        <li>Returns, money back</li>
+
+                                        <li>Ships in a business day with
+                                        tracking</li>
+                                    </ul><a href=
+                                    "http://pages.ebay.com/trp/index.html">Learn
+                                    More</a>
+                                </div>
+
+                                <div class="etrs3 g-hdn">
+                                    <b style="color:#333333">Top Rated
+                                    Plus</b><br>
+
+                                    <ul style="color:#666666;margin: 3px 0;">
+                                        <li>Sellers with highest buyer
+                                        ratings</li>
+
+                                        <li>Returns, money back</li>
+
+                                        <li>Ships in a business day with
+                                        tracking</li>
+                                    </ul><a href=
+                                    "http://pages.ebay.com/trp/index.html">Learn
+                                    More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-               </div>
+
+                    <div id="rtm_html_391"></div>
+
+                    <div id="rtm_html_984"></div>
+
+                    <div id="rtm_html_985"></div>
+
+                    <div id="rtm_html_278"></div>
+                </div>
             </div>
         </div>
     </div>
 
+    
+     <form method="post">
     <div id="Foot">
-        <div id="VRFooterDF">
-           
-        </div>
+                         <%if(results.length!==0)
+                         {%>
+                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="hidden" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout" >
+                         <%}%>  
+                         <%if(results.length>0)
+                         {%>
+                                 <input class="btn btn-prim gh-spr" id="gh-btn" type="submit" value= "Check Out"  style="position:relative;left:1000px; right:20px" formaction="/checkout" >
+                         <%}%>  
     </div>
+    </form>
+    
 
     <div id="HtmlFrags"></div>
 
     <div id="JSDF">
-        <script>
+       <script>
 var pCon = {isDash:true,isVR:true,browser:{type:'FIREFOX',majorVersion:33,minorVersion:0},treatments:[27858,18389,28101,27762,26807,17547,24012,22653,27813,27964,27758,27176,22170],poolType:'production',showJSErrors:false};
         </script>
 

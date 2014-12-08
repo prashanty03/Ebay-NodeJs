@@ -6,7 +6,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var crypto = require('crypto');
-var Chance = require('chance')
+var Chance = require('chance');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -16,6 +16,9 @@ var meher = require('./routes/meher');
 var kiran = require('./routes/Kiran');
 var juveria = require('./routes/juveria');
 var vertical = require('./routes/vertical');
+//import cache, flush cache on every server startup,
+//initialization takes time, but cache is renewed on server startup
+var cache = require("./redisCache");
 var app = express();
 var connection = require('express-myconnection');
 // var mysql = require('mysql');
@@ -64,6 +67,11 @@ app.get('/getPurchaseHistory', customers.getPurchaseHistory);
 app.get('/getSellingHistory', customers.getSellingHistory);
 app.get('/search', customers.searchproducts);
 app.get('/delete/:id/:status/:utype', customers.deleteUser);
+app.get('/testredis', customers.test2);
+
+
+
+
 // ///prashant luthra/////
 app.get('/', customers.login);
 app.get('/login', customers.login);
@@ -85,7 +93,7 @@ app.get('/getUserDetails_vertical/:id', customers.getUserDetails_vertical);
 app.get('/getProductDetailsBid/:catName/:id', juveria.getProductDetails);
 app.post('/bid', juveria.bid);
 app.post('/buy', juveria.buy);
-app.get('/mycart', juveria.cart);
+// app.get('/mycart', juveria.cart);
 
 // ///Meher/////
 app.get('/getCategories', meher.getCategories);
@@ -117,8 +125,14 @@ app.get('/signout', kiran.signout);
 app.get('/searchPurchasedProducts', kiran.searchPurchasedProducts);
 app.get('/searchBiddedProducts', kiran.searchBiddedProducts);
 app.get('/searchSoldProducts', kiran.searchSoldProducts);
+app.get('/searchAllProductsInHistory', kiran.searchAllProductsInHistory);
+app.get('/mycart', kiran.myCart);
+app.get('/deleteFromCart/:id', kiran.deleteFromCart);
+app.post('/checkout', kiran.checkout);
 
 app.use(app.router);
+//flush cache on server startup
+cache.vlmCache.flush();
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });

@@ -36,7 +36,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
     <meta content="8kHr3jd3Z43q1ovwo0KVgo_NZKIEMjthBxti8m8fYTg" name=
     "google-site-verification">
 
-    <title>laptop | eBay</title>
+    <title><%=searchName%></title>
     <link href="http://m.ebay.com/sch/i.html?_nkw=laptop" media=
     "only screen and (max-width: 640px)" rel="alternate">
     <meta content="acf32e2a69cbc2b0" name="y_key">
@@ -252,21 +252,23 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 </li>
 <li class="gh-t gh-spr" id="gh-p-2">
 <a class="gh-p" href=
-"/addProduct">Sell your product</a>
+"/selectCategory">Sell your product</a>
 </li>      
                             </ul>
 
                             <ul id="gh-eb">
-                               <li class="gh-eb-li rt" id="gh-cart">
-                                               <p>Last Login:<%=sess.lastlogin%></p>
-                                               </li>
-                                               <li class="gh-eb-li rt" id="gh-cart">
-                                               <a class="gh-eb-li-a" href="/signout" title="Sign Out">Signout</a>
-                                               </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
+                              
+                              <li class="gh-eb-li rt" id="gh-cart">
+<p><a href="/mycart"><b>My Cart<b></a></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<p>Last Login: <b><%=sess.lastlogin%></b></p>
+</li>
+<li class="gh-eb-li rt" id="gh-cart">
+<a class="gh-eb-li-a" href=
+"/signout" title=
+"Sign Out"><b>Signout</b></a>
+</li>
 
                                 <li class=
                                 "gh-eb-li gh-layer rt gh-eb-Alerts-tab-0" id=
@@ -287,6 +289,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
 
           
             </div>
+        </div>
         </div>
 
         <div id="LeftCenterBottomPanelDF">
@@ -473,8 +476,15 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                                                        
                                                         <strong><%=results[i].name %>
                                                        
-                                                       </strong></a></h3>
-                                                       
+                                                       </strong></a> </h3> 
+                                                       <%if(results[i].isForAuction===1)
+                                                       {%>
+                                                       <b>Is Available For Auction</b>
+                                                       <%}%>
+                                                       <%if(results[i].isForAuction===0)
+                                                       {%>
+                                                       <b>Is Available For Purchase</b>
+                                                       <%}%>
                                                         
                                                         <div class=
                                                         "lvsubtitle">
@@ -602,7 +612,7 @@ var ABOVEFOLD = {imagesCount : 0, completedAt : null, load : function(source){th
                 </div>
             </div>
         </div>
-    </div>
+    
 
     <div id="Foot">
         <div id="VRFooterDF">

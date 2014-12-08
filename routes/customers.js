@@ -86,19 +86,38 @@ exports.updateUser = function(req, res) {
                                         console.log(
                                                 "Error fetching results : %s",
                                                 err);
-                                    res.render('getUserDetails', {
-                                        message : req.flash('error'),
-                                        data : rows[0],
-                                        personId : sess.uid,
-                                        firstname : sess.fname,
-                                        lastname : sess.lname,
-                                        email : sess.email,
-                                        lastlogin : sess.lastlogin,
-                                        isAdmin : sess.isAdmin,
-                                        isBuyer : sess.isBuyer,
-                                        isSeller : sess.isSeller,
-                                        memberno : sess.memberno
-                                    });
+                                    else{
+                                    	cache.vlmCache.invalidate("users", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                                    	cache.vlmCache.invalidate("buyers", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                                    	cache.vlmCache.invalidate("sellers", function(err) {
+                    						if(err) {
+                    							throw err;
+                    						}
+                    					});
+                    					console.log(JSON.stringify(cache.vlmCache.getStats()));
+                                    	 res.render('getUserDetails', {
+                                             message : req.flash('error'),
+                                             data : rows[0],
+                                             personId : sess.uid,
+                                             firstname : sess.fname,
+                                             lastname : sess.lname,
+                                             email : sess.email,
+                                             lastlogin : sess.lastlogin,
+                                             isAdmin : sess.isAdmin,
+                                             isBuyer : sess.isBuyer,
+                                             isSeller : sess.isSeller,
+                                             memberno : sess.memberno
+                                         });
+                                    }
+                                   
 
                                 });
             }
@@ -213,6 +232,21 @@ exports.saveUser = function(req, res) {
                                                             .log(
                                                                     "Error Inserting: %s",
                                                                     err);
+                                                cache.vlmCache.invalidate("users", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
+                                            	cache.vlmCache.invalidate("buyers", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
+                                            	cache.vlmCache.invalidate("sellers", function(err) {
+                            						if(err) {
+                            							throw err;
+                            						}
+                            					});
                                                 req
                                                         .flash('error',
                                                                 'You are registerd.Please Login!');
@@ -790,6 +824,11 @@ exports.saveProduct = function(req, res) {
                         if (err)
                             console.log("Error inserting : %s", err);
                         else {
+                        	cache.vlmCache.invalidate("products", function(err) {
+        						if(err) {
+        							throw err;
+        						}
+        					});
                             console.log(info.insertId);
                             res.render('addProduct', {
                                 categoryName : input.categoryName,
@@ -818,17 +857,8 @@ exports.home = function(req, res) {
     }
 }
 validate = function(input, name) {
-
     var msgappender = " is mandoatory";
     var msg = "";
-    console.log(typeof (input.startPrice * 1));
-    console.log(name.toString());
-    console.log(name.toString().indexOf("JPEG") != -1);
-    console.log(name.toString().indexOf("jpeg") != -1);
-    console.log(name.toString().indexOf("JPG") != -1);
-    console.log(name.toString().indexOf("jpg") != -1);
-    console.log(name.toString().indexOf("PNG") != -1);
-    console.log(name.toString().indexOf("png") != -1);
 
     if (input.title == "" || input.title.length == 0) {
         msg = "Title" + msgappender;
@@ -961,4 +991,39 @@ exports.deleteUser = function(req, res) {
     });
 
     connection.end();
+}
+
+ 
+/// REDIS TEST
+var redis = require("redis"),
+client = redis.createClient();
+var cache = require('../redisCache');
+var rows1;
+exports.test2 = function(req, res){
+	var sql = 'select * from person limit 1000';
+	cache.vlmCache.get("users", sql, function(err, value) {
+		if(value !== null) {
+			rows1 = value;
+			console.log("got data from cache");
+			console.log(JSON.stringify(cache.vlmCache.getStats()));
+			res.send(rows1);
+		} else {
+			console.log("have to set cache");
+			var connection = mysqldb.getConnection();
+			connection.query(sql,function(err, rows) {
+				rows1=rows;
+				if(err) {
+					throw err;
+				} else {
+					//console.log(JSON.stringify(rows));
+					cache.vlmCache.set("users", sql, rows, function(err, success) {
+						if(err || !success) {
+							throw err;
+						}
+					});
+					console.log(JSON.stringify(cache.vlmCache.getStats()));
+					res.send(rows1);
+				}});
+
+			}});
 }
