@@ -15,11 +15,10 @@ exports.getProductDetails = function(req,res){
 	var categoryName = req.params.catName;
 	var connection = mysqldb.getConnection();
 	connection.connect();
-	var query =connection.query("select pr.id,pr.name as product_name,pr.details as product_details, pr.image,pr.`condition` as product_condition,pr.cost as cost,pr.isForAuction as auction,pr.cost as cost, pr.min_bid as min_bid,pr.bid_duration as bid_duration,pr.quantity as quantity,pr.bid_start_time as bid_start_time, pr.bid_end_time, p.firstname as seller_name from Products pr JOIN Person p ON pr.seller_id=p.id WHERE pr.id=?",[id], function(err, rows)
-			{
-
+	var query =connection.query("select pr.id,pr.name as product_name,pr.details as product_details, pr.image,pr.`condition` as product_condition,pr.cost as cost,pr.isForAuction as auction,pr.cost as cost, pr.min_bid as min_bid,pr.bid_duration as bid_duration,pr.quantity as quantity,pr.bid_start_time as bid_start_time, pr.bid_end_time, p.firstname as seller_name, avg(pur.rating) as rating from Products pr INNER JOIN Person p ON pr.seller_id=p.id INNER JOIN purchase pur ON pr.id = pur.product_id WHERE pur.sold = 1 AND pr.id = ?",[id], function(err, rows){
 		if (err)
 			console.log("Error : %s ",err );
+		console.log("rows: " + rows[0].rating);
 		res.render('getProductDetailsBid',{data:rows,categoryName:categoryName, message: req.flash('message')});
 
 			});

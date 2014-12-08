@@ -432,13 +432,7 @@ exports.rate = function(req, res) {
                                                                         err);
                                                     console.log(rows
                                                             + "************");
-                                                    res
-                                                            .render(
-                                                                    'Purchase-History',
-                                                                    {
-                                                                        page_title : "Categories",
-                                                                        dataVar : rows
-                                                                    });
+                                                    res.redirect('/getPurchaseHistory');
                                                 });
                             } else {
                                 var id = sess.uid // session user-id
@@ -459,13 +453,7 @@ exports.rate = function(req, res) {
                                                                         err);
                                                     console.log(rows
                                                             + "************");
-                                                    res
-                                                            .render(
-                                                                    'SellingHistory',
-                                                                    {
-                                                                        page_title : "Categories",
-                                                                        dataVar : rows
-                                                                    });
+                                                    res.redirect('/getPurchaseHistory');
                                                 });
                             }
 
