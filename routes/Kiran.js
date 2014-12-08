@@ -413,7 +413,7 @@ function searchPurchasedProducts(req, res) {
                                 + " ON s.id = pr.seller_id WHERE p.customer_id = ? AND p.sold=1 AND pr.name REGEXP '"
                                 + searchQuery + "'", [ id ], function(err,
                                 results) {
-                            if (results.length > 0) {
+                            if (!err) {
                                 res.render('Purchase-History', {
                                     page_title : "",
                                     dataVar : results
@@ -447,7 +447,7 @@ function searchBiddedProducts(req, res) {
                                 + " WHERE p.customer_id = ? AND pr.isForAuction = 1 AND pr.name REGEXP '"
                                 + searchQuery + "'", [ id ], function(err,
                                 results) {
-                            if (results.length > 0) {
+                            if (!err) {
                                 console.log("hi");
                                 res.render('BiddingHistory', {
                                     page_title : "",
@@ -481,7 +481,7 @@ function searchSoldProducts(req, res) {
                                 + " ON c.id = p.customer_id WHERE pr.seller_id = ? AND p.sold=1 AND pr.name REGEXP '"
                                 + searchQuery + "'", [ id ], function(err,
                                 results) {
-                            if (results.length > 0) {
+                            if (!err) {
                                 res.render('BiddingHistory', {
                                     page_title : "",
                                     dataVar : results
@@ -539,7 +539,7 @@ function searchAllProductsInHistory(req, res) {
                         "Select p.*, c.name as cname from products p join category c on c.id = p.category_id where p.seller_id = ? AND p.name REGEXP '"
                                 + searchQuery + "'", [ id ], function(err,
                                 results) {
-                            if (results.length > 0) {
+                            if (!err) {
                                 res.render('getSellerProducts', {
                                     page_title : "",
                                     data : results
