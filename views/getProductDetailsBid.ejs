@@ -618,7 +618,8 @@ function picOnLoad(isSetClkId){
                                         </div>
 
                                         <div class="u-flL condText" id=
-                                        "vi-itm-cond"><%=data[0].seller_name%> <font color = "green">(Rating: <%=data[0].rating%>)</font>
+                                        "vi-itm-cond"><%=data[0].seller_name%> <font color = "green">(Rating:<%if(data[0].rating){%> <%=data[0].rating%></font>
+                                        <%}else{%><font color = "green"> Not rated yet.</font><%}%>)
                                         
                                         </div>
                                     </div><!-- volume pricing -->
