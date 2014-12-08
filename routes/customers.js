@@ -770,8 +770,6 @@ exports.saveProduct = function(req, res) {
             isActive : 1,
             image : temp_path
         };
-        // console.log(data);
-
         var msg = validate(input, req.files.image.name);
 
         console.log("Message : " + msg.length);
@@ -796,8 +794,6 @@ exports.saveProduct = function(req, res) {
                     if (err)
                         throw err;
                     console.log();
-                    // res.send('File uploaded to: ' + target_path + ' - ' +
-                    // req.files.image.size + ' bytes');
                 });
             });
             var myDate = new Date();
@@ -969,7 +965,7 @@ new CronJob(
                                     }
                                 }
                             });
-            console.log('You will see this message every second');
+          //  console.log('You will see this message every second');
         }, null, true, "America/Los_Angeles");
 
 exports.deleteUser = function(req, res) {
