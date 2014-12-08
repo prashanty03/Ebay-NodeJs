@@ -774,76 +774,84 @@ exports.saveProduct = function(req, res) {
             isActive : 1,
             image : temp_path
         };
-        var msg = validate(input, req.files.image.name);
+        console.log('####Image Size####'+req.files.image.size);
+        if(req.files.image.size>3000000){
+        	req.flash('error', 'Maximum Image Size is 5MB');
+        	 res.redirect('/addProduct/'+input.categoryName+'/'+input.categoryId);
+        }
+        else{
+        	var msg = validate(input, req.files.image.name);
 
-        console.log("Message : " + msg.length);
-        if (msg.length == 0) {
+            console.log("Message : " + msg.length);
+            if (msg.length == 0) {
 
-            console.log("inside if")
-            // get the temporary location of the file
-            var tmp_path = req.files.image.path;
-            // set where the file should actually exists - in this case it is in
-            // the
-            // "images" directory
-            var target_path = './public/images/' + req.files.image.name;
-            // move the file from the temporary location to the intended
-            // location
-            fs.rename(tmp_path, target_path, function(err) {
-                if (err)
-                    throw err;
-                // delete the temporary file, so that the explicitly set
-                // temporary
-                // upload dir does not get filled with unwanted files
-                fs.unlink(tmp_path, function() {
+                console.log("inside if")
+                // get the temporary location of the file
+                var tmp_path = req.files.image.path;
+                // set where the file should actually exists - in this case it is in
+                // the
+                // "images" directory
+                var target_path = './public/images/' + req.files.image.name;
+                // move the file from the temporary location to the intended
+                // location
+                fs.rename(tmp_path, target_path, function(err) {
                     if (err)
                         throw err;
-                    console.log();
-                });
-            });
-            var myDate = new Date();
-            myDate.setDate(myDate.getDate() + parseInt(input.duration));
-            var data = {
-                name : input.title,
-                details : input.details,
-                condition : condition,
-                isForAuction : auction,
-                min_bid : input.startPrice * 1,
-                quantity : parseInt(input.quantity),
-                bid_duration : parseInt(input.duration),
-                category_id : input.categoryId,
-                cost : input.startPrice * 1,
-                seller_id : sess.uid,
-                bid_start_time : new Date(),
-                image : target_path.substring(8),
-                isActive : 1,
-                bid_end_time : myDate
-            };
-            connection.connect();
-            var query = connection.query("Insert into products set ? ", data,
-                    function(err, info) {
+                    // delete the temporary file, so that the explicitly set
+                    // temporary
+                    // upload dir does not get filled with unwanted files
+                    fs.unlink(tmp_path, function() {
                         if (err)
-                            console.log("Error inserting : %s", err);
-                        else {
-                        	cache.vlmCache.invalidate("products", function(err) {
-        						if(err) {
-        							throw err;
-        						}
-        					});
-                            console.log(info.insertId);
-                            res.render('addProduct', {
-                                categoryName : input.categoryName,
-                                categoryId : input.categoryId,
-                                message : 'Product added successfuly'
-                            });
-                        }
-
+                            throw err;
+                        console.log();
                     });
-            connection.end();
-        } else {
-            console.log("inside else")
-            req.flash('error', msg);
-            res.redirect('/addProduct');
+                });
+                var myDate = new Date();
+                myDate.setDate(myDate.getDate() + parseInt(input.duration));
+                var data = {
+                    name : input.title,
+                    details : input.details,
+                    condition : condition,
+                    isForAuction : auction,
+                    min_bid : input.startPrice * 1,
+                    quantity : parseInt(input.quantity),
+                    bid_duration : parseInt(input.duration),
+                    category_id : input.categoryId,
+                    cost : input.startPrice * 1,
+                    seller_id : sess.uid,
+                    bid_start_time : new Date(),
+                    image : target_path.substring(8),
+                    isActive : 1,
+                    bid_end_time : myDate
+                };
+                connection.connect();
+                var query = connection.query("Insert into products set ? ", data,
+                        function(err, info) {
+                            if (err)
+                                console.log("Error inserting : %s", err);
+                            else {
+                            	cache.vlmCache.invalidate("products", function(err) {
+            						if(err) {
+            							throw err;
+            						}
+            					});
+                                console.log(info.insertId);
+                                res.render('addProduct', {
+                                    categoryName : input.categoryName,
+                                    categoryId : input.categoryId,
+                                    message : 'Product added successfuly'
+                                });
+                            }
+
+                        });
+                connection.end();
+            } else {
+                console.log("inside else")
+                req.flash('error', msg);
+                res.redirect('/addProduct/'+input.categoryName+'/'+input.categoryId);
+            }
         }
+        
 
     }
 
@@ -874,13 +882,6 @@ validate = function(input, name) {
         msg = "Duration" + msgappender;
     else if (name.toString().indexOf(".") == -1)
         msg = "Invalid Image";
-    // else if(!(name.toString().indexOf("JPEG")!=-1 ||
-    // name.toString().indexOf("jpeg")!=-1
-    // || name.toString().indexOf("JPG")!=-1 ||
-    // name.toString().indexOf("jpg")!=-1
-    // || name.toString().indexOf("png")!=-1)){
-    // msg = "Only JPEG,JPG and PNG Image supported";
-    // }
     else if ((input.startPrice * 1) == NaN)
         msg == "Invalid Start Price";
 
