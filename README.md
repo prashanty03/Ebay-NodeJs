@@ -1,6 +1,6 @@
 
 
-# Yelp
+# Ecommerce Web Aplication - Bidding and Buying of products
 
 
 
