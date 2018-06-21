@@ -1,0 +1,4 @@
+actions:
+  - module: up
+  - module: cmd
+    cmd: 'service telegraf restart'
